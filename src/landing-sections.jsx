@@ -708,4 +708,4 @@ function StartHereSection() {
   );
 }
 
-export { HeroSection, AboutSection, AudienceSection, ApproachSection, TeamSection, WorkSection, PulseSection };
+export { SectionLabel, HeroSection, AboutSection, AudienceSection, ApproachSection, TeamSection, WorkSection, PulseSection };

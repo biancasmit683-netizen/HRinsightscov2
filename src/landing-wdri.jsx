@@ -1,5 +1,7 @@
 import React from 'react'
 import { WDRI_QUESTIONS, WDRI_BANDS, bandForPct } from './page-wdri'
+import { Icon } from './shared'
+import { SectionLabel } from './landing-sections'
 
 // Embedded Workforce Data Readiness Index — inline section for the landing page.
 

@@ -68,7 +68,7 @@ function HeroSection({ id }) {
             </span>.
           </h1>
           <div style={{ fontSize: isMobile ? 16 : 20, lineHeight: 1.55, color:'#e5e7ff', marginTop: isMobile ? 22 : 36, maxWidth: 620, fontWeight: 400 }}>
-            We help mid-sized South African organisations turn fragmented workforce data into financial decisions. HR knows the people. Finance knows the numbers. We bring them together.
+            We help mid-sized South African organisations turn fragmented workforce data into financial decisions. HR leads people. Finance leads money. Analytics is the specialism that connects them.
           </div>
 
           <div style={{ display:'flex', flexWrap:'wrap', gap: 12, marginTop: isMobile ? 28 : 40 }}>
@@ -116,7 +116,7 @@ function AboutSection({ id }) {
         <SectionLabel index="02 / ABOUT"/>
         <div>
           <div style={{ fontSize: isMobile ? 30 : 40, lineHeight: 1.1, fontWeight: 600, letterSpacing:'-0.025em', maxWidth: 560 }}>
-            Built for the decision, not the deck.
+            Built for the decision.
           </div>
         </div>
         <div style={{ fontSize: isMobile ? 15.5 : 16.5, lineHeight: 1.65, color:'var(--graphite)', maxWidth: 520 }}>
@@ -153,7 +153,7 @@ function AudienceSection({ id }) {
         />
         <AudienceCard
           role="HR Leader"
-          line="You want influence in decisions that shape the business, and need numbers the exec team trusts."
+          line="You want your insights to land with the numbers to back them."
           bullets={[
             'Engagement read, operationalised by population',
             'Time to fill, on the critical roles',
@@ -196,25 +196,25 @@ function ApproachSection({ id }) {
     {
       n:'01', tag:'Starting point', title:'Pulse Check',
       headline:'A written analysis of where your workforce data can take you.',
-      body:'The starting point. On the data side, we assess which workforce metrics your current data can support and where the gaps sit. On the insights side, we agree which metrics will change decisions for a business like yours. The output is a robust written analysis, usable as a standalone deliverable if you do not continue.',
+      body:'The starting point. We meet you where you are and work two legs in parallel. On the data side, we assess which workforce metrics your current data can support and where the gaps sit. On the insights side, we agree which metrics will change decisions for a business like yours. We arrive with a view on what matters in your industry, so clients who cannot yet put words to what they need do not start from a blank page. The output is a robust written analysis of where the client stands and where insight can be driven from the data they have. Clients who do not continue to Implementation still walk away with something usable.',
       duration:'2 to 4 weeks',
-      output:'Written analysis · data-readiness view · metric shortlist',
+      output:'Written analysis · where the data stands · metric shortlist',
       color:'var(--orange)',
     },
     {
       n:'02', tag:'Hands-on', title:'Implementation',
-      headline:'We clean what exists. We build what does not.',
-      body:'The hands-on phase. Where data exists but is fragmented or messy, we clean and structure it so the numbers can be trusted. Where the Pulse Check identified data points you do not yet capture, we build the systems or tools to generate them. Scope and price are set per engagement, against the specific gaps the Pulse Check named.',
+      headline:'Closing the gaps the Pulse Check named.',
+      body:'The hands-on phase. The Pulse Check gives us a specific picture of where the client stands, and Implementation closes the gaps it surfaced. Two legs again. Where data exists but is fragmented or messy, we clean and structure it so the numbers can be trusted. Where the Pulse Check identified data points the client does not yet capture, we build the systems or tools to generate them. Scope and price are set per engagement, against the specific gaps the Pulse Check named and the insights the client wants to use.',
       duration:'Scoped per engagement',
-      output:'Working dashboard · trusted source of truth · documented data model',
+      output:'Working dashboard · trusted source of truth · gaps closed',
       color:'var(--ink)',
     },
     {
       n:'03', tag:'Ongoing', title:'Monthly Insights',
       headline:'A board-ready read of the workforce, built to drive decisions.',
-      body:'The ongoing layer. Each month we maintain the dashboard and produce an accompanying analysis: what the numbers are saying, what has changed, what is driving the change, and where the data points to further investigation. Where we have sector depth we add the external view.',
+      body:'The ongoing layer. Implementation leaves the client with a working dashboard; Monthly Insights keeps it current and turns what it shows into decisions. Each month we maintain the dashboard and produce an accompanying analysis: what the numbers are saying, what has changed, what is driving the change, and where the data points to further investigation. Where we have operating experience in the client\'s sector, we add the external view: how a metric compares to the industry norm and what the gap means in practice. Our initial focus is hospitality. This is where our team\'s depth in people data earns its keep.',
       duration:'Monthly · ongoing',
-      output:'Live dashboard · monthly commentary · benchmarked view',
+      output:'Live dashboard · monthly analysis · industry comparison',
       accent: true,
       color:'#3b3b86',
     },
@@ -569,7 +569,7 @@ function PulseSection({ id }) {
             Start with a Pulse Check.
           </h2>
           <div style={{ fontSize: 16.5, lineHeight: 1.6, color:'var(--graphite)', marginTop: 22, maxWidth: 480 }}>
-            The Pulse Check is an engagement that ends in a written analysis you can act on, whether or not you continue with us. We answer new enquiries in a working day.
+            The Pulse Check ends with a written analysis of where your data stands and where insight can be driven from it. Clients who do not continue to Implementation still walk away with something usable. We answer new enquiries in a working day.
           </div>
 
           <div style={{ marginTop: 40, background:'#fff', borderLeft:'3px solid var(--ink)', padding:'22px 24px' }}>

@@ -170,7 +170,7 @@ function SiteFooter() {
               REPLY IN A DAY
             </div>
             <div style={{ fontSize: isMobile ? 30 : 44, fontWeight: 600, lineHeight: 1.15, letterSpacing:'-0.028em', maxWidth: 960, textWrap:'balance' }}>
-              If the numbers do not change a decision, they are not insight. Let us show you where yours can.
+              Turning workforce data into better decisions.
             </div>
           </div>
           <div>

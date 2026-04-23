@@ -74,7 +74,7 @@ function EmbedLanding({ onStart }) {
           DIAGNOSTIC · FREE · NO SIGN-UP TO TAKE
         </div>
         <div style={{ fontSize: 22, lineHeight: 1.4, color:'var(--ink)', maxWidth: 560, fontWeight: 500 }}>
-          Most mid-sized South African businesses have more workforce data than they think, and less insight than they need. This assessment surfaces the gap.
+          Most mid-sized South African businesses have more workforce data than they realise. This assessment surfaces where insight can be driven from what you already have.
         </div>
         <div style={{ fontSize: 15.5, lineHeight: 1.6, color:'var(--graphite)', maxWidth: 560, marginTop: 16 }}>
           At the end you see a readiness percentage, the band you sit in, and the three gaps worth addressing first. Nothing is emailed unless you ask for it.

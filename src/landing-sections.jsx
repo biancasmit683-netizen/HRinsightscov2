@@ -366,10 +366,10 @@ function FounderCard({ idx, photo, name, role, bio, cred, accent }) {
         <img src={photo} alt={name} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 15%', display:'block' }}/>
         <div style={{ position:'absolute', inset:0, background:'rgba(210,210,210,0.18)', mixBlendMode:'color', pointerEvents:'none' }}/>
       </div>
-      <div style={{ display:'flex', alignItems:'center', gap: 10, marginTop: 18 }}>
-        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color: accent ? 'var(--orange)' : 'var(--slate)', letterSpacing:'.1em' }}>{idx} / 03</span>
-        {accent && <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--orange)' }}/>}
-        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em', textTransform:'uppercase' }}>{role}</span>
+      <div style={{ display:'flex', alignItems:'flex-start', gap: 10, marginTop: 18, minHeight: 42 }}>
+        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color: accent ? 'var(--orange)' : 'var(--slate)', letterSpacing:'.1em', whiteSpace:'nowrap', paddingTop: 1 }}>{idx} / 03</span>
+        {accent && <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--orange)', flexShrink:0, marginTop: 4 }}/>}
+        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em', textTransform:'uppercase', lineHeight: 1.5 }}>{role}</span>
       </div>
       <div style={{ fontSize: 24, fontWeight: 600, letterSpacing:'-0.02em', marginTop: 10, color:'var(--ink)', lineHeight: 1.15 }}>{name}</div>
       <p style={{ fontSize: 14.5, lineHeight: 1.6, color:'var(--graphite)', marginTop: 14, maxWidth: 420 }}>{bio}</p>

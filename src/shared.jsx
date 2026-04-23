@@ -13,6 +13,16 @@ const BRAND = {
   hair: '#06064410',
 };
 
+function useIsMobile() {
+  const [m, setM] = React.useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+  React.useEffect(() => {
+    const fn = () => setM(window.innerWidth < 768);
+    window.addEventListener('resize', fn);
+    return () => window.removeEventListener('resize', fn);
+  }, []);
+  return m;
+}
+
 // Wordmark — "The HR insights Co." with the orange-dot i
 function Wordmark({ size = 16, onInk = false }) {
   const dim = onInk ? '#a6a6d4' : 'var(--slate)';
@@ -140,6 +150,7 @@ function SiteNav({ active = 'Home', dark = false }) {
 }
 
 function SiteFooter() {
+  const isMobile = useIsMobile();
   const scrollToPulse = () => {
     const el = document.getElementById('pulse');
     if (el) el.scrollIntoView({ behavior:'smooth' });
@@ -148,13 +159,13 @@ function SiteFooter() {
   return (
     <div style={{ background:'var(--ink)', color:'#fff', fontFamily:'Inter,sans-serif' }}>
       {/* CTA band */}
-      <div style={{ padding:'88px 48px 80px' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr auto', gap: 56, alignItems:'center' }}>
+      <div style={{ padding: isMobile ? '56px 20px 48px' : '88px 48px 80px' }}>
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr auto', gap: isMobile ? 28 : 56, alignItems:'center' }}>
           <div>
             <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'#a6a6d4', letterSpacing:'.12em', marginBottom: 20 }}>
               REPLY IN A DAY
             </div>
-            <div style={{ fontSize: 44, fontWeight: 600, lineHeight: 1.1, letterSpacing:'-0.028em', maxWidth: 960, textWrap:'balance' }}>
+            <div style={{ fontSize: isMobile ? 30 : 44, fontWeight: 600, lineHeight: 1.15, letterSpacing:'-0.028em', maxWidth: 960, textWrap:'balance' }}>
               If the numbers do not change a decision, they are not insight. Let us show you where yours can.
             </div>
           </div>
@@ -168,9 +179,10 @@ function SiteFooter() {
 
       {/* Thin legal strip */}
       <div style={{
-        padding:'18px 48px',
+        padding: isMobile ? '14px 20px' : '18px 48px',
         borderTop:'1px solid #ffffff1a',
         display:'flex', justifyContent:'space-between', alignItems:'center',
+        flexWrap:'wrap', gap: 8,
         fontSize: 11, color:'#a6a6d4', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.08em',
       }}>
         <span>© 2026 THE HR INSIGHTS CO. (PTY) LTD</span>
@@ -286,6 +298,7 @@ function ArrowLink({ children, dark, color, onClick }) {
 
 // Homepage "Meet the team" strip — compact summary, links to About
 function TeamStrip({ dark = false }) {
+  const isMobile = useIsMobile();
   const bg = dark ? 'var(--ink)' : '#fff';
   const fg = dark ? '#fff' : 'var(--ink)';
   const sub = dark ? '#cfcfe6' : 'var(--graphite)';
@@ -296,17 +309,17 @@ function TeamStrip({ dark = false }) {
     { photo:'/brand/founder-liza.jpg',      name:'Liza Burger',             disc:'HR, org design and change' },
   ];
   return (
-    <section style={{ padding:'72px 48px', background: bg, color: fg, borderTop:`1px solid ${rule}`, borderBottom:`1px solid ${rule}` }}>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40, marginBottom: 40 }}>
-        <Eyebrow color={dark ? '#a6a6d4' : 'var(--slate)'}>Meet the team</Eyebrow>
-        <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 32 }}>
-          <div style={{ fontSize: 32, lineHeight: 1.2, fontWeight: 600, letterSpacing:'-0.02em', maxWidth: 680 }}>
+    <section style={{ padding: isMobile ? '48px 20px' : '72px 48px', background: bg, color: fg, borderTop:`1px solid ${rule}`, borderBottom:`1px solid ${rule}` }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 20 : 40, marginBottom: isMobile ? 28 : 40 }}>
+        {!isMobile && <Eyebrow color={dark ? '#a6a6d4' : 'var(--slate)'}>Meet the team</Eyebrow>}
+        <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 32, flexWrap:'wrap' }}>
+          <div style={{ fontSize: isMobile ? 26 : 32, lineHeight: 1.2, fontWeight: 600, letterSpacing:'-0.02em', maxWidth: 680 }}>
             Three founders. HR, finance, and data, at the same table.
           </div>
-          <ArrowLink dark={dark}>Read the founder profiles</ArrowLink>
+          {!isMobile && <ArrowLink dark={dark}>Read the founder profiles</ArrowLink>}
         </div>
       </div>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 28 }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 32 : 28 }}>
         {people.map((p,i) => (
           <div key={i} style={{ display:'flex', flexDirection:'column' }}>
             <div style={{ width:'100%', aspectRatio:'4/5', background:'#E5E7EB', overflow:'hidden', position:'relative' }}>
@@ -327,4 +340,4 @@ function TeamStrip({ dark = false }) {
   );
 }
 
-export { BRAND, Wordmark, Icon, Photo, SiteNav, SiteFooter, Eyebrow, RuleThin, RuleInk, BtnPrimary, BtnGhost, ArrowLink, TeamStrip };
+export { BRAND, Wordmark, Icon, Photo, SiteNav, SiteFooter, Eyebrow, RuleThin, RuleInk, BtnPrimary, BtnGhost, ArrowLink, TeamStrip, useIsMobile };

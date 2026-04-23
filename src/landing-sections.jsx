@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, BtnPrimary, BtnGhost } from './shared'
+import { Icon, BtnPrimary, BtnGhost, useIsMobile } from './shared'
 import HeroGraph from './landing-hero-graph'
 import { Dashboard } from './page-dashboard'
 
@@ -37,43 +37,41 @@ function SectionLabel({ index, children, dark }) {
 
 // ---------- Section 1: Hero -------------------------------------------------
 function HeroSection({ id }) {
+  const isMobile = useIsMobile();
   return (
-    <section id={id} data-anchor="top" style={{ background:'var(--ink)', color:'#fff', padding:'96px 48px 72px', position:'relative', overflow:'hidden' }}>
-      {/* Atmospheric stock photo — people of colour, real office, slightly blurred; sits behind a Deep Ink scrim */}
+    <section id={id} data-anchor="top" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '56px 20px 48px' : '96px 48px 72px', position:'relative', overflow:'hidden' }}>
       <div aria-hidden="true" style={{
         position:'absolute', inset: 0,
         backgroundImage:'url(/brand/hero-photo.jpg)',
         backgroundSize:'cover',
         backgroundPosition:'right center',
         filter:'blur(6px) saturate(0.85)',
-        transform:'scale(1.06)', // hide blur edge
+        transform:'scale(1.06)',
         opacity: 0.55,
       }}/>
-      {/* Scrim: heavy Deep Ink gradient from the left so the type stays legible; fades to let image breathe on the right */}
       <div aria-hidden="true" style={{
         position:'absolute', inset: 0,
         background:'linear-gradient(90deg, var(--ink) 0%, var(--ink) 38%, rgba(6,6,68,0.88) 58%, rgba(6,6,68,0.65) 100%)',
       }}/>
-      {/* Bottom gradient to blend into next section */}
       <div aria-hidden="true" style={{
         position:'absolute', left: 0, right: 0, bottom: 0, height: 120,
         background:'linear-gradient(180deg, rgba(6,6,68,0) 0%, var(--ink) 100%)',
       }}/>
 
-      <div style={{ position:'relative', display:'grid', gridTemplateColumns:'minmax(0, 1fr) minmax(0, 560px)', gap: 56, alignItems:'center' }}>
+      <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1fr) minmax(0, 560px)', gap: isMobile ? 32 : 56, alignItems:'center' }}>
         <div>
-          <h1 style={{ fontSize: 82, lineHeight: 1.02, fontWeight: 600, letterSpacing:'-0.035em', margin: 0 }}>
+          <h1 style={{ fontSize: isMobile ? 44 : 82, lineHeight: isMobile ? 1.1 : 1.02, fontWeight: 600, letterSpacing:'-0.035em', margin: 0 }}>
             Workforce data,<br/>
             <span style={{ position:'relative', whiteSpace:'nowrap' }}>
               financial decisions
-              <span style={{ position:'absolute', right:-26, top: 12, width: 16, height: 16, background:'var(--orange)', borderRadius:'50%' }}/>
+              <span style={{ position:'absolute', right: isMobile ? -16 : -26, top: isMobile ? 8 : 12, width: isMobile ? 10 : 16, height: isMobile ? 10 : 16, background:'var(--orange)', borderRadius:'50%' }}/>
             </span>.
           </h1>
-          <div style={{ fontSize: 20, lineHeight: 1.55, color:'#e5e7ff', marginTop: 36, maxWidth: 620, fontWeight: 400 }}>
+          <div style={{ fontSize: isMobile ? 16 : 20, lineHeight: 1.55, color:'#e5e7ff', marginTop: isMobile ? 22 : 36, maxWidth: 620, fontWeight: 400 }}>
             We help mid-sized South African organisations turn fragmented workforce data into financial decisions. HR knows the people. Finance knows the numbers. We bring them together.
           </div>
 
-          <div style={{ display:'flex', gap: 14, marginTop: 40 }}>
+          <div style={{ display:'flex', flexWrap:'wrap', gap: 12, marginTop: isMobile ? 28 : 40 }}>
             <BtnPrimary dark onClick={() => document.getElementById('pulse').scrollIntoView({ behavior:'smooth' })}>
               Book a Pulse Check <Icon name="arrowSm" size={14} color="var(--ink)"/>
             </BtnPrimary>
@@ -83,10 +81,11 @@ function HeroSection({ id }) {
           </div>
         </div>
 
-        {/* Ambient graph — lives opposite the headline; decorative, aria-hidden from the nav flow */}
-        <div style={{ justifySelf:'end', width:'100%', maxWidth: 560 }}>
-          <HeroGraph />
-        </div>
+        {!isMobile && (
+          <div style={{ justifySelf:'end', width:'100%', maxWidth: 560 }}>
+            <HeroGraph />
+          </div>
+        )}
       </div>
 
     </section>
@@ -110,16 +109,17 @@ function HeroStat({ n, label, value, accent }) {
 
 // ---------- Section 2: About -----------------------------------------------
 function AboutSection({ id }) {
+  const isMobile = useIsMobile();
   return (
-    <section id={id} data-anchor="about" style={{ background:'#fff', padding:'96px 48px' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr 1fr', gap: 48 }}>
+    <section id={id} data-anchor="about" style={{ background:'#fff', padding: isMobile ? '56px 20px' : '96px 48px' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 24 : 48 }}>
         <SectionLabel index="02 / ABOUT"/>
         <div>
-          <div style={{ fontSize: 40, lineHeight: 1.1, fontWeight: 600, letterSpacing:'-0.025em', maxWidth: 560 }}>
+          <div style={{ fontSize: isMobile ? 30 : 40, lineHeight: 1.1, fontWeight: 600, letterSpacing:'-0.025em', maxWidth: 560 }}>
             Built for the decision, not the deck.
           </div>
         </div>
-        <div style={{ fontSize: 16.5, lineHeight: 1.65, color:'var(--graphite)', maxWidth: 520 }}>
+        <div style={{ fontSize: isMobile ? 15.5 : 16.5, lineHeight: 1.65, color:'var(--graphite)', maxWidth: 520 }}>
           <p style={{ margin: 0 }}>
             The HR Insights Co. helps mid-sized South African organisations turn fragmented workforce data into financial decisions. Founded by three women from HR, finance, and data, we connect HR metrics with financial cost, give teams one reliable view of what is happening, and measure ourselves on whether the data changed a decision.
           </p>
@@ -131,16 +131,17 @@ function AboutSection({ id }) {
 
 // ---------- Section 3: Our Audience ----------------------------------------
 function AudienceSection({ id }) {
+  const isMobile = useIsMobile();
   return (
-    <section id={id} data-anchor="audience" data-screen-label="03 Our Audience" style={{ background:'#fff', padding:'96px 48px', borderTop:'1px solid var(--rule)' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40, marginBottom: 48 }}>
+    <section id={id} data-anchor="audience" data-screen-label="03 Our Audience" style={{ background:'#fff', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
         <SectionLabel index="03 / OUR AUDIENCE"/>
-        <div style={{ fontSize: 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
+        <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
           Two audiences. One shared view.
         </div>
       </div>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr 1fr', gap: 36 }}>
-        <div/>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 16 : 36 }}>
+        {!isMobile && <div/>}
         <AudienceCard
           role="CFO"
           line="You carry the people cost line and rarely see workforce data framed in terms you can act on."
@@ -218,20 +219,21 @@ function ApproachSection({ id }) {
       color:'#3b3b86',
     },
   ];
+  const isMobile = useIsMobile();
   const [openIdx, setOpenIdx] = React.useState(0);
   return (
-    <section id={id} data-anchor="approach" style={{ background:'var(--mist)', padding:'96px 48px', borderTop:'1px solid var(--rule)' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40, marginBottom: 48 }}>
+    <section id={id} data-anchor="approach" style={{ background:'var(--mist)', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
         <SectionLabel index="04 / HOW WE WORK"/>
         <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 32, flexWrap:'wrap' }}>
-          <div style={{ fontSize: 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
+          <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
             One continuous process. Three phases, in order.
           </div>
         </div>
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40 }}>
-        <div/>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
+        {!isMobile && <div/>}
         <div style={{ background:'#fff', borderTop:'1px solid var(--ink)' }}>
           {phases.map((p, i) => (
             <PhaseRow
@@ -249,10 +251,11 @@ function ApproachSection({ id }) {
 }
 
 function PhaseRow({ n, tag, title, headline, body, duration, output, accent, color = 'var(--ink)', open, onToggle, isLast }) {
+  const isMobile = useIsMobile();
   const [hover, setHover] = React.useState(false);
   return (
     <div style={{ borderBottom: isLast ? 'none' : '1px solid var(--rule)', position:'relative' }}>
-      {/* Colored left accent bar — always visible, brightens when open */}
+      {/* Colored left accent bar */}
       <div aria-hidden="true" style={{
         position:'absolute', left: 0, top: 0, bottom: 0,
         width: open ? 6 : 3,
@@ -265,55 +268,89 @@ function PhaseRow({ n, tag, title, headline, body, duration, output, accent, col
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         style={{
-          display:'grid', gridTemplateColumns:'80px 180px 1fr 40px', gap: 24,
-          alignItems:'center',
-          padding:'28px 32px 28px 40px',
+          display: isMobile ? 'flex' : 'grid',
+          gridTemplateColumns: isMobile ? undefined : '80px 180px 1fr 40px',
+          alignItems: isMobile ? 'flex-start' : 'center',
+          justifyContent: isMobile ? 'space-between' : undefined,
+          gap: isMobile ? 0 : 24,
+          padding: isMobile ? '18px 16px 18px 24px' : '28px 32px 28px 40px',
           cursor:'pointer',
           background: open ? '#fafaf7' : (hover ? '#fafaf7' : '#fff'),
           transition:'background 160ms ease',
         }}
       >
-        <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
-          <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 12, color: color, letterSpacing:'.1em', fontWeight: 600 }}>{n}</span>
-          <span style={{ width:6, height:6, borderRadius:'50%', background: color }}/>
-        </div>
-        <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em', textTransform:'uppercase' }}>
-          {tag}
-        </div>
-        <div style={{ display:'flex', flexDirection:'column', gap: 6 }}>
-          <div style={{ fontSize: 26, fontWeight: 600, letterSpacing:'-0.02em', color:'var(--ink)', display:'inline-flex', alignItems:'center' }}>
-            <span style={{
-              borderBottom: open ? `2px solid ${color}` : '2px solid transparent',
-              paddingBottom: 2, transition:'border-color 200ms ease',
-            }}>{title}</span>
-          </div>
-          <div style={{ fontSize: 15, color:'var(--graphite)', lineHeight: 1.45, maxWidth: 640 }}>{headline}</div>
-        </div>
-        <div style={{
-          width: 32, height: 32, border:`1px solid ${color}`, display:'flex', alignItems:'center', justifyContent:'center',
-          transform: open ? 'rotate(45deg)' : 'rotate(0)', transition:'transform 220ms ease, background 160ms ease',
-          background: (hover || open) ? color : 'transparent',
-          color: (hover || open) ? '#fff' : color,
-        }}>
-          <Icon name="plus" size={16} color={(hover || open) ? '#fff' : color}/>
-        </div>
+        {isMobile ? (
+          <>
+            <div style={{ flex: 1, paddingRight: 12 }}>
+              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.08em', marginBottom: 6 }}>
+                {n} · {tag.toUpperCase()}
+              </div>
+              <div style={{ fontSize: 21, fontWeight: 600, letterSpacing:'-0.02em', color:'var(--ink)', lineHeight: 1.2 }}>{title}</div>
+              <div style={{ fontSize: 14, color:'var(--graphite)', lineHeight: 1.45, marginTop: 4 }}>{headline}</div>
+            </div>
+            <div style={{
+              width: 32, height: 32, border:`1px solid ${color}`, display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0, marginTop: 2,
+              transform: open ? 'rotate(45deg)' : 'rotate(0)', transition:'transform 220ms ease, background 160ms ease',
+              background: (hover || open) ? color : 'transparent',
+            }}>
+              <Icon name="plus" size={16} color={(hover || open) ? '#fff' : color}/>
+            </div>
+          </>
+        ) : (
+          <>
+            <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+              <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 12, color: color, letterSpacing:'.1em', fontWeight: 600 }}>{n}</span>
+              <span style={{ width:6, height:6, borderRadius:'50%', background: color }}/>
+            </div>
+            <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em', textTransform:'uppercase' }}>
+              {tag}
+            </div>
+            <div style={{ display:'flex', flexDirection:'column', gap: 6 }}>
+              <div style={{ fontSize: 26, fontWeight: 600, letterSpacing:'-0.02em', color:'var(--ink)', display:'inline-flex', alignItems:'center' }}>
+                <span style={{
+                  borderBottom: open ? `2px solid ${color}` : '2px solid transparent',
+                  paddingBottom: 2, transition:'border-color 200ms ease',
+                }}>{title}</span>
+              </div>
+              <div style={{ fontSize: 15, color:'var(--graphite)', lineHeight: 1.45, maxWidth: 640 }}>{headline}</div>
+            </div>
+            <div style={{
+              width: 32, height: 32, border:`1px solid ${color}`, display:'flex', alignItems:'center', justifyContent:'center',
+              transform: open ? 'rotate(45deg)' : 'rotate(0)', transition:'transform 220ms ease, background 160ms ease',
+              background: (hover || open) ? color : 'transparent',
+              color: (hover || open) ? '#fff' : color,
+            }}>
+              <Icon name="plus" size={16} color={(hover || open) ? '#fff' : color}/>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Expand */}
       <div style={{
-        maxHeight: open ? 600 : 0, overflow:'hidden',
+        maxHeight: open ? 800 : 0, overflow:'hidden',
         transition:'max-height 340ms ease',
         borderTop: open ? '1px solid var(--rule)' : 'none',
       }}>
-        <div style={{ padding:'32px 32px 40px 40px', display:'grid', gridTemplateColumns:'80px 180px 1fr 260px', gap: 24, background:'#fafaf7' }}>
-          <div/>
-          <div/>
-          <div style={{ fontSize: 16.5, lineHeight: 1.65, color:'var(--graphite)', maxWidth: 640 }}>{body}</div>
-          <div>
-            <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color: color, letterSpacing:'.1em', marginBottom: 8, fontWeight: 600 }}>OUTPUT</div>
-            <div style={{ fontSize: 14, fontWeight: 500, color:'var(--ink)', lineHeight: 1.45 }}>{output}</div>
+        {isMobile ? (
+          <div style={{ padding:'16px 16px 24px 24px', background:'#fafaf7' }}>
+            <div style={{ fontSize: 15, lineHeight: 1.65, color:'var(--graphite)' }}>{body}</div>
+            <div style={{ marginTop: 16 }}>
+              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color: color, letterSpacing:'.1em', marginBottom: 6, fontWeight: 600 }}>OUTPUT</div>
+              <div style={{ fontSize: 14, fontWeight: 500, color:'var(--ink)', lineHeight: 1.45 }}>{output}</div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div style={{ padding:'32px 32px 40px 40px', display:'grid', gridTemplateColumns:'80px 180px 1fr 260px', gap: 24, background:'#fafaf7' }}>
+            <div/>
+            <div/>
+            <div style={{ fontSize: 16.5, lineHeight: 1.65, color:'var(--graphite)', maxWidth: 640 }}>{body}</div>
+            <div>
+              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color: color, letterSpacing:'.1em', marginBottom: 8, fontWeight: 600 }}>OUTPUT</div>
+              <div style={{ fontSize: 14, fontWeight: 500, color:'var(--ink)', lineHeight: 1.45 }}>{output}</div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -321,6 +358,7 @@ function PhaseRow({ n, tag, title, headline, body, duration, output, accent, col
 
 // ---------- Section 4: Team ------------------------------------------------
 function TeamSection({ id }) {
+  const isMobile = useIsMobile();
   const people = [
     { photo:'/brand/founder-bianca.jpg', name:'Bianca Janse van Vuuren', role:'Finance, Data and AI Strategy', accent:true,
       bio:'Finance and data strategist. Designs data architectures that turn disconnected workforce, financial, and operational data into a single source of truth. Leads analytics frameworks that embed financial thinking into people data, and the practical application of AI to speed the work.',
@@ -336,21 +374,21 @@ function TeamSection({ id }) {
     },
   ];
   return (
-    <section id={id} data-anchor="team" style={{ background:'#fff', padding:'96px 48px' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40, marginBottom: 56 }}>
+    <section id={id} data-anchor="team" style={{ background:'#fff', padding: isMobile ? '56px 20px' : '96px 48px' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 56 }}>
         <SectionLabel index="05 / FOUNDERS"/>
         <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 40, flexWrap:'wrap' }}>
           <div>
-            <div style={{ fontSize: 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
+            <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
               Three founders. HR, finance, and data, at the same table.
             </div>
           </div>
         </div>
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40 }}>
-        <div/>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 28, borderTop:'1px solid var(--ink)', paddingTop: 36, maxWidth: 1040 }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
+        {!isMobile && <div/>}
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 36 : 28, borderTop:'1px solid var(--ink)', paddingTop: 36, maxWidth: 1040 }}>
           {people.map((p, i) => (
             <FounderCard key={i} idx={'0'+(i+1)} {...p}/>
           ))}
@@ -380,32 +418,38 @@ function FounderCard({ idx, photo, name, role, bio, cred, accent }) {
 
 // ---------- Section 5: Work in action --------------------------------------
 function WorkSection({ id }) {
+  const isMobile = useIsMobile();
   return (
-    <section id={id} data-anchor="work" style={{ background:'var(--ink)', color:'#fff', padding:'96px 48px' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40, marginBottom: 48 }}>
+    <section id={id} data-anchor="work" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '56px 20px' : '96px 48px' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
         <SectionLabel index="06 / INDUSTRY FOCUS" dark/>
         <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 32, flexWrap:'wrap' }}>
-          <div style={{ fontSize: 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
+          <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
             Hospitality.
           </div>
         </div>
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40 }}>
-        <div/>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr', gap: 0 }}>
-        {/* Live dashboard embed */}
-        <div style={{ maxHeight: 720, overflowY: 'auto', border: '1px solid rgba(255,255,255,0.12)', scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.2) transparent' }}>
-          <Dashboard />
-        </div>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
+        {!isMobile && <div/>}
+        <div>
+          {/* Live dashboard embed */}
+          <div style={{
+            maxHeight: isMobile ? 480 : 720,
+            overflowY: 'auto', overflowX: isMobile ? 'auto' : 'hidden',
+            border: '1px solid rgba(255,255,255,0.12)',
+            scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.2) transparent',
+          }}>
+            <Dashboard />
+          </div>
 
-        {/* Other industries — understated */}
-        <div style={{ marginTop: 40, paddingTop: 20, borderTop:'1px solid rgba(255,255,255,0.14)', display:'flex', alignItems:'center', gap: 14, flexWrap:'wrap' }}>
-          <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'rgba(255,255,255,0.55)', letterSpacing:'.14em' }}>ALSO SERVING</span>
-          <span style={{ fontSize: 13.5, color:'rgba(255,255,255,0.7)', letterSpacing:'-0.005em' }}>
-            Mining · Professional services · Other mid-sized industries
-          </span>
-        </div>
+          {/* Other industries — understated */}
+          <div style={{ marginTop: 40, paddingTop: 20, borderTop:'1px solid rgba(255,255,255,0.14)', display:'flex', alignItems:'center', gap: 14, flexWrap:'wrap' }}>
+            <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'rgba(255,255,255,0.55)', letterSpacing:'.14em' }}>ALSO SERVING</span>
+            <span style={{ fontSize: 13.5, color:'rgba(255,255,255,0.7)', letterSpacing:'-0.005em' }}>
+              Mining · Professional services · Other mid-sized industries
+            </span>
+          </div>
         </div>
       </div>
     </section>
@@ -514,13 +558,14 @@ function ClientCard({ tag, sector, problem, change, metric, period }) {
 
 // ---------- Section 7: Pulse Check form -----------------------------------
 function PulseSection({ id }) {
+  const isMobile = useIsMobile();
   return (
-    <section id={id} data-anchor="pulse" style={{ background:'var(--mist)', padding:'96px 48px', borderTop:'1px solid var(--rule)' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr 1fr', gap: 48, alignItems:'start' }}>
+    <section id={id} data-anchor="pulse" style={{ background:'var(--mist)', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
         <SectionLabel index="08 / PULSE CHECK"/>
 
         <div>
-          <h2 style={{ fontSize: 48, lineHeight: 1.06, fontWeight: 600, letterSpacing:'-0.03em', margin: 0, maxWidth: 520 }}>
+          <h2 style={{ fontSize: isMobile ? 32 : 48, lineHeight: 1.06, fontWeight: 600, letterSpacing:'-0.03em', margin: 0, maxWidth: 520 }}>
             Start with a Pulse Check.
           </h2>
           <div style={{ fontSize: 16.5, lineHeight: 1.6, color:'var(--graphite)', marginTop: 22, maxWidth: 480 }}>

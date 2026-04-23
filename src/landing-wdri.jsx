@@ -1,11 +1,12 @@
 import React from 'react'
 import { WDRI_QUESTIONS, WDRI_BANDS, bandForPct } from './page-wdri'
-import { Icon } from './shared'
+import { Icon, useIsMobile } from './shared'
 import { SectionLabel } from './landing-sections'
 
 // Embedded Workforce Data Readiness Index — inline section for the landing page.
 
 function WDRISection({ id }) {
+  const isMobile = useIsMobile();
   const [phase, setPhase] = React.useState('landing'); // landing | q | loading | result
   const [idx, setIdx] = React.useState(0);
   const [answers, setAnswers] = React.useState(() => Array(10).fill(null));
@@ -35,23 +36,23 @@ function WDRISection({ id }) {
   return (
     <section id={id} data-anchor="readiness" data-screen-label="06 WDRI" style={{
       background:'#fff',
-      padding:'96px 48px 48px',
+      padding: isMobile ? '56px 20px 40px' : '96px 48px 48px',
       borderTop:'1px solid var(--rule)',
     }}>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40, marginBottom: 48 }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
         <SectionLabel index="07 / READINESS ASSESSMENT"/>
         <div>
-          <div style={{ fontSize: 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
+          <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
             How ready is your workforce data to drive decisions?
           </div>
-          <div style={{ fontSize: 16.5, lineHeight: 1.6, color:'var(--graphite)', maxWidth: 640, marginTop: 18 }}>
+          <div style={{ fontSize: isMobile ? 15 : 16.5, lineHeight: 1.6, color:'var(--graphite)', maxWidth: 640, marginTop: 18 }}>
             Ten questions. About five minutes. Honest answers give you a more useful result.
           </div>
         </div>
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40 }}>
-        <div/>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
+        {!isMobile && <div/>}
         <div style={{ background:'#F7F7F4', border:'1px solid var(--rule)' }}>
           {phase === 'landing'  && <EmbedLanding onStart={start}/>}
           {phase === 'q'        && <EmbedQuestion idx={idx} total={10} selected={answers[idx]} onSelect={select} onNext={next} onBack={back}/>}
@@ -65,8 +66,9 @@ function WDRISection({ id }) {
 
 // ---------- Landing ----------
 function EmbedLanding({ onStart }) {
+  const isMobile = useIsMobile();
   return (
-    <div style={{ padding:'56px 48px 60px', display:'grid', gridTemplateColumns:'1fr 360px', gap: 48, alignItems:'center' }}>
+    <div style={{ padding: isMobile ? '36px 24px 40px' : '56px 48px 60px', display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 360px', gap: isMobile ? 28 : 48, alignItems:'center' }}>
       <div>
         <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.12em', marginBottom: 18 }}>
           DIAGNOSTIC · FREE · NO SIGN-UP TO TAKE
@@ -140,13 +142,14 @@ function EmbedProgress({ n, total }) {
 
 // ---------- Question ----------
 function EmbedQuestion({ idx, total, selected, onSelect, onNext, onBack }) {
+  const isMobile = useIsMobile();
   const q = WDRI_QUESTIONS[idx];
   const [hover, setHover] = React.useState(-1);
   return (
-    <div style={{ padding:'40px 48px 44px' }}>
+    <div style={{ padding: isMobile ? '28px 20px 32px' : '40px 48px 44px' }}>
       <EmbedProgress n={idx} total={total}/>
 
-      <div style={{ fontSize: 28, lineHeight: 1.25, fontWeight: 600, letterSpacing:'-0.018em', maxWidth: 840, marginTop: 22 }}>
+      <div style={{ fontSize: isMobile ? 21 : 28, lineHeight: 1.25, fontWeight: 600, letterSpacing:'-0.018em', maxWidth: 840, marginTop: 22 }}>
         {q.q}
       </div>
       {q.clar && (
@@ -220,8 +223,9 @@ function EmbedQuestion({ idx, total, selected, onSelect, onNext, onBack }) {
 
 // ---------- Loading ----------
 function EmbedLoading() {
+  const isMobile = useIsMobile();
   return (
-    <div style={{ padding:'80px 48px', textAlign:'center' }}>
+    <div style={{ padding: isMobile ? '60px 20px' : '80px 48px', textAlign:'center' }}>
       <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.12em' }}>
         CALCULATING · READINESS INDEX
       </div>
@@ -239,6 +243,7 @@ function EmbedLoading() {
 
 // ---------- Result ----------
 function EmbedResult({ answers, onReset }) {
+  const isMobile = useIsMobile();
   // Score: each answer carries s (0..4). Max = 10 * 4 = 40.
   const raw = answers.reduce((t, a) => t + (a ? a.s : 0), 0);
   const pct = Math.round((raw / 40) * 100);
@@ -267,14 +272,14 @@ function EmbedResult({ answers, onReset }) {
   }, [pct]);
 
   return (
-    <div style={{ padding:'40px 48px 48px' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 48, alignItems:'start' }}>
+    <div style={{ padding: isMobile ? '28px 20px 32px' : '40px 48px 48px' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
         <div>
           <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.12em', marginBottom: 14 }}>
             YOUR READINESS INDEX
           </div>
           <div style={{ display:'flex', alignItems:'baseline', gap: 14 }}>
-            <div style={{ fontSize: 96, lineHeight: 1, fontWeight: 600, letterSpacing:'-0.04em', color:'var(--ink)' }}>
+            <div style={{ fontSize: isMobile ? 72 : 96, lineHeight: 1, fontWeight: 600, letterSpacing:'-0.04em', color:'var(--ink)' }}>
               {shown}<span style={{ fontSize: 44, color:'var(--slate)' }}>%</span>
             </div>
           </div>

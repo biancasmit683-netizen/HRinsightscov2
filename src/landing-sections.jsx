@@ -68,7 +68,7 @@ function HeroSection({ id }) {
             </span>.
           </h1>
           <div style={{ fontSize: isMobile ? 16 : 20, lineHeight: 1.55, color:'#e5e7ff', marginTop: isMobile ? 22 : 36, maxWidth: 620, fontWeight: 400 }}>
-            We help mid-sized South African organisations turn fragmented workforce data into financial decisions. HR leads people. Finance leads money. Analytics is the specialism that connects them.
+            We help mid-sized South African organisations turn fragmented workforce data into financial decisions. HR leads people. Finance leads money. We connect the two into decisions the business can act on.
           </div>
 
           <div style={{ display:'flex', flexWrap:'wrap', gap: 12, marginTop: isMobile ? 28 : 40 }}>

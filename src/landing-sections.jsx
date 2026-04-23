@@ -1,6 +1,7 @@
 import React from 'react'
 import { Icon, BtnPrimary, BtnGhost } from './shared'
 import HeroGraph from './landing-hero-graph'
+import { Dashboard } from './page-dashboard'
 
 // Landing page sections — in order of appearance.
 
@@ -393,42 +394,9 @@ function WorkSection({ id }) {
       <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40 }}>
         <div/>
         <div style={{ display:'grid', gridTemplateColumns:'1fr', gap: 0 }}>
-        {/* Dashboard snapshot — inline stylised recreation */}
-        <div style={{ background:'#f3f1ec', color:'var(--ink)', padding:'28px 28px 30px', position:'relative', overflow:'hidden' }}>
-          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 20, paddingBottom: 14, borderBottom:'1px solid var(--rule)' }}>
-            <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em' }}>
-              KAYA RIDGE LODGE GROUP · APR 2026
-            </div>
-            <div style={{ display:'inline-flex', border:'1px solid var(--ink)' }}>
-              <span style={{ padding:'4px 10px', background:'var(--ink)', color:'#fff', fontSize: 10.5, fontFamily:'JetBrains Mono,monospace', letterSpacing:'.06em' }}>CFO</span>
-              <span style={{ padding:'4px 10px', background:'#fff', color:'var(--ink)', fontSize: 10.5, fontFamily:'JetBrains Mono,monospace', letterSpacing:'.06em', borderLeft:'1px solid var(--ink)' }}>HR</span>
-            </div>
-          </div>
-
-          <div style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.3, letterSpacing:'-0.015em', maxWidth: 720, marginBottom: 20 }}>
-            Labour cost crossed <span style={{ background:'#f6e4d9', color:'var(--orange)', padding:'0 5px' }}>48% of revenue at two properties</span>, driven by eight regrettable exits and a 41-day fill time on two lodge manager seats.
-          </div>
-
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 10 }}>
-            <MiniTile n="01" name="Labour cost / revenue" value="44.8%" sub="+3.3 pp over plan"/>
-            <MiniTile n="02" name="Cost of workforce"     value="R 31.4m" sub="+R 2.4m YTD"/>
-            <MiniTile n="03" name="Regrettable turnover"  value="R 680k" sub="8 of 14 exits" accent/>
-            <MiniTile n="04" name="Time to fill"          value="41 days" sub="+6 vs Q1"/>
-          </div>
-
-          <div style={{ marginTop: 14, paddingTop: 14, borderTop:'1px solid var(--rule)', display:'flex', justifyContent:'space-between', fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.06em' }}>
-            <span>SOURCES · PAYROLL + OPS ROSTER + PULSE SURVEY + FINANCE GL</span>
-            <span>28 MORE METRICS AVAILABLE</span>
-          </div>
-
-          {/* Device frame hint */}
-          <div style={{ position:'absolute', top: 10, left: 10, fontFamily:'JetBrains Mono,monospace', fontSize: 9, color:'var(--slate)', letterSpacing:'.1em' }}>
-            DEMO · HOSPITALITY
-          </div>
-        </div>
-
-        {/* View demo button — left-aligned under the dashboard */}
-        <div style={{ display:'flex', justifyContent:'flex-start', marginTop: 28 }}>
+        {/* Live dashboard embed */}
+        <div style={{ maxHeight: 720, overflowY: 'auto', border: '1px solid rgba(255,255,255,0.12)', scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.2) transparent' }}>
+          <Dashboard />
         </div>
 
         {/* Other industries — understated */}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon, BtnPrimary, BtnGhost, useIsMobile } from './shared'
 import HeroGraph from './landing-hero-graph'
-import { Dashboard } from './page-dashboard'
+import { Dashboard, MobileDashboard } from './page-dashboard'
 
 // Landing page sections — in order of appearance.
 
@@ -435,12 +435,12 @@ function WorkSection({ id }) {
         <div>
           {/* Live dashboard embed */}
           <div style={{
-            maxHeight: isMobile ? 480 : 720,
-            overflowY: 'auto', overflowX: isMobile ? 'auto' : 'hidden',
+            maxHeight: isMobile ? 600 : 720,
+            overflowY: 'auto', overflowX: 'hidden',
             border: '1px solid rgba(255,255,255,0.12)',
             scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.2) transparent',
           }}>
-            <Dashboard />
+            {isMobile ? <MobileDashboard /> : <Dashboard />}
           </div>
 
           {/* Other industries — understated */}

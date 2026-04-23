@@ -477,7 +477,7 @@ function Dashboard({ view: propView }) {
 function MobileDashboard() {
   const [view, setView] = React.useState('cfo');
   return (
-    <div style={{ width: 390, background:'#f3f1ec', fontFamily:'Inter,sans-serif', color:'var(--ink)' }}>
+    <div style={{ width: '100%', maxWidth: 390, background:'#f3f1ec', fontFamily:'Inter,sans-serif', color:'var(--ink)' }}>
       <div style={{ padding:'14px 18px', background:'#fff', borderBottom:'1px solid var(--rule)', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
         <Wordmark size={11}/>
         <Icon name="menu" size={18} color="var(--ink)"/>

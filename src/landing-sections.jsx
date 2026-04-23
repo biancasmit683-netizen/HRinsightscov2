@@ -429,18 +429,6 @@ function WorkSection({ id }) {
 
         {/* View demo button — left-aligned under the dashboard */}
         <div style={{ display:'flex', justifyContent:'flex-start', marginTop: 28 }}>
-          <a href="#readiness" style={{ textDecoration:'none' }}>
-            <div style={{
-              padding:'16px 22px', background:'#fff', color:'var(--ink)',
-              display:'inline-flex', alignItems:'center', gap: 14,
-              cursor:'pointer', transition:'transform 160ms ease',
-            }}
-            onMouseEnter={(e)=>e.currentTarget.style.transform='translateX(2px)'}
-            onMouseLeave={(e)=>e.currentTarget.style.transform='translateX(0)'}>
-              <span style={{ fontSize: 14, fontWeight: 500 }}>View a demo dashboard</span>
-              <Icon name="arrowSm" size={16} color="var(--ink)"/>
-            </div>
-          </a>
         </div>
 
         {/* Other industries — understated */}

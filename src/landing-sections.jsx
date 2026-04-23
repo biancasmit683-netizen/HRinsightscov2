@@ -362,8 +362,9 @@ function TeamSection({ id }) {
 function FounderCard({ idx, photo, name, role, bio, cred, accent }) {
   return (
     <div style={{ display:'flex', flexDirection:'column' }}>
-      <div style={{ width:'100%', aspectRatio:'1/1', background:'#E5E7EB', overflow:'hidden', position:'relative' }}>
-        <img src={photo} alt={name} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}/>
+      <div style={{ width:'100%', aspectRatio:'1/1', background:'#D6D6D6', overflow:'hidden', position:'relative' }}>
+        <img src={photo} alt={name} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 15%', display:'block' }}/>
+        <div style={{ position:'absolute', inset:0, background:'rgba(210,210,210,0.18)', mixBlendMode:'color', pointerEvents:'none' }}/>
       </div>
       <div style={{ display:'flex', alignItems:'center', gap: 10, marginTop: 18 }}>
         <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color: accent ? 'var(--orange)' : 'var(--slate)', letterSpacing:'.1em' }}>{idx} / 03</span>

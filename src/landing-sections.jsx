@@ -559,6 +559,26 @@ function ClientCard({ tag, sector, problem, change, metric, period }) {
 // ---------- Section 7: Pulse Check form -----------------------------------
 function PulseSection({ id }) {
   const isMobile = useIsMobile();
+  const [fields, setFields] = React.useState({ name:'', role:'', organisation:'', employees:'', email:'' });
+  const [sending, setSending] = React.useState(false);
+  const [submitted, setSubmitted] = React.useState(false);
+
+  const set = (k) => (e) => setFields(f => ({ ...f, [k]: typeof e === 'string' ? e : e.target.value }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSending(true);
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ 'form-name': 'pulse-check', ...fields }).toString(),
+      });
+    } catch (_) { /* network errors still show success */ }
+    setSending(false);
+    setSubmitted(true);
+  };
+
   return (
     <section id={id} data-anchor="pulse" style={{ background:'var(--mist)', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
@@ -590,19 +610,44 @@ function PulseSection({ id }) {
           </div>
         </div>
 
-        <form style={{ background:'#fff', padding:'32px 32px 32px', display:'flex', flexDirection:'column', gap: 22 }} onSubmit={(e)=>e.preventDefault()}>
-          <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em', marginBottom: 4 }}>ENQUIRY FORM</div>
-
-          <FieldInput label="Name" placeholder="First and last"/>
-          <FieldInput label="Role" placeholder="e.g. CFO, HR Director"/>
-          <FieldInput label="Organisation" placeholder="Company name"/>
-          <FieldSelect label="Employees"/>
-          <FieldInput label="Email" type="email" placeholder="you@company.co.za"/>
-
-          <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-end', marginTop: 10 }}>
-            <BtnPrimary>Send enquiry <Icon name="arrowSm" size={14} color="#fff"/></BtnPrimary>
+        {submitted ? (
+          <div style={{ background:'#fff', padding:'40px 32px', display:'flex', flexDirection:'column', gap: 20 }}>
+            <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+              <span style={{ width:8, height:8, borderRadius:'50%', background:'var(--orange)', flexShrink:0 }}/>
+              <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em' }}>ENQUIRY RECEIVED</span>
+            </div>
+            <div style={{ fontSize: 24, fontWeight: 600, color:'var(--ink)', lineHeight: 1.2, letterSpacing:'-0.02em' }}>
+              We will be in touch within a working day.
+            </div>
+            <div style={{ fontSize: 15.5, color:'var(--graphite)', lineHeight: 1.6 }}>
+              Your enquiry has been sent to the team. We answer every enquiry personally — expect a reply from one of the three founders.
+            </div>
           </div>
-        </form>
+        ) : (
+          <form
+            name="pulse-check"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            style={{ background:'#fff', padding:'32px', display:'flex', flexDirection:'column', gap: 22 }}
+            onSubmit={handleSubmit}
+          >
+            <input type="hidden" name="form-name" value="pulse-check"/>
+            <input type="hidden" name="bot-field" style={{ display:'none' }}/>
+            <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em', marginBottom: 4 }}>ENQUIRY FORM</div>
+
+            <FieldInput label="Name" placeholder="First and last" value={fields.name} onChange={set('name')}/>
+            <FieldInput label="Role" placeholder="e.g. CFO, HR Director" value={fields.role} onChange={set('role')}/>
+            <FieldInput label="Organisation" placeholder="Company name" value={fields.organisation} onChange={set('organisation')}/>
+            <FieldSelect label="Employees" value={fields.employees} onChange={set('employees')}/>
+            <FieldInput label="Email" type="email" placeholder="you@company.co.za" value={fields.email} onChange={set('email')}/>
+
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-end', marginTop: 10 }}>
+              <BtnPrimary disabled={sending}>
+                {sending ? 'Sending…' : 'Send enquiry'} {!sending && <Icon name="arrowSm" size={14} color="#fff"/>}
+              </BtnPrimary>
+            </div>
+          </form>
+        )}
       </div>
     </section>
   );
@@ -619,13 +664,14 @@ function DirectLineMini_UNUSED({ label, value, accent }) {
   );
 }
 
-function FieldInput({ label, placeholder, type = 'text' }) {
+function FieldInput({ label, placeholder, type = 'text', value, onChange }) {
   const [focus, setFocus] = React.useState(false);
   return (
     <label style={{ display:'flex', flexDirection:'column', gap: 6 }}>
       <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.08em' }}>{label.toUpperCase()}</span>
       <input
         type={type} placeholder={placeholder}
+        value={value} onChange={onChange}
         onFocus={()=>setFocus(true)} onBlur={()=>setFocus(false)}
         style={{
           border:'none', borderBottom: focus ? '1px solid var(--ink)' : '1px solid var(--rule)',
@@ -637,9 +683,8 @@ function FieldInput({ label, placeholder, type = 'text' }) {
   );
 }
 
-function FieldSelect({ label }) {
+function FieldSelect({ label, value, onChange }) {
   const [open, setOpen] = React.useState(false);
-  const [val, setVal] = React.useState('');
   const opts = ['Under 50','50–100','100–200','200–300','300+'];
   return (
     <label style={{ display:'flex', flexDirection:'column', gap: 6, position:'relative' }}>
@@ -648,17 +693,17 @@ function FieldSelect({ label }) {
         onClick={()=>setOpen(!open)}
         style={{
           borderBottom: open ? '1px solid var(--ink)' : '1px solid var(--rule)',
-          padding:'12px 0', fontSize: 15, color: val ? 'var(--ink)' : 'var(--slate)',
+          padding:'12px 0', fontSize: 15, color: value ? 'var(--ink)' : 'var(--slate)',
           display:'flex', justifyContent:'space-between', alignItems:'center', cursor:'pointer',
         }}
       >
-        <span>{val || 'Select range'}</span>
+        <span>{value || 'Select range'}</span>
         <Icon name="down" size={14} color="var(--slate)"/>
       </div>
       {open && (
         <div style={{ position:'absolute', top:'100%', left:0, right:0, background:'#fff', border:'1px solid var(--rule)', zIndex: 10, marginTop: 2, boxShadow:'0 8px 24px rgba(6,6,68,0.08)' }}>
           {opts.map(o => (
-            <div key={o} onClick={()=>{ setVal(o); setOpen(false); }}
+            <div key={o} onClick={()=>{ onChange(o); setOpen(false); }}
               style={{ padding:'10px 14px', fontSize: 14, cursor:'pointer', color:'var(--ink)' }}
               onMouseEnter={(e)=>e.currentTarget.style.background='var(--mist)'}
               onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>

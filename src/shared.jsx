@@ -189,7 +189,7 @@ function SiteFooter() {
         flexWrap:'wrap', gap: 8,
         fontSize: 11, color:'#a6a6d4', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.08em',
       }}>
-        <span>© 2026 THE HR INSIGHTS CO. (PTY) LTD</span>
+        <span>© 2026 HR ANALYTICS (PTY) LTD</span>
         <span>PAIA · POPIA · TERMS</span>
       </div>
     </div>

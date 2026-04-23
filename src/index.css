@@ -8,7 +8,7 @@
   --rule: #0606441a;
   --hair: #06064410;
 }
-html, body { margin: 0; padding: 0; background: #fff; font-family: Inter, system-ui, sans-serif; color: var(--ink); scroll-behavior: smooth; }
+html, body { margin: 0; padding: 0; background: #fff; font-family: Inter, system-ui, sans-serif; color: var(--ink); scroll-behavior: smooth; overflow-x: hidden; }
 * { box-sizing: border-box; }
 section[data-anchor] { scroll-margin-top: 64px; }
 ::selection { background: var(--ink); color: #fff; }

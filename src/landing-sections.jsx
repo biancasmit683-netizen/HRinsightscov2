@@ -58,13 +58,13 @@ function HeroSection({ id }) {
         background:'linear-gradient(180deg, rgba(6,6,68,0) 0%, var(--ink) 100%)',
       }}/>
 
-      <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1fr) minmax(0, 560px)', gap: isMobile ? 32 : 56, alignItems:'center' }}>
+      <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) minmax(0, 560px)', gap: isMobile ? 32 : 56, alignItems:'center' }}>
         <div>
-          <h1 style={{ fontSize: isMobile ? 44 : 82, lineHeight: isMobile ? 1.1 : 1.02, fontWeight: 600, letterSpacing:'-0.035em', margin: 0 }}>
+          <h1 style={{ fontSize: isMobile ? 34 : 82, lineHeight: isMobile ? 1.15 : 1.02, fontWeight: 600, letterSpacing:'-0.035em', margin: 0 }}>
             Workforce data,<br/>
             <span style={{ position:'relative', whiteSpace:'nowrap' }}>
               financial decisions
-              <span style={{ position:'absolute', right: isMobile ? -16 : -26, top: isMobile ? 8 : 12, width: isMobile ? 10 : 16, height: isMobile ? 10 : 16, background:'var(--orange)', borderRadius:'50%' }}/>
+              <span style={{ position:'absolute', right: isMobile ? -13 : -26, top: isMobile ? 6 : 12, width: isMobile ? 8 : 16, height: isMobile ? 8 : 16, background:'var(--orange)', borderRadius:'50%' }}/>
             </span>.
           </h1>
           <div style={{ fontSize: isMobile ? 16 : 20, lineHeight: 1.55, color:'#e5e7ff', marginTop: isMobile ? 22 : 36, maxWidth: 620, fontWeight: 400 }}>

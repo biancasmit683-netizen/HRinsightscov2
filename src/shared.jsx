@@ -14,11 +14,15 @@ const BRAND = {
 };
 
 function useIsMobile() {
-  const [m, setM] = React.useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+  const [m, setM] = React.useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(max-width: 767px)').matches;
+  });
   React.useEffect(() => {
-    const fn = () => setM(window.innerWidth < 768);
-    window.addEventListener('resize', fn);
-    return () => window.removeEventListener('resize', fn);
+    const mq = window.matchMedia('(max-width: 767px)');
+    const fn = (e) => setM(e.matches);
+    mq.addEventListener('change', fn);
+    return () => mq.removeEventListener('change', fn);
   }, []);
   return m;
 }

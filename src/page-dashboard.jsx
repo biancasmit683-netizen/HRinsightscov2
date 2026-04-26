@@ -1,7 +1,7 @@
 import React from 'react'
 import { Wordmark, Eyebrow, Icon } from './shared'
 
-// Industry focus — Kaya Ridge Lodge Group dashboard demo
+// Industry focus — ABC Lodge (Pty) Ltd dashboard demo
 // A marketing asset that looks like a product. Lives on the Industry Focus (hospitality) page.
 
 // ---------- Helpers ---------------------------------------------------------
@@ -125,7 +125,7 @@ function DashFraming({ view }) {
         </div>
         <div>
           <div style={{ fontSize: 28, fontWeight: 600, lineHeight: 1.15, letterSpacing:'-0.02em', maxWidth: 760 }}>
-            Kaya Ridge Lodge Group: workforce view, April 2026.
+            ABC Lodge (Pty) Ltd: workforce view, April 2026.
           </div>
           <div style={{ marginTop: 18, fontSize: 15, lineHeight: 1.55, color:'var(--graphite)', maxWidth: 760, fontWeight: 400 }}>
             {view === 'cfo' ? cfoTakeaway : hrTakeaway}
@@ -485,7 +485,7 @@ function MobileDashboard() {
       <div style={{ padding:'22px 18px 18px', background:'#fff' }}>
         <Eyebrow>Industry focus · hospitality</Eyebrow>
         <div style={{ fontSize: 22, fontWeight: 600, lineHeight: 1.2, letterSpacing:'-0.02em', marginTop: 10 }}>
-          Kaya Ridge Lodge Group: workforce view, April 2026.
+          ABC Lodge (Pty) Ltd: workforce view, April 2026.
         </div>
         <div style={{ fontSize: 13.5, color:'var(--graphite)', marginTop: 12, lineHeight: 1.5 }}>
           Labour cost crossed 48% at two properties. Eight regrettable exits cost <span style={{ color:'var(--orange)', fontWeight:600 }}>R 680k</span>. Retention and roster actions triggered.

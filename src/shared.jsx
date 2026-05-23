@@ -1,4 +1,5 @@
 import React from 'react'
+import { PrivacyModal } from './page-privacy'
 
 // Shared primitives for the Direction B site
 
@@ -155,44 +156,62 @@ function SiteNav({ active = 'Home', dark = false }) {
 
 function SiteFooter() {
   const isMobile = useIsMobile();
+  const [showPrivacy, setShowPrivacy] = React.useState(false);
   const scrollToPulse = () => {
     const el = document.getElementById('pulse');
     if (el) el.scrollIntoView({ behavior:'smooth' });
     else if (window.__nav) window.__nav('home', 'pulse');
   };
   return (
-    <div style={{ background:'var(--ink)', color:'#fff', fontFamily:'Inter,sans-serif' }}>
-      {/* CTA band */}
-      <div style={{ padding: isMobile ? '56px 20px 48px' : '88px 48px 80px' }}>
-        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr auto', gap: isMobile ? 28 : 56, alignItems:'center' }}>
-          <div>
-            <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'#a6a6d4', letterSpacing:'.12em', marginBottom: 20 }}>
-              REPLY IN A DAY
+    <>
+      <div style={{ background:'var(--ink)', color:'#fff', fontFamily:'Inter,sans-serif' }}>
+        {/* CTA band */}
+        <div style={{ padding: isMobile ? '56px 20px 48px' : '88px 48px 80px' }}>
+          <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr auto', gap: isMobile ? 28 : 56, alignItems:'center' }}>
+            <div>
+              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'#a6a6d4', letterSpacing:'.12em', marginBottom: 20 }}>
+                REPLY IN A DAY
+              </div>
+              <div style={{ fontSize: isMobile ? 30 : 44, fontWeight: 600, lineHeight: 1.15, letterSpacing:'-0.028em', maxWidth: 960, textWrap:'balance' }}>
+                Turning workforce data into better decisions.
+              </div>
             </div>
-            <div style={{ fontSize: isMobile ? 30 : 44, fontWeight: 600, lineHeight: 1.15, letterSpacing:'-0.028em', maxWidth: 960, textWrap:'balance' }}>
-              Turning workforce data into better decisions.
+            <div>
+              <BtnPrimary dark onClick={scrollToPulse}>
+                Book a Pulse Check <Icon name="arrowSm" size={14} color="var(--ink)"/>
+              </BtnPrimary>
             </div>
-          </div>
-          <div>
-            <BtnPrimary dark onClick={scrollToPulse}>
-              Book a Pulse Check <Icon name="arrowSm" size={14} color="var(--ink)"/>
-            </BtnPrimary>
           </div>
         </div>
-      </div>
 
-      {/* Thin legal strip */}
-      <div style={{
-        padding: isMobile ? '14px 20px' : '18px 48px',
-        borderTop:'1px solid #ffffff1a',
-        display:'flex', justifyContent:'space-between', alignItems:'center',
-        flexWrap:'wrap', gap: 8,
-        fontSize: 11, color:'#a6a6d4', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.08em',
-      }}>
-        <span>© 2026 HR ANALYTICS (PTY) LTD</span>
-        <span>PAIA · POPIA · TERMS</span>
+        {/* Thin legal strip */}
+        <div style={{
+          padding: isMobile ? '14px 20px' : '18px 48px',
+          borderTop:'1px solid #ffffff1a',
+          display:'flex', justifyContent:'space-between', alignItems:'center',
+          flexWrap:'wrap', gap: 8,
+          fontSize: 11, color:'#a6a6d4', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.08em',
+        }}>
+          <span>© 2026 HR ANALYTICS (PTY) LTD</span>
+          <span style={{ display:'flex', gap: 14, alignItems:'center', flexWrap:'wrap' }}>
+            <a
+              href="mailto:info@thehrinsightsco.co.za"
+              style={{ color:'#a6a6d4', textDecoration:'none' }}
+            >
+              INFO@THEHRINSIGHTSCO.CO.ZA
+            </a>
+            <span style={{ opacity: 0.35 }}>·</span>
+            <span
+              onClick={() => setShowPrivacy(true)}
+              style={{ cursor:'pointer', textDecoration:'underline', textUnderlineOffset: 3 }}
+            >
+              PRIVACY NOTICE
+            </span>
+          </span>
+        </div>
       </div>
-    </div>
+      {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
+    </>
   );
 }
 function FooterCol({ title, items }) {

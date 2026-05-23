@@ -1,5 +1,6 @@
 import React from 'react'
 import { PrivacyModal } from './page-privacy'
+import { PAIAModal } from './page-paia'
 
 // Shared primitives for the Direction B site
 
@@ -157,6 +158,7 @@ function SiteNav({ active = 'Home', dark = false }) {
 function SiteFooter() {
   const isMobile = useIsMobile();
   const [showPrivacy, setShowPrivacy] = React.useState(false);
+  const [showPaia, setShowPaia] = React.useState(false);
   const scrollToPulse = () => {
     const el = document.getElementById('pulse');
     if (el) el.scrollIntoView({ behavior:'smooth' });
@@ -202,6 +204,13 @@ function SiteFooter() {
             </a>
             <span style={{ opacity: 0.35 }}>·</span>
             <span
+              onClick={() => setShowPaia(true)}
+              style={{ cursor:'pointer', textDecoration:'underline', textUnderlineOffset: 3 }}
+            >
+              PAIA MANUAL
+            </span>
+            <span style={{ opacity: 0.35 }}>·</span>
+            <span
               onClick={() => setShowPrivacy(true)}
               style={{ cursor:'pointer', textDecoration:'underline', textUnderlineOffset: 3 }}
             >
@@ -210,6 +219,7 @@ function SiteFooter() {
           </span>
         </div>
       </div>
+      {showPaia    && <PAIAModal    onClose={() => setShowPaia(false)} />}
       {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
     </>
   );

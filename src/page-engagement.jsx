@@ -1,0 +1,485 @@
+import React from 'react'
+import { SiteHeader, SiteFooter, Circles, Icon, useIsMobile } from './shared'
+import { SectionLabel } from './landing-sections'
+
+// Engagement Surveys — the home page (/). Leads with WhatsApp/QR surveys for deskless teams.
+
+const pad = (isMobile) => (isMobile ? '56px 20px' : '96px 48px');
+
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function BtnOrange({ children, onClick, type = 'button', disabled, full }) {
+  const [h, setH] = React.useState(false);
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      onMouseEnter={() => setH(true)}
+      onMouseLeave={() => setH(false)}
+      style={{
+        background: h ? '#9A3412' : 'var(--orange)', color:'#fff', border:'none',
+        padding:'14px 22px', fontFamily:'Inter,sans-serif', fontWeight: 600, fontSize: 14.5,
+        cursor: disabled ? 'wait' : 'pointer', borderRadius: 0,
+        display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 10,
+        width: full ? '100%' : 'auto',
+        transition:'background 160ms ease',
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function BtnOutlineLight({ children, onClick }) {
+  const [h, setH] = React.useState(false);
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setH(true)}
+      onMouseLeave={() => setH(false)}
+      style={{
+        background: h ? '#fff' : 'transparent', color: h ? 'var(--ink)' : '#fff',
+        border:'1px solid rgba(255,255,255,0.55)', padding:'14px 22px',
+        fontFamily:'Inter,sans-serif', fontWeight: 500, fontSize: 14.5, cursor:'pointer', borderRadius: 0,
+        transition:'background 160ms ease, color 160ms ease',
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function SectionHead({ index, title, lede, dark }) {
+  const isMobile = useIsMobile();
+  return (
+    <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 32 : 56, alignItems:'end' }}>
+      <SectionLabel index={index} dark={dark}/>
+      <h2 style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', margin: 0, maxWidth: 560 }}>{title}</h2>
+      {lede && <p style={{ fontSize: isMobile ? 15.5 : 17, lineHeight: 1.6, color: dark ? 'var(--ink-soft)' : 'var(--graphite)', margin: 0, maxWidth: 520 }}>{lede}</p>}
+    </div>
+  );
+}
+
+// ---------- Hero ------------------------------------------------------------
+function PhoneMock() {
+  const msg = { background:'#fff', borderRadius: 10, borderTopLeftRadius: 2, padding:'9px 11px', fontSize: 12.5, lineHeight: 1.45, color:'#111', maxWidth:'88%', boxShadow:'0 1px 1px rgba(0,0,0,.08)' };
+  const time = { display:'block', textAlign:'right', fontSize: 9.5, color:'#6b7280', marginTop: 3 };
+  return (
+    <div aria-hidden="true" style={{ width: 270, background:'#111', borderRadius: 36, padding: 10, boxShadow:'0 30px 60px rgba(0,0,0,.45)' }}>
+      <div style={{ background:'#ECE5DD', borderRadius: 27, overflow:'hidden', minHeight: 470, display:'flex', flexDirection:'column' }}>
+        <div style={{ background:'#075E54', color:'#fff', padding:'16px 14px 12px', display:'flex', alignItems:'center', gap: 10 }}>
+          <div style={{ width: 32, height: 32, borderRadius:'50%', background:'#fff', display:'grid', placeItems:'center', color:'var(--ink)', fontWeight: 700, fontSize: 11 }}>HRI</div>
+          <div><div style={{ fontSize: 13.5, fontWeight: 600 }}>Staff Survey</div><div style={{ fontSize: 10.5, opacity: .8 }}>via WhatsApp</div></div>
+        </div>
+        <div style={{ padding:'14px 11px', display:'flex', flexDirection:'column', gap: 9 }}>
+          <div style={msg}>Hi Thandi 👋 Your employer has asked for your honest views. It takes about 8 minutes and your answers are private.<span style={time}>08:14</span></div>
+          <div style={msg}>
+            Choose your language:
+            <div style={{ display:'flex', gap: 5, flexWrap:'wrap', marginTop: 7 }}>
+              {['English','isiZulu','Afrikaans','Sesotho'].map(l => <span key={l} style={{ fontSize: 10.5, padding:'3px 8px', borderRadius: 999, border:'1px solid #d1d5db', background:'#fff' }}>{l}</span>)}
+            </div>
+            <span style={time}>08:14</span>
+          </div>
+          <div style={{ ...msg, alignSelf:'flex-end', background:'#DCF8C6', borderTopLeftRadius: 10, borderTopRightRadius: 2 }}>isiZulu<span style={time}>08:15 ✓✓</span></div>
+          <div style={msg}>
+            Here is your personal survey link:
+            <span style={{ display:'block', marginTop: 7, padding: 9, borderRadius: 8, background:'#f3f4f6', color:'#075E54', fontWeight: 600, fontSize: 11.5 }}>🔒 Open my private survey</span>
+            <span style={time}>08:15</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Hero() {
+  const isMobile = useIsMobile();
+  return (
+    <section id="top" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '56px 20px 64px' : '88px 48px 96px', position:'relative', overflow:'hidden' }}>
+      <Circles items={[
+        { size: 340, right: -120, bottom: -150, coral: true, opacity: 0.55 },
+        { size: 220, left: '38%', top: -110 },
+        { size: 140, left: -50, bottom: 60 },
+      ]}/>
+      <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? 'minmax(0,1fr)' : 'minmax(0,1.15fr) minmax(0,.85fr)', gap: isMobile ? 40 : 56, alignItems:'center' }}>
+        <div>
+          <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.14em', color:'var(--ink-soft)', display:'flex', alignItems:'center', gap: 10 }}>
+            <span style={{ width: 7, height: 7, borderRadius:'50%', background:'var(--coral)' }}/>EMPLOYEE ENGAGEMENT SURVEYS
+          </div>
+          <h1 style={{ fontSize: isMobile ? 36 : 68, lineHeight: 1.03, fontWeight: 600, letterSpacing:'-0.035em', margin: isMobile ? '18px 0 0' : '24px 0 0' }}>
+            Hear from every employee.<br/>
+            <span style={{ color:'var(--ink-soft)' }}>Not just the ones with email.</span>
+          </h1>
+          <p style={{ fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color:'#EFEBE4', margin: isMobile ? '22px 0 30px' : '30px 0 38px', maxWidth: 560 }}>
+            End-to-end engagement surveys for deskless teams. Each staff member gets a private survey link on WhatsApp, or scans a QR poster on site. No app, no login, no email, no shared device.
+          </p>
+          <div style={{ display:'flex', gap: 12, flexWrap:'wrap' }}>
+            <BtnOrange onClick={() => scrollTo('book')}>Book a demo <Icon name="arrowSm" size={14} color="#fff"/></BtnOrange>
+            <BtnOutlineLight onClick={() => scrollTo('how')}>See how it works</BtnOutlineLight>
+          </div>
+          <div style={{ display:'flex', gap: isMobile ? 14 : 26, flexWrap:'wrap', marginTop: isMobile ? 32 : 44, fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.08em', color:'var(--ink-soft)' }}>
+            {['WHATSAPP & QR','LOCAL LANGUAGES','ONE FIXED FEE','POPIA-COMPLIANT'].map(f => (
+              <span key={f} style={{ display:'inline-flex', alignItems:'center', gap: 8 }}><Icon name="check" size={13} color="var(--coral)" stroke={2}/>{f}</span>
+            ))}
+          </div>
+        </div>
+
+        {!isMobile ? (
+          <div style={{ position:'relative', height: 540 }}>
+            <img src="/brand/poster-engagement.jpg" alt="The HR Insights Co. engagement survey poster" style={{ position:'absolute', right: 0, top: 0, height: 540, width:'auto', boxShadow:'0 30px 60px rgba(0,0,0,.35)' }}/>
+            <div style={{ position:'absolute', left: -36, bottom: -24 }}><PhoneMock/></div>
+          </div>
+        ) : (
+          <div style={{ display:'flex', justifyContent:'center' }}><PhoneMock/></div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// ---------- 01 The problem --------------------------------------------------
+function Problem() {
+  const isMobile = useIsMobile();
+  const cells = [
+    ['Built for office workers', 'Generic survey platforms assume an inbox and a laptop. Housekeepers, operators, field staff and security officers have neither.'],
+    ['Subscriptions you don\'t need', 'A monthly licence makes little sense for a survey you run once or twice a year.'],
+    ['Low response, skewed data', 'When only a fraction of staff respond, the result is unrepresentative, and you act on the wrong things.'],
+  ];
+  return (
+    <section id="problem" style={{ background:'#fff', padding: pad(isMobile) }}>
+      <SectionHead index="01 / THE PROBLEM" title="Most surveys stop at the front desk."
+        lede="In hospitality, mining, agriculture, retail, manufacturing, security and logistics, most of the workforce never sits behind a company email address. So most surveys never reach them, and the results describe the office, not the operation."/>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
+        {!isMobile && <div/>}
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)', borderTop:'1px solid var(--ink)' }}>
+          {cells.map(([t, b], i) => (
+            <div key={i} style={{ padding: isMobile ? '24px 0 8px' : '30px 28px 8px', paddingLeft: isMobile || i === 0 ? 0 : 28, borderRight: !isMobile && i < 2 ? '1px solid var(--rule)' : 'none', borderBottom: isMobile && i < 2 ? '1px solid var(--rule)' : 'none' }}>
+              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 12, color:'var(--orange)' }}>0{i + 1}</div>
+              <h3 style={{ fontSize: 21, fontWeight: 600, letterSpacing:'-0.015em', margin:'12px 0 10px' }}>{t}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.6, color:'var(--graphite)', margin:'0 0 20px' }}>{b}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ---------- 02 How it works -------------------------------------------------
+function FlowNode({ icon, title, sub }) {
+  return (
+    <div style={{ textAlign:'center' }}>
+      <div style={{ width: 56, height: 56, margin:'0 auto 12px', borderRadius: '50%', display:'grid', placeItems:'center', background:'#fff', border:'1px solid var(--rule)' }}>{icon}</div>
+      <div style={{ fontSize: 15, fontWeight: 600 }}>{title}</div>
+      <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, letterSpacing:'.08em', color:'var(--slate)', marginTop: 4 }}>{sub.toUpperCase()}</div>
+    </div>
+  );
+}
+
+function HowItWorks() {
+  const isMobile = useIsMobile();
+  const arrow = <div aria-hidden="true" style={{ color:'var(--orange)', fontSize: 24, transform: isMobile ? 'rotate(90deg)' : 'none', textAlign:'center' }}>→</div>;
+  const steps = [
+    ['We set it up together', 'We meet your HR lead or operations head to understand your sites, workforce groups and what you most need to hear. Questions are designed by HR professionals and tuned to your industry.'],
+    ['We reach your people', 'Invitations go out by WhatsApp and QR poster, supported by team champions and announcement templates. We watch response rates live and send targeted reminders to groups that lag.'],
+    ['You get the picture', 'A clear, actionable insights report broken down by department, site and role, showing what is driving engagement and where to act first, delivered within an agreed timeframe.'],
+  ];
+  return (
+    <section id="how" style={{ background:'var(--paper)', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
+      <SectionHead index="02 / HOW IT WORKS" title="Three steps. Fully supported."
+        lede="We run the survey with you from set-up to results, so your HR team isn't left chasing responses."/>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
+        {!isMobile && <div/>}
+        <div>
+          <div aria-label="How staff reach the survey" style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr auto 1fr auto 1fr', alignItems:'center', gap: 16, padding: 28, background:'var(--sand)', marginBottom: isMobile ? 32 : 48 }}>
+            <FlowNode title="Scan on site" sub="or receive a message" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#060644" strokeWidth="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v7M14 20h3"/></svg>}/>
+            {arrow}
+            <FlowNode title="WhatsApp opens" sub="no app to install" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1FA855" strokeWidth="1.8"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5l1.2-1.2 2 .8-.4 1.6c-3.8.4-8.2-4-7.8-7.8l1.6-.4.8 2z"/></svg>}/>
+            {arrow}
+            <FlowNode title="Private survey link" sub="unique to each person" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C2410C" strokeWidth="1.8"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>}/>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)', gap: 20 }}>
+            {steps.map(([t, b], i) => (
+              <div key={i} style={{ background:'#fff', padding: isMobile ? 24 : 30, borderTop: i === 0 ? '3px solid var(--orange)' : '3px solid var(--ink)' }}>
+                <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.1em', color:'var(--orange)' }}>STEP 0{i + 1}</div>
+                <h3 style={{ fontSize: 21, fontWeight: 600, letterSpacing:'-0.015em', margin:'16px 0 10px' }}>{t}</h3>
+                <p style={{ fontSize: 15, lineHeight: 1.6, color:'var(--graphite)', margin: 0 }}>{b}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ---------- Listening route (from the print campaign) -----------------------
+function ListeningRoute() {
+  const isMobile = useIsMobile();
+  return (
+    <section style={{ background:'var(--ink)', color:'#fff', padding: pad(isMobile), position:'relative', overflow:'hidden' }}>
+      <Circles items={[{ size: 280, left: -110, bottom: -120, coral: true, opacity: 0.5 }, { size: 180, right: '40%', top: -90 }]}/>
+      <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr auto', gap: isMobile ? 32 : 56, alignItems:'center' }}>
+        {!isMobile && <div/>}
+        <div>
+          <div style={{ fontSize: isMobile ? 34 : 60, lineHeight: 1.04, fontWeight: 700, letterSpacing:'-0.035em' }}>
+            The shop steward already knows.<br/>Do you?
+          </div>
+          <p style={{ fontSize: isMobile ? 17 : 20, lineHeight: 1.55, color:'#EFEBE4', margin:'28px 0 0', maxWidth: 560 }}>
+            They're on the floor every day. People trust them.
+          </p>
+          <p style={{ fontSize: isMobile ? 17 : 20, lineHeight: 1.55, color:'#fff', fontWeight: 600, margin:'14px 0 32px', maxWidth: 560 }}>
+            The question is: have you built a listening route of your own?
+          </p>
+          <BtnOrange onClick={() => scrollTo('book')}>Book a demo <Icon name="arrowSm" size={14} color="#fff"/></BtnOrange>
+        </div>
+        <figure style={{ margin: 0, justifySelf: isMobile ? 'center' : 'end' }}>
+          <img src="/brand/poster-shop-steward.jpg" alt="On-site poster: “The shop steward already knows. Do you?” with a QR code staff scan to open the survey" style={{ width: isMobile ? 240 : 300, height:'auto', display:'block', boxShadow:'0 30px 60px rgba(0,0,0,.35)' }}/>
+          <figcaption style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, letterSpacing:'.1em', color:'var(--ink-soft)', marginTop: 14 }}>ON-SITE QR POSTER · STAFF SCAN, WHATSAPP OPENS</figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+// ---------- 03 Why us -------------------------------------------------------
+function WhyUs() {
+  const isMobile = useIsMobile();
+  const feats = [
+    ['QR · WHATSAPP', 'Reach everyone, no email required', 'A personal link on WhatsApp, or a branded QR poster on site. Staff scan, WhatsApp opens, and they receive their own private survey link.'],
+    ['LANGUAGES', 'In the languages your staff speak', 'English plus additional local languages, so everyone can answer honestly and in their own words.'],
+    ['LIVE', 'We chase the gaps', 'Live response rates by department, site and role. When one group lags, we see it and follow up, so the data represents everyone.'],
+    ['ZA · POPIA', 'Fully POPIA-compliant', 'Built in South Africa, for South African employers, with personal information handled in line with POPIA.'],
+  ];
+  const bars = [['Front office', 82], ['Kitchen & F&B', 68], ['Housekeeping', 41, true], ['Maintenance', 74]];
+  return (
+    <section id="why" style={{ background:'#fff', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
+      <SectionHead index="03 / WHY US" title="Built for how South African workplaces actually work."
+        lede="Three founders from HR, industrial psychology, finance and data, running surveys that represent the whole workforce, not just the part with a laptop."/>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
+        {!isMobile && <div/>}
+        <div>
+          <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2,1fr)', borderTop:'1px solid var(--ink)' }}>
+            {feats.map(([tag, t, b], i) => (
+              <div key={i} style={{ padding: isMobile ? '24px 0' : '30px 32px 30px 0', paddingLeft: !isMobile && i % 2 ? 32 : 0, borderRight: !isMobile && i % 2 === 0 ? '1px solid var(--rule)' : 'none', borderBottom:'1px solid var(--rule)' }}>
+                <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.1em', color:'var(--orange)' }}>{tag}</div>
+                <h3 style={{ fontSize: 21, fontWeight: 600, letterSpacing:'-0.015em', margin:'12px 0 8px' }}>{t}</h3>
+                <p style={{ fontSize: 15, lineHeight: 1.6, color:'var(--graphite)', margin: 0 }}>{b}</p>
+              </div>
+            ))}
+          </div>
+
+          <div aria-label="Example of live response monitoring" style={{ marginTop: 48, background:'var(--paper)', padding: isMobile ? 20 : 32 }}>
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', flexWrap:'wrap', gap: 8, marginBottom: 18 }}>
+              <div style={{ fontSize: 16, fontWeight: 600 }}>Live response monitor</div>
+              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, letterSpacing:'.1em', color:'var(--slate)' }}>ILLUSTRATIVE EXAMPLE · DAY 4 OF 10</div>
+            </div>
+            {bars.map(([name, pct, low]) => (
+              <div key={name} style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr 44px' : '190px 1fr 52px', gap: isMobile ? '8px 12px' : 16, alignItems:'center', padding:'10px 0', borderTop:'1px solid var(--rule)', fontSize: 14 }}>
+                <span>{name}{low && <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10, color:'var(--orange)', marginLeft: 8 }}>REMINDER SENT</span>}</span>
+                <div style={{ height: 10, background:'var(--sand)', position:'relative', gridColumn: isMobile ? '1 / -1' : 'auto', gridRow: isMobile ? 2 : 'auto' }}>
+                  <div style={{ position:'absolute', inset:0, right:'auto', width: pct + '%', background: low ? 'var(--orange)' : 'var(--ink)' }}/>
+                </div>
+                <span style={{ fontFamily:'JetBrains Mono,monospace', textAlign:'right' }}>{pct}%</span>
+              </div>
+            ))}
+            <p style={{ fontSize: 13, color:'var(--slate)', margin:'14px 0 0' }}>When one group lags, a targeted reminder goes to non-responders in that group only.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ---------- 04 Who it's for + 05 Pricing -----------------------------------
+function WhoFor() {
+  const isMobile = useIsMobile();
+  const inds = ['Mining','Agriculture','Retail','Manufacturing','Security','Logistics & transport','Healthcare & care services'];
+  return (
+    <section id="industries" style={{ background:'var(--paper)', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
+      <SectionHead index="04 / WHO IT'S FOR" title="Any employer with a deskless workforce."
+        lede="If a large share of your people work on the floor, in the field, on shift or on site, this is built for you."/>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
+        {!isMobile && <div/>}
+        <div style={{ display:'flex', flexWrap:'wrap', gap: 10 }}>
+          <span style={{ padding:'12px 18px', background:'var(--ink)', color:'#fff', fontWeight: 500, fontSize: 15 }}>Hospitality: lodges, hotels &amp; game reserves</span>
+          {inds.map(i => <span key={i} style={{ padding:'12px 18px', background:'#fff', border:'1px solid var(--rule)', fontWeight: 500, fontSize: 15 }}>{i}</span>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Pricing() {
+  const isMobile = useIsMobile();
+  const rows = [['Subscription','None'], ['Per-person charges','None'], ['Lock-in','None'], ['Set-up, reminders & report','Included']];
+  return (
+    <section id="pricing" style={{ background:'#fff', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 24 : 40, alignItems:'start' }}>
+        <SectionLabel index="05 / PRICING"/>
+        <div>
+          <h2 style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', margin: 0 }}>One survey. One price.</h2>
+          <p style={{ fontSize: isMobile ? 15.5 : 17, lineHeight: 1.6, color:'var(--graphite)', margin:'18px 0 0', maxWidth: 440 }}>A single fixed fee per survey, agreed upfront. You know exactly what it costs before we start.</p>
+          <div style={{ marginTop: 26, fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.1em', color:'var(--slate)' }}>
+            TRUSTED WITH SURVEYS AT <span style={{ fontFamily:'Inter,sans-serif', fontSize: 16, fontWeight: 600, letterSpacing: 0, color:'var(--ink)', marginLeft: 8 }}>Karongwe</span>
+          </div>
+        </div>
+        <ul style={{ listStyle:'none', margin: 0, padding: 0, borderTop:'1px solid var(--ink)' }}>
+          {rows.map(([k, v]) => (
+            <li key={k} style={{ display:'flex', justifyContent:'space-between', gap: 16, padding:'17px 0', borderBottom:'1px solid var(--rule)', fontSize: 16.5 }}>
+              <span>{k}</span>
+              <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 12.5, letterSpacing:'.08em', color:'var(--orange)' }}>{v.toUpperCase()}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+// ---------- 06 Book a demo --------------------------------------------------
+const labelStyle = { fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.08em' };
+const inputStyle = { border:'none', borderBottom:'1px solid var(--warm-grey)', padding:'11px 0', fontSize: 15, fontFamily:'Inter,sans-serif', color:'var(--ink)', background:'transparent', borderRadius: 0, width:'100%' };
+
+function Field({ label, children }) {
+  return (
+    <label style={{ display:'flex', flexDirection:'column', gap: 6, minWidth: 0 }}>
+      <span style={labelStyle}>{label.toUpperCase()}</span>
+      {children}
+    </label>
+  );
+}
+
+function BookDemo() {
+  const isMobile = useIsMobile();
+  const empty = { name:'', role:'', organisation:'', industry:'', employees:'', 'deskless-share':'', email:'', phone:'', consent:'' };
+  const [fields, setFields] = React.useState(empty);
+  const [sending, setSending] = React.useState(false);
+  const [submitted, setSubmitted] = React.useState(false);
+  const set = (k) => (e) => setFields(f => ({ ...f, [k]: e.target.type === 'checkbox' ? (e.target.checked ? 'yes' : '') : e.target.value }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSending(true);
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ 'form-name': 'demo-request', ...fields }).toString(),
+      });
+    } catch (_) { /* network errors still show success */ }
+    setSending(false);
+    setSubmitted(true);
+  };
+
+  const row = { display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 22 : 24 };
+
+  return (
+    <section id="book" style={{ background:'var(--paper)', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1.2fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
+        <SectionLabel index="06 / BOOK A DEMO"/>
+        <div>
+          <h2 style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', margin: 0 }}>See what a survey looks like for a business your size.</h2>
+          <p style={{ fontSize: 16.5, lineHeight: 1.6, color:'var(--graphite)', margin:'22px 0 12px' }}>In 30 minutes we'll walk you through:</p>
+          <ul style={{ margin: 0, padding: 0, listStyle:'none', display:'flex', flexDirection:'column', gap: 10 }}>
+            {['What your staff see on WhatsApp, step by step', 'How we lift response rates in hard-to-reach teams', 'A sample insights report by site, department and role', 'A fixed quote for your workforce'].map(t => (
+              <li key={t} style={{ display:'grid', gridTemplateColumns:'20px 1fr', gap: 10, fontSize: 15, lineHeight: 1.5 }}>
+                <Icon name="check" size={15} color="var(--orange)" stroke={2}/><span>{t}</span>
+              </li>
+            ))}
+          </ul>
+          <p style={{ fontSize: 15, color:'var(--graphite)', marginTop: 24 }}>
+            Prefer email? <a href="mailto:info@thehrinsightsco.co.za" style={{ color:'var(--ink)' }}>info@thehrinsightsco.co.za</a>
+          </p>
+        </div>
+
+        {submitted ? (
+          <div role="status" style={{ background:'#fff', padding: isMobile ? '28px 22px' : '40px 36px', borderTop:'3px solid var(--orange)' }}>
+            <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+              <span style={{ width: 8, height: 8, borderRadius:'50%', background:'var(--orange)' }}/>
+              <span style={labelStyle}>REQUEST RECEIVED</span>
+            </div>
+            <div style={{ fontSize: 24, fontWeight: 600, lineHeight: 1.2, letterSpacing:'-0.02em', margin:'16px 0 12px' }}>Thank you. We'll be in touch within a working day.</div>
+            <p style={{ fontSize: 15.5, color:'var(--graphite)', lineHeight: 1.6, margin: 0 }}>
+              In the meantime, you can look through our <a href="https://engagementsurveysdeck.thehrinsightsco.co.za/" style={{ color:'var(--ink)' }}>engagement surveys overview</a>.
+            </p>
+          </div>
+        ) : (
+          <form
+            name="demo-request"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
+            style={{ background:'#fff', padding: isMobile ? '26px 20px' : '36px', display:'flex', flexDirection:'column', gap: 22, borderTop:'3px solid var(--orange)' }}
+          >
+            <input type="hidden" name="form-name" value="demo-request"/>
+            <input type="hidden" name="bot-field" style={{ display:'none' }}/>
+            <div style={row}>
+              <Field label="Name"><input style={inputStyle} name="name" required autoComplete="name" value={fields.name} onChange={set('name')}/></Field>
+              <Field label="Role"><input style={inputStyle} name="role" required autoComplete="organization-title" placeholder="e.g. HR Manager" value={fields.role} onChange={set('role')}/></Field>
+            </div>
+            <div style={row}>
+              <Field label="Organisation"><input style={inputStyle} name="organisation" required autoComplete="organization" value={fields.organisation} onChange={set('organisation')}/></Field>
+              <Field label="Industry">
+                <select style={inputStyle} name="industry" required value={fields.industry} onChange={set('industry')}>
+                  <option value="">Select</option>
+                  {['Hospitality','Mining','Agriculture','Retail','Manufacturing','Security','Logistics & transport','Healthcare & care','Other'].map(o => <option key={o}>{o}</option>)}
+                </select>
+              </Field>
+            </div>
+            <div style={row}>
+              <Field label="Employees">
+                <select style={inputStyle} name="employees" required value={fields.employees} onChange={set('employees')}>
+                  <option value="">Select range</option>
+                  {['Under 50','50–150','151–300','301–1,000','1,000+'].map(o => <option key={o}>{o}</option>)}
+                </select>
+              </Field>
+              <Field label="Staff without company email">
+                <select style={inputStyle} name="deskless-share" value={fields['deskless-share']} onChange={set('deskless-share')}>
+                  <option value="">Roughly how many?</option>
+                  {['Less than a quarter','About half','Most of them','Almost all'].map(o => <option key={o}>{o}</option>)}
+                </select>
+              </Field>
+            </div>
+            <div style={row}>
+              <Field label="Work email"><input style={inputStyle} type="email" name="email" required autoComplete="email" value={fields.email} onChange={set('email')}/></Field>
+              <Field label="Phone (optional)"><input style={inputStyle} type="tel" name="phone" autoComplete="tel" value={fields.phone} onChange={set('phone')}/></Field>
+            </div>
+            <label style={{ display:'flex', gap: 10, alignItems:'flex-start', fontSize: 13, color:'var(--graphite)', lineHeight: 1.5 }}>
+              <input type="checkbox" name="consent" value="yes" required checked={fields.consent === 'yes'} onChange={set('consent')} style={{ marginTop: 3 }}/>
+              I agree that The HR Insights Co. may use these details to contact me about a demo, in line with POPIA.
+            </label>
+            <BtnOrange type="submit" disabled={sending} full>
+              {sending ? 'Sending…' : 'Request a demo'} {!sending && <Icon name="arrowSm" size={14} color="#fff"/>}
+            </BtnOrange>
+            <p style={{ fontSize: 12.5, color:'var(--slate)', margin: 0 }}>We reply within one working day to confirm a time.</p>
+          </form>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function EngagementPage() {
+  React.useEffect(() => { document.title = 'Employee Engagement Surveys via WhatsApp — The HR Insights Co.'; }, []);
+  return (
+    <div>
+      <SiteHeader current="surveys"/>
+      <Hero/>
+      <Problem/>
+      <HowItWorks/>
+      <ListeningRoute/>
+      <WhyUs/>
+      <WhoFor/>
+      <Pricing/>
+      <BookDemo/>
+      <SiteFooter/>
+    </div>
+  );
+}
+
+export default EngagementPage;

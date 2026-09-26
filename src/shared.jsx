@@ -31,7 +31,7 @@ function useIsMobile() {
 
 // Wordmark — "The HR insights Co." with the orange-dot i
 function Wordmark({ size = 16, onInk = false }) {
-  const dim = onInk ? '#a6a6d4' : 'var(--slate)';
+  const dim = onInk ? '#C9C2B6' : 'var(--slate)';
   const ink = onInk ? '#fff' : 'var(--ink)';
   return (
     <span style={{ display:'inline-flex', alignItems:'baseline', fontFamily:'Inter,sans-serif', fontWeight:600, fontSize: size, letterSpacing:'-0.01em', lineHeight:1, color: ink }}>
@@ -113,7 +113,7 @@ function SiteNav({ active = 'Home', dark = false }) {
         {items.map(i => {
           const isActive = i.label === active;
           const isHover = hover === i.label;
-          const base = isActive ? (dark ? '#fff' : 'var(--ink)') : (dark ? '#cfcfe6' : 'var(--graphite)');
+          const base = isActive ? (dark ? '#fff' : 'var(--ink)') : (dark ? '#DDD7CC' : 'var(--graphite)');
           const hoverCol = dark ? '#fff' : 'var(--ink)';
           return (
             <span
@@ -155,23 +155,158 @@ function SiteNav({ active = 'Home', dark = false }) {
   );
 }
 
-function SiteFooter() {
+
+// Site-wide header — page links + CTA. Used on every page.
+const PAGES = [
+  { id:'surveys',      label:'Engagement Surveys', href:'/' },
+  { id:'hr-analytics', label:'HR Analytics',       href:'/hr-analytics' },
+  { id:'about',        label:'About us',           href:'/about' },
+];
+
+function SiteHeader({ current, ctaLabel = 'Book a demo', ctaHref = '/#book' }) {
+  const isMobile = useIsMobile();
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [hover, setHover] = React.useState(null);
+  const [ctaHover, setCtaHover] = React.useState(false);
+
+  const onCta = (e) => {
+    const hash = ctaHref.split('#')[1];
+    const el = hash && document.getElementById(hash);
+    if (el) { e.preventDefault(); el.scrollIntoView({ behavior:'smooth', block:'start' }); }
+    setMenuOpen(false);
+  };
+
+  return (
+    <>
+      <div style={{
+        position:'sticky', top: 0, zIndex: 50,
+        display:'flex', alignItems:'center', justifyContent:'space-between',
+        padding: isMobile ? '12px 20px' : '14px 40px',
+        background:'rgba(255,255,255,0.96)',
+        backdropFilter:'blur(10px)', WebkitBackdropFilter:'blur(10px)',
+        borderBottom:'1px solid var(--rule)',
+        fontFamily:'Inter,sans-serif',
+      }}>
+        <a href="/" style={{ display:'inline-flex', alignItems:'center' }} aria-label="The HR Insights Co. home">
+          <img src="/brand/logo-primary-white-bg.png" alt="The HR Insights Co." style={{ height: isMobile ? 24 : 28, width:'auto', display:'block' }}/>
+        </a>
+
+        {isMobile ? (
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            style={{ background:'none', border:'none', cursor:'pointer', padding: 6, display:'flex', alignItems:'center' }}
+          >
+            <Icon name={menuOpen ? 'close' : 'menu'} size={22} color="var(--ink)"/>
+          </button>
+        ) : (
+          <nav aria-label="Main" style={{ display:'flex', alignItems:'center', gap: 30, fontSize: 13.5, fontWeight: 500 }}>
+            {PAGES.map(pg => {
+              const isActive = current === pg.id;
+              return (
+                <a
+                  key={pg.id}
+                  href={pg.href}
+                  aria-current={isActive ? 'page' : undefined}
+                  onMouseEnter={() => setHover(pg.id)}
+                  onMouseLeave={() => setHover(null)}
+                  style={{
+                    position:'relative', textDecoration:'none', padding:'18px 0',
+                    color: isActive || hover === pg.id ? 'var(--ink)' : 'var(--graphite)',
+                    transition:'color 140ms ease',
+                  }}
+                >
+                  {pg.label}
+                  <span style={{ position:'absolute', left:0, right:0, bottom: 8, height: 2, background: isActive ? 'var(--orange)' : 'transparent' }}/>
+                </a>
+              );
+            })}
+            <a
+              href={ctaHref}
+              onClick={onCta}
+              onMouseEnter={() => setCtaHover(true)}
+              onMouseLeave={() => setCtaHover(false)}
+              style={{
+                display:'inline-flex', alignItems:'center', gap: 8,
+                padding:'10px 16px', marginLeft: 6,
+                background: ctaHover ? '#9A3412' : 'var(--orange)', color:'#fff',
+                fontSize: 13, fontWeight: 600, textDecoration:'none',
+                transition:'background 160ms ease',
+              }}
+            >
+              {ctaLabel} <Icon name="arrowSm" size={14} color="#fff"/>
+            </a>
+          </nav>
+        )}
+      </div>
+
+      {isMobile && menuOpen && (
+        <div style={{
+          position:'fixed', top: 49, left: 0, right: 0, bottom: 0,
+          background:'rgba(255,255,255,0.98)', zIndex: 49,
+          display:'flex', flexDirection:'column', padding:'12px 0 32px', overflowY:'auto',
+        }}>
+          {PAGES.map(pg => (
+            <a
+              key={pg.id}
+              href={pg.href}
+              aria-current={current === pg.id ? 'page' : undefined}
+              style={{
+                padding:'18px 24px', fontSize: 18, fontWeight: 500, textDecoration:'none',
+                color: current === pg.id ? 'var(--ink)' : 'var(--graphite)',
+                borderBottom:'1px solid var(--rule)',
+                display:'flex', justifyContent:'space-between', alignItems:'center',
+              }}
+            >
+              {pg.label}
+              {current === pg.id && <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--orange)' }}/>}
+            </a>
+          ))}
+          <div style={{ padding:'28px 24px 0' }}>
+            <a href={ctaHref} onClick={onCta} style={{ display:'inline-flex', alignItems:'center', gap: 10, padding:'14px 20px', background:'var(--orange)', color:'#fff', fontWeight: 600, fontSize: 15, textDecoration:'none' }}>
+              {ctaLabel} <Icon name="arrowSm" size={14} color="#fff"/>
+            </a>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+// Decorative circles — the brand motif from the print material. Place inside a position:relative parent.
+function Circles({ items }) {
+  return (
+    <div aria-hidden="true" style={{ position:'absolute', inset: 0, overflow:'hidden', pointerEvents:'none' }}>
+      {items.map((c, i) => (
+        <span key={i} style={{
+          position:'absolute', width: c.size, height: c.size, borderRadius:'50%',
+          left: c.left, right: c.right, top: c.top, bottom: c.bottom,
+          background: c.coral ? 'var(--coral)' : '#ffffff',
+          opacity: c.opacity ?? (c.coral ? 0.75 : 0.07),
+        }}/>
+      ))}
+    </div>
+  );
+}
+
+function SiteFooter({ ctaLabel = 'Book a demo', ctaTarget = 'book' }) {
   const isMobile = useIsMobile();
   const [showPrivacy, setShowPrivacy] = React.useState(false);
   const [showPaia, setShowPaia] = React.useState(false);
-  const scrollToPulse = () => {
-    const el = document.getElementById('pulse');
+  const goCta = () => {
+    const el = document.getElementById(ctaTarget);
     if (el) el.scrollIntoView({ behavior:'smooth' });
-    else if (window.__nav) window.__nav('home', 'pulse');
+    else window.location.href = '/#book';
   };
   return (
     <>
       <div style={{ background:'var(--ink)', color:'#fff', fontFamily:'Inter,sans-serif' }}>
         {/* CTA band */}
-        <div style={{ padding: isMobile ? '56px 20px 48px' : '88px 48px 80px' }}>
-          <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr auto', gap: isMobile ? 28 : 56, alignItems:'center' }}>
+        <div style={{ padding: isMobile ? '56px 20px 48px' : '88px 48px 80px', position:'relative', overflow:'hidden' }}>
+          <Circles items={[{ size: 200, right: -90, top: -120, coral: true, opacity: 0.55 }, { size: 160, right: 220, bottom: -110 }]}/>
+          <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr auto', gap: isMobile ? 28 : 56, alignItems:'center' }}>
             <div>
-              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'#a6a6d4', letterSpacing:'.12em', marginBottom: 20 }}>
+              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'#C9C2B6', letterSpacing:'.12em', marginBottom: 20 }}>
                 REPLY IN A DAY
               </div>
               <div style={{ fontSize: isMobile ? 30 : 44, fontWeight: 600, lineHeight: 1.15, letterSpacing:'-0.028em', maxWidth: 960, textWrap:'balance' }}>
@@ -179,8 +314,8 @@ function SiteFooter() {
               </div>
             </div>
             <div>
-              <BtnPrimary dark onClick={scrollToPulse}>
-                Book a Pulse Check <Icon name="arrowSm" size={14} color="var(--ink)"/>
+              <BtnPrimary dark onClick={goCta}>
+                {ctaLabel} <Icon name="arrowSm" size={14} color="var(--ink)"/>
               </BtnPrimary>
             </div>
           </div>
@@ -192,13 +327,18 @@ function SiteFooter() {
           borderTop:'1px solid #ffffff1a',
           display:'flex', justifyContent:'space-between', alignItems:'center',
           flexWrap:'wrap', gap: 8,
-          fontSize: 11, color:'#a6a6d4', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.08em',
+          fontSize: 11, color:'#C9C2B6', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.08em',
         }}>
-          <span>© 2026 HR ANALYTICS (PTY) LTD</span>
+          <span style={{ display:'flex', gap: 14, flexWrap:'wrap', alignItems:'center' }}>
+            <span>© 2026 HR ANALYTICS (PTY) LTD</span>
+            {PAGES.map(pg => (
+              <a key={pg.id} href={pg.href} style={{ color:'var(--ink-soft)', textDecoration:'none' }}>{pg.label.toUpperCase()}</a>
+            ))}
+          </span>
           <span style={{ display:'flex', gap: 14, alignItems:'center', flexWrap:'wrap' }}>
             <a
               href="mailto:info@thehrinsightsco.co.za"
-              style={{ color:'#a6a6d4', textDecoration:'none' }}
+              style={{ color:'#C9C2B6', textDecoration:'none' }}
             >
               INFO@THEHRINSIGHTSCO.CO.ZA
             </a>
@@ -229,8 +369,8 @@ function FooterCol({ title, items }) {
   const [hover, setHover] = React.useState(null);
   return (
     <div>
-      <div style={{ fontSize: 11, color:'#a6a6d4', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.1em', marginBottom: 14 }}>{title.toUpperCase()}</div>
-      <div style={{ display:'flex', flexDirection:'column', gap: 9, fontSize: 13.5, color:'#e5e7ff' }}>
+      <div style={{ fontSize: 11, color:'#C9C2B6', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.1em', marginBottom: 14 }}>{title.toUpperCase()}</div>
+      <div style={{ display:'flex', flexDirection:'column', gap: 9, fontSize: 13.5, color:'#EFEBE4' }}>
         {items.map((i,idx) => {
           const item = typeof i === 'string' ? { label: i } : i;
           const clickable = nav && item.route;
@@ -243,7 +383,7 @@ function FooterCol({ title, items }) {
               onMouseLeave={() => setHover(null)}
               style={{
                 cursor: clickable ? 'pointer' : 'default',
-                color: isHover ? '#fff' : '#e5e7ff',
+                color: isHover ? '#fff' : '#EFEBE4',
                 transition:'color 140ms ease',
               }}
             >
@@ -274,7 +414,7 @@ function BtnPrimary({ children, dark, onClick }) {
       onMouseLeave={() => setH(false)}
       style={{
         background: base, color: text, border:'none', padding:'13px 20px',
-        fontFamily:'Inter', fontWeight:500, fontSize:14, cursor:'pointer', borderRadius:0,
+        fontFamily:'Inter,sans-serif', fontWeight:500, fontSize:14, cursor:'pointer', borderRadius:0,
         display:'inline-flex', alignItems:'center', gap:10,
         transform: h ? 'translateY(-1px)' : 'none',
         boxShadow: h ? (dark ? '0 6px 20px rgba(255,255,255,0.15)' : '0 6px 20px rgba(6,6,68,0.22)') : '0 0 0 rgba(0,0,0,0)',
@@ -297,7 +437,7 @@ function BtnGhost({ children, dark, onClick }) {
       style={{
         background: h ? hoverBg : 'transparent', color: c,
         border:`1px solid ${dark?'#ffffff55':'var(--ink)'}`,
-        padding:'13px 20px', fontFamily:'Inter', fontWeight:500, fontSize:14,
+        padding:'13px 20px', fontFamily:'Inter,sans-serif', fontWeight:500, fontSize:14,
         cursor:'pointer', borderRadius:0, display:'inline-flex', alignItems:'center', gap:10,
         transition:'background 160ms ease',
       }}
@@ -319,7 +459,7 @@ function ArrowLink({ children, dark, color, onClick }) {
       style={{
         display:'inline-flex', alignItems:'center', gap: 8, fontSize: 13.5, fontWeight: 500,
         color: c, borderBottom:`1px solid ${c}`, paddingBottom: 3,
-        cursor: onClick ? 'pointer' : 'default',
+        cursor: onClick ? 'pointer' : 'inherit',
         transform: h ? 'translateX(2px)' : 'none',
         transition:'transform 160ms ease',
       }}
@@ -334,7 +474,7 @@ function TeamStrip({ dark = false }) {
   const isMobile = useIsMobile();
   const bg = dark ? 'var(--ink)' : '#fff';
   const fg = dark ? '#fff' : 'var(--ink)';
-  const sub = dark ? '#cfcfe6' : 'var(--graphite)';
+  const sub = dark ? '#DDD7CC' : 'var(--graphite)';
   const rule = dark ? '#ffffff14' : 'var(--rule)';
   const people = [
     { photo:'/brand/founder-bianca.jpg',    name:'Bianca Janse van Vuuren', disc:'Finance, data and AI', accent:true },
@@ -344,7 +484,7 @@ function TeamStrip({ dark = false }) {
   return (
     <section style={{ padding: isMobile ? '48px 20px' : '72px 48px', background: bg, color: fg, borderTop:`1px solid ${rule}`, borderBottom:`1px solid ${rule}` }}>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 20 : 40, marginBottom: isMobile ? 28 : 40 }}>
-        {!isMobile && <Eyebrow color={dark ? '#a6a6d4' : 'var(--slate)'}>Meet the team</Eyebrow>}
+        {!isMobile && <Eyebrow color={dark ? '#C9C2B6' : 'var(--slate)'}>Meet the team</Eyebrow>}
         <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 32, flexWrap:'wrap' }}>
           <div style={{ fontSize: isMobile ? 26 : 32, lineHeight: 1.2, fontWeight: 600, letterSpacing:'-0.02em', maxWidth: 680 }}>
             Three founders. HR, finance, and data, at the same table.
@@ -360,7 +500,7 @@ function TeamStrip({ dark = false }) {
             </div>
             <div style={{ display:'flex', alignItems:'center', gap: 8, marginTop: 16 }}>
               {p.accent && <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--orange)' }}/>}
-              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color: p.accent ? 'var(--orange)' : (dark ? '#a6a6d4' : 'var(--slate)'), letterSpacing:'.1em' }}>
+              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color: p.accent ? 'var(--orange)' : (dark ? '#C9C2B6' : 'var(--slate)'), letterSpacing:'.1em' }}>
                 {'0'+(i+1)} / 03
               </div>
             </div>
@@ -373,4 +513,4 @@ function TeamStrip({ dark = false }) {
   );
 }
 
-export { BRAND, Wordmark, Icon, Photo, SiteNav, SiteFooter, Eyebrow, RuleThin, RuleInk, BtnPrimary, BtnGhost, ArrowLink, TeamStrip, useIsMobile };
+export { PAGES, SiteHeader, Circles, BRAND, Wordmark, Icon, Photo, SiteNav, SiteFooter, Eyebrow, RuleThin, RuleInk, BtnPrimary, BtnGhost, ArrowLink, TeamStrip, useIsMobile };

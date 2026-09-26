@@ -183,7 +183,7 @@ function WDRILanding({ onStart }) {
             Most mid-sized South African businesses have more workforce data than they think, and less insight than they need. This assessment surfaces the gap. It asks the questions a CFO and an HR leader should be able to answer together. Wherever you land, the result tells you what is worth doing next.
           </p>
           <div style={{ marginTop: 40, display:'flex', alignItems:'center', gap: 22 }}>
-            <button onClick={onStart} style={{ background:'var(--ink)', color:'#fff', border:'none', padding:'15px 24px', fontFamily:'Inter', fontWeight: 500, fontSize: 15, cursor:'pointer', display:'inline-flex', alignItems:'center', gap: 12 }}>
+            <button onClick={onStart} style={{ background:'var(--ink)', color:'#fff', border:'none', padding:'15px 24px', fontFamily:'Inter,sans-serif', fontWeight: 500, fontSize: 15, cursor:'pointer', display:'inline-flex', alignItems:'center', gap: 12 }}>
               <span style={{ width:7, height:7, borderRadius:'50%', background:'var(--orange)' }}/>
               Start the assessment
               <Icon name="arrowSm" size={16} color="#fff"/>
@@ -306,7 +306,7 @@ function WDRIQuestion({ idx, total, selected, onSelect, onNext, onBack }) {
           disabled={idx === 0}
           style={{
             background:'transparent', border:'none', padding:0, cursor: idx===0?'default':'pointer',
-            fontFamily:'Inter', fontSize: 14, fontWeight: 500, color: idx===0 ? 'var(--rule)' : 'var(--slate)',
+            fontFamily:'Inter,sans-serif', fontSize: 14, fontWeight: 500, color: idx===0 ? 'var(--rule)' : 'var(--slate)',
             display:'inline-flex', alignItems:'center', gap: 8,
           }}
         >
@@ -321,7 +321,7 @@ function WDRIQuestion({ idx, total, selected, onSelect, onNext, onBack }) {
             color: selected!=null ? '#fff' : 'var(--slate)',
             border: selected!=null ? 'none' : '1px solid var(--rule)',
             padding:'13px 22px',
-            fontFamily:'Inter', fontSize: 14, fontWeight: 500,
+            fontFamily:'Inter,sans-serif', fontSize: 14, fontWeight: 500,
             cursor: selected!=null ? 'pointer' : 'default',
             display:'inline-flex', alignItems:'center', gap: 10,
             transition:'all .18s ease',
@@ -399,7 +399,7 @@ function WDRIResult({ answers, onReset }) {
           <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', marginTop: 12, letterSpacing:'.06em', lineHeight: 1.7 }}>
             WORKFORCE DATA<br/>READINESS INDEX<br/>{new Date().toISOString().slice(0,10).toUpperCase()}
           </div>
-          <button onClick={onReset} style={{ marginTop: 24, background:'transparent', border:'none', padding:0, cursor:'pointer', fontFamily:'Inter', fontSize: 13, fontWeight: 500, color:'var(--slate)', display:'inline-flex', alignItems:'center', gap: 8 }}>
+          <button onClick={onReset} style={{ marginTop: 24, background:'transparent', border:'none', padding:0, cursor:'pointer', fontFamily:'Inter,sans-serif', fontSize: 13, fontWeight: 500, color:'var(--slate)', display:'inline-flex', alignItems:'center', gap: 8 }}>
             <span style={{ transform:'rotate(180deg)', display:'inline-flex' }}><Icon name="arrowSm" size={13} color="var(--slate)"/></span>
             Retake the assessment
           </button>
@@ -461,7 +461,7 @@ function WDRIResult({ answers, onReset }) {
           </div>
 
           {/* CTA */}
-          <div style={{ marginTop: 48, background:'var(--mist)', padding:'36px 32px', display:'grid', gridTemplateColumns:'1.2fr 1fr', gap: 32, alignItems:'center' }}>
+          <div style={{ marginTop: 48, background:'var(--paper)', padding:'36px 32px', display:'grid', gridTemplateColumns:'1.2fr 1fr', gap: 32, alignItems:'center' }}>
             <div>
               <div style={{ fontSize: 22, fontWeight: 600, letterSpacing:'-0.01em', lineHeight: 1.3 }}>
                 The result is a starting point, not a plan.
@@ -471,11 +471,11 @@ function WDRIResult({ answers, onReset }) {
               </p>
             </div>
             <div style={{ display:'flex', flexDirection:'column', alignItems:'flex-start', gap: 14 }}>
-              <button style={{ background:'var(--ink)', color:'#fff', border:'none', padding:'15px 24px', fontFamily:'Inter', fontWeight: 500, fontSize: 15, cursor:'pointer', display:'inline-flex', alignItems:'center', gap: 10 }}>
+              <button style={{ background:'var(--ink)', color:'#fff', border:'none', padding:'15px 24px', fontFamily:'Inter,sans-serif', fontWeight: 500, fontSize: 15, cursor:'pointer', display:'inline-flex', alignItems:'center', gap: 10 }}>
                 Book a conversation with the team
                 <Icon name="arrowSm" size={15} color="#fff"/>
               </button>
-              <button style={{ background:'transparent', border:'none', padding:0, fontFamily:'Inter', fontWeight: 500, fontSize: 14, color:'var(--graphite)', cursor:'pointer', borderBottom:'1px solid var(--graphite)', paddingBottom: 2 }}>
+              <button style={{ background:'transparent', border:'none', padding:0, fontFamily:'Inter,sans-serif', fontWeight: 500, fontSize: 14, color:'var(--graphite)', cursor:'pointer', borderBottom:'1px solid var(--graphite)', paddingBottom: 2 }}>
                 Email the result to me
               </button>
             </div>
@@ -577,7 +577,7 @@ function WDRIMobileLanding() {
       <p style={{ fontSize: 14, lineHeight: 1.6, color:'var(--graphite)', marginTop: 16 }}>
         Most mid-sized South African businesses have more workforce data than they think, and less insight than they need. This assessment surfaces the gap. It asks the questions a CFO and an HR leader should be able to answer together. Wherever you land, the result tells you what is worth doing next.
       </p>
-      <button style={{ marginTop: 28, background:'var(--ink)', color:'#fff', border:'none', padding:'14px 22px', fontFamily:'Inter', fontWeight: 500, fontSize: 15, cursor:'pointer', display:'inline-flex', alignItems:'center', gap: 10, width:'100%', justifyContent:'center' }}>
+      <button style={{ marginTop: 28, background:'var(--ink)', color:'#fff', border:'none', padding:'14px 22px', fontFamily:'Inter,sans-serif', fontWeight: 500, fontSize: 15, cursor:'pointer', display:'inline-flex', alignItems:'center', gap: 10, width:'100%', justifyContent:'center' }}>
         <span style={{ width:7, height:7, borderRadius:'50%', background:'var(--orange)' }}/>
         Start the assessment
       </button>
@@ -633,7 +633,7 @@ function WDRIMobileQuestion() {
         })}
       </div>
       <div style={{ marginTop: 28, display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-        <span style={{ fontFamily:'Inter', fontSize: 13, color:'var(--slate)', display:'inline-flex', alignItems:'center', gap: 6 }}>
+        <span style={{ fontFamily:'Inter,sans-serif', fontSize: 13, color:'var(--slate)', display:'inline-flex', alignItems:'center', gap: 6 }}>
           <span style={{ transform:'rotate(180deg)', display:'inline-flex' }}><Icon name="arrowSm" size={12} color="var(--slate)"/></span>
           Back
         </span>
@@ -694,7 +694,7 @@ function WDRIMobileResult() {
         ))}
       </div>
 
-      <div style={{ marginTop: 26, background:'var(--mist)', padding:'20px 18px' }}>
+      <div style={{ marginTop: 26, background:'var(--paper)', padding:'20px 18px' }}>
         <div style={{ fontSize: 16, fontWeight: 600, letterSpacing:'-0.01em', lineHeight: 1.3 }}>
           The result is a starting point, not a plan.
         </div>
@@ -778,8 +778,8 @@ function WDRISpecs() {
           <div style={{ marginTop: 36, borderTop:'1px solid var(--rule)', paddingTop: 28 }}>
             <Eyebrow>Buttons and links</Eyebrow>
             <div style={{ marginTop: 18, display:'flex', gap: 16, flexWrap:'wrap', alignItems:'center' }}>
-              <button style={{ background:'var(--ink)', color:'#fff', border:'none', padding:'13px 22px', fontFamily:'Inter', fontSize: 14, fontWeight: 500 }}>Primary · Deep Ink</button>
-              <button style={{ background:'transparent', color:'var(--slate)', border:'1px solid var(--rule)', padding:'13px 22px', fontFamily:'Inter', fontSize: 14, fontWeight: 500 }}>Next (inactive)</button>
+              <button style={{ background:'var(--ink)', color:'#fff', border:'none', padding:'13px 22px', fontFamily:'Inter,sans-serif', fontSize: 14, fontWeight: 500 }}>Primary · Deep Ink</button>
+              <button style={{ background:'transparent', color:'var(--slate)', border:'1px solid var(--rule)', padding:'13px 22px', fontFamily:'Inter,sans-serif', fontSize: 14, fontWeight: 500 }}>Next (inactive)</button>
               <span style={{ fontSize: 14, color:'var(--graphite)', borderBottom:'1px solid var(--graphite)', paddingBottom: 2 }}>Secondary link</span>
             </div>
             <p style={{ fontSize: 13.5, color:'var(--graphite)', marginTop: 14, lineHeight: 1.55, maxWidth: 760 }}>

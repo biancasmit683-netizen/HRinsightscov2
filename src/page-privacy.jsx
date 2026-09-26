@@ -5,7 +5,7 @@ import { Wordmark } from './shared'
 const S = {
   overlay: {
     position: 'fixed', inset: 0, zIndex: 1000,
-    background: 'var(--ink)', color: '#e5e7ff',
+    background: 'var(--ink)', color: '#EFEBE4',
     fontFamily: 'Inter, system-ui, sans-serif',
     overflowY: 'auto',
   },
@@ -25,12 +25,12 @@ const S = {
   },
   docMeta: {
     fontFamily: 'JetBrains Mono, monospace',
-    fontSize: 10, color: '#a6a6d4', letterSpacing: '.08em',
+    fontSize: 10, color: '#C9C2B6', letterSpacing: '.08em',
     marginTop: 4,
   },
   closeBtn: {
     background: 'none', border: 'none', cursor: 'pointer',
-    color: '#a6a6d4', padding: '6px 8px', lineHeight: 1,
+    color: '#C9C2B6', padding: '6px 8px', lineHeight: 1,
     fontSize: 22, fontWeight: 300,
     display: 'flex', alignItems: 'center',
   },
@@ -40,7 +40,7 @@ const S = {
   },
   heroMeta: {
     fontFamily: 'JetBrains Mono, monospace',
-    fontSize: 11, color: '#a6a6d4', letterSpacing: '.08em',
+    fontSize: 11, color: '#C9C2B6', letterSpacing: '.08em',
     marginBottom: 48,
   },
   rule: {
@@ -48,7 +48,7 @@ const S = {
   },
   sectionNumber: {
     fontFamily: 'JetBrains Mono, monospace',
-    fontSize: 10, color: '#a6a6d4', letterSpacing: '.12em',
+    fontSize: 10, color: '#C9C2B6', letterSpacing: '.12em',
     marginBottom: 6,
   },
   sectionHeading: {
@@ -557,8 +557,8 @@ function PrivacyModal({ onClose }) {
                 ['Registered organisation', 'HR Analytics (Pty) Ltd, trading as The HR Insights Co.'],
                 ['Information Regulator registration number', '2026-018806'],
                 ['Registration date', '23 May 2026'],
-                ['Email', <a key="email" href="mailto:info@thehrinsightsco.co.za" style={{ color: '#a6a6d4' }}>info@thehrinsightsco.co.za</a>],
-                ['Website', <a key="web" href="https://thehrinsightsco.co.za" style={{ color: '#a6a6d4' }}>thehrinsightsco.co.za</a>],
+                ['Email', <a key="email" href="mailto:info@thehrinsightsco.co.za" style={{ color: '#C9C2B6' }}>info@thehrinsightsco.co.za</a>],
+                ['Website', <a key="web" href="https://thehrinsightsco.co.za" style={{ color: '#C9C2B6' }}>thehrinsightsco.co.za</a>],
               ].map(([label, value], i) => (
                 <tr key={i}>
                   <td style={{ ...S.td, color: '#fff', fontWeight: 500, width: '40%' }}>{label}</td>
@@ -594,13 +594,13 @@ function PrivacyModal({ onClose }) {
               <div key={i} style={{ fontSize: 13, color: '#c8caee', lineHeight: 1.6 }}>{line}</div>
             ))}
             <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <a href="mailto:enquiries@inforegulator.org.za" style={{ fontSize: 13, color: '#a6a6d4' }}>
+              <a href="mailto:enquiries@inforegulator.org.za" style={{ fontSize: 13, color: '#C9C2B6' }}>
                 General enquiries: enquiries@inforegulator.org.za
               </a>
-              <a href="mailto:POPIAComplaints@inforegulator.org.za" style={{ fontSize: 13, color: '#a6a6d4' }}>
+              <a href="mailto:POPIAComplaints@inforegulator.org.za" style={{ fontSize: 13, color: '#C9C2B6' }}>
                 POPIA complaints: POPIAComplaints@inforegulator.org.za
               </a>
-              <a href="https://inforegulator.org.za" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#a6a6d4' }}>
+              <a href="https://inforegulator.org.za" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#C9C2B6' }}>
                 inforegulator.org.za
               </a>
             </div>
@@ -638,7 +638,7 @@ function PrivacyModal({ onClose }) {
         <div style={S.rule}/>
 
         {/* Footer note */}
-        <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: '#a6a6d4', letterSpacing: '.06em', lineHeight: 1.8 }}>
+        <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: '#C9C2B6', letterSpacing: '.06em', lineHeight: 1.8 }}>
           <div>This Privacy Policy is published by HR Analytics (Pty) Ltd, trading as The HR Insights Co.</div>
           <div>Registered with the Information Regulator of South Africa, registration number 2026-018806.</div>
         </div>

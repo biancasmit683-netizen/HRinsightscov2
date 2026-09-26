@@ -5,7 +5,7 @@ import { Wordmark } from './shared'
 const S = {
   overlay: {
     position: 'fixed', inset: 0, zIndex: 1000,
-    background: 'var(--ink)', color: '#e5e7ff',
+    background: 'var(--ink)', color: '#EFEBE4',
     fontFamily: 'Inter, system-ui, sans-serif',
     overflowY: 'auto',
   },
@@ -22,12 +22,12 @@ const S = {
   },
   docMeta: {
     fontFamily: 'JetBrains Mono, monospace',
-    fontSize: 10, color: '#a6a6d4', letterSpacing: '.08em',
+    fontSize: 10, color: '#C9C2B6', letterSpacing: '.08em',
     marginTop: 4,
   },
   closeBtn: {
     background: 'none', border: 'none', cursor: 'pointer',
-    color: '#a6a6d4', padding: '6px 8px', lineHeight: 1,
+    color: '#C9C2B6', padding: '6px 8px', lineHeight: 1,
     fontSize: 22, fontWeight: 300,
     display: 'flex', alignItems: 'center',
   },
@@ -37,7 +37,7 @@ const S = {
   },
   heroMeta: {
     fontFamily: 'JetBrains Mono, monospace',
-    fontSize: 11, color: '#a6a6d4', letterSpacing: '.08em',
+    fontSize: 11, color: '#C9C2B6', letterSpacing: '.08em',
     marginBottom: 48,
   },
   rule: {
@@ -45,7 +45,7 @@ const S = {
   },
   sectionNumber: {
     fontFamily: 'JetBrains Mono, monospace',
-    fontSize: 10, color: '#a6a6d4', letterSpacing: '.12em',
+    fontSize: 10, color: '#C9C2B6', letterSpacing: '.12em',
     marginBottom: 6,
   },
   sectionHeading: {
@@ -159,10 +159,10 @@ function PAIAModal({ onClose }) {
               {[
                 ['Registered name', 'HR Analytics (Pty) Ltd'],
                 ['Trading name', 'The HR Insights Co.'],
-                ['Website', <a key="web" href="https://thehrinsightsco.co.za" style={{ color:'#a6a6d4' }}>thehrinsightsco.co.za</a>],
-                ['General email', <a key="email" href="mailto:info@thehrinsightsco.co.za" style={{ color:'#a6a6d4' }}>info@thehrinsightsco.co.za</a>],
+                ['Website', <a key="web" href="https://thehrinsightsco.co.za" style={{ color:'#C9C2B6' }}>thehrinsightsco.co.za</a>],
+                ['General email', <a key="email" href="mailto:info@thehrinsightsco.co.za" style={{ color:'#C9C2B6' }}>info@thehrinsightsco.co.za</a>],
                 ['Information Officer', 'B Janse van Vuuren'],
-                ['Information Officer email', <a key="ioemail" href="mailto:info@thehrinsightsco.co.za" style={{ color:'#a6a6d4' }}>info@thehrinsightsco.co.za</a>],
+                ['Information Officer email', <a key="ioemail" href="mailto:info@thehrinsightsco.co.za" style={{ color:'#C9C2B6' }}>info@thehrinsightsco.co.za</a>],
                 ['Information Regulator registration number', '2026-018806'],
                 ['Registration date', '23 May 2026'],
               ].map(([label, value], i) => (
@@ -277,7 +277,7 @@ function PAIAModal({ onClose }) {
             Any person wishing to request access to a record held by HR Analytics (Pty) Ltd must
             submit a written request to the Information Officer. Requests must be made on the
             prescribed Form C, which is available from the Information Regulator of South Africa at{' '}
-            <a href="https://inforegulator.org.za" target="_blank" rel="noopener noreferrer" style={{ color:'#a6a6d4' }}>
+            <a href="https://inforegulator.org.za" target="_blank" rel="noopener noreferrer" style={{ color:'#C9C2B6' }}>
               inforegulator.org.za
             </a>.
           </p>
@@ -285,7 +285,7 @@ function PAIAModal({ onClose }) {
           <div style={S.subHeading}>How to submit</div>
           <p style={S.para}>
             Completed requests must be submitted by email to our Information Officer at{' '}
-            <a href="mailto:info@thehrinsightsco.co.za" style={{ color:'#a6a6d4' }}>
+            <a href="mailto:info@thehrinsightsco.co.za" style={{ color:'#C9C2B6' }}>
               info@thehrinsightsco.co.za
             </a>.
             Please include "PAIA Request" in the subject line.
@@ -330,7 +330,7 @@ function PAIAModal({ onClose }) {
               href="https://inforegulator.org.za"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ fontSize: 13, color:'#a6a6d4' }}
+              style={{ fontSize: 13, color:'#C9C2B6' }}
             >
               Download from inforegulator.org.za →
             </a>
@@ -450,13 +450,13 @@ function PAIAModal({ onClose }) {
               <div key={i} style={{ fontSize: 13, color:'#c8caee', lineHeight: 1.6 }}>{line}</div>
             ))}
             <div style={{ marginTop: 10, display:'flex', flexDirection:'column', gap: 4 }}>
-              <a href="mailto:enquiries@inforegulator.org.za" style={{ fontSize:13, color:'#a6a6d4' }}>
+              <a href="mailto:enquiries@inforegulator.org.za" style={{ fontSize:13, color:'#C9C2B6' }}>
                 General enquiries: enquiries@inforegulator.org.za
               </a>
-              <a href="mailto:PAIAComplaints@inforegulator.org.za" style={{ fontSize:13, color:'#a6a6d4' }}>
+              <a href="mailto:PAIAComplaints@inforegulator.org.za" style={{ fontSize:13, color:'#C9C2B6' }}>
                 PAIA complaints: PAIAComplaints@inforegulator.org.za
               </a>
-              <a href="https://inforegulator.org.za" target="_blank" rel="noopener noreferrer" style={{ fontSize:13, color:'#a6a6d4' }}>
+              <a href="https://inforegulator.org.za" target="_blank" rel="noopener noreferrer" style={{ fontSize:13, color:'#C9C2B6' }}>
                 inforegulator.org.za
               </a>
             </div>
@@ -470,7 +470,7 @@ function PAIAModal({ onClose }) {
         <div style={S.rule}/>
 
         {/* Footer note */}
-        <div style={{ fontFamily:'JetBrains Mono, monospace', fontSize:10, color:'#a6a6d4', letterSpacing:'.06em', lineHeight:1.8 }}>
+        <div style={{ fontFamily:'JetBrains Mono, monospace', fontSize:10, color:'#C9C2B6', letterSpacing:'.06em', lineHeight:1.8 }}>
           <div>This PAIA Manual is published by HR Analytics (Pty) Ltd, trading as The HR Insights Co.</div>
           <div>Published in compliance with section 51 of the Promotion of Access to Information Act, 2 of 2000.</div>
           <div>Version 1.0 · 23 May 2026.</div>

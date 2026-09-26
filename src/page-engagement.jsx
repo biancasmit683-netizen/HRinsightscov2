@@ -416,9 +416,9 @@ function SurveyResults() {
   );
   return (
     <section id="results" style={{ background:'var(--paper)', padding: isMobile ? '56px 20px 24px' : '96px 48px 32px', borderTop:'1px solid var(--rule)' }}>
-      <SectionHead index="06 / SURVEY RESULTS" title="Interactive results. Deep insights."
+      <SectionHead index="06 / RESULTS" title="Interactive results. Deep insights."
         lede="Your results arrive as a live dashboard, not a static PDF. Filter by department, site, manager or tenure and every score recalculates. Then we tell you what it means and where to act first."/>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr) minmax(0,1.25fr)', gap: isMobile ? 32 : 40, alignItems:'start' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr) minmax(0,1fr)', gap: isMobile ? 32 : 40, alignItems:'start' }}>
         {!isMobile && <div/>}
         <div style={{ display:'flex', flexDirection:'column', gap: 24 }}>
           {list('INTERACTIVE RESULTS', results)}

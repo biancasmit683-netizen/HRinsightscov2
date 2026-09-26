@@ -357,7 +357,7 @@ function ResultsPreview() {
   const tileLabel = { fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, letterSpacing:'.1em', color:'var(--slate)' };
   const tileValue = { fontSize: isMobile ? 24 : 26, fontWeight: 700, letterSpacing:'-0.02em', fontVariantNumeric:'tabular-nums' };
   return (
-    <div style={{ background:'#fff', padding: isMobile ? 20 : 28, borderTop:'3px solid var(--orange)' }}>
+    <div style={{ background:'#fff', padding: isMobile ? 20 : 28, borderTop:'3px solid var(--orange)', height:'100%', boxSizing:'border-box' }}>
       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', flexWrap:'wrap', gap: 8 }}>
         <div style={{ fontSize: 16, fontWeight: 600 }}>Engagement by theme <span style={{ fontSize: 12, fontWeight: 400, color:'var(--slate)' }}>· % favourable</span></div>
         <div style={tileLabel}>SAMPLE DATA · LODGE CO.</div>
@@ -425,12 +425,12 @@ function SurveyResults() {
     <section id="results" style={{ background:'var(--paper)', padding: isMobile ? '56px 20px 24px' : '96px 48px 32px', borderTop:'1px solid var(--rule)' }}>
       <SectionHead index="06 / RESULTS" title="Interactive results. Deep insights."
         lede="Your results arrive as a live dashboard, not a static PDF. Filter by department, site, manager or tenure and every score recalculates. Then we tell you what it means and where to act first."/>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr) minmax(0,1fr)', gap: isMobile ? 32 : 40, alignItems:'start' }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr) minmax(0,1fr)', gap: isMobile ? 32 : 40, alignItems:'stretch' }}>
         {!isMobile && <div/>}
         <div style={{ display:'flex', flexDirection:'column', gap: 24 }}>
           {list('INTERACTIVE RESULTS', results)}
           {list('DEEP INSIGHTS', insights)}
-          <p style={{ fontSize: 14.5, lineHeight: 1.6, color:'var(--graphite)', margin: 0 }}>
+          <p style={{ fontSize: 14.5, lineHeight: 1.6, color:'var(--graphite)', margin: 0, marginTop: isMobile ? 0 : 'auto', paddingTop: isMobile ? 0 : 8 }}>
             Anonymity is built in: any group with fewer than five responses is hidden, so no individual can be identified.
           </p>
         </div>

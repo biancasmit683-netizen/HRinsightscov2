@@ -268,28 +268,28 @@ function Pricing() {
 // Client testimonial — quote and details approved by Yuri de Villiers.
 function Testimonial() {
   const isMobile = useIsMobile();
-  const light = 'rgba(255,255,255,0.85)';
+  const light = 'var(--ink-soft)';
   return (
-    <section id="testimonial" style={{ background:'var(--orange)', color:'#fff', padding: isMobile ? '56px 20px' : '88px 48px', position:'relative', overflow:'hidden' }}>
+    <section id="testimonial" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '56px 20px' : '88px 48px', position:'relative', overflow:'hidden' }}>
       <Circles items={[
-        { size: isMobile ? 160 : 300, right: isMobile ? -80 : -110, top: isMobile ? -70 : -130, opacity: 0.1 },
-        { size: isMobile ? 110 : 180, left: isMobile ? -50 : '14%', bottom: isMobile ? -60 : -110, opacity: 0.1 },
+        { size: isMobile ? 120 : 220, right: isMobile ? -60 : -90, top: isMobile ? -50 : -90, coral: true },
+        { size: isMobile ? 110 : 180, left: isMobile ? -50 : '14%', bottom: isMobile ? -60 : -110, opacity: 0.07 },
       ]}/>
       <figure style={{ position:'relative', margin: 0, display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr)', gap: isMobile ? 24 : 40, alignItems:'center' }}>
         <div style={{ display:'flex', flexDirection:'column', gap: 18, alignItems:'flex-start' }}>
-          <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 12, letterSpacing:'.14em', color: light }}>FROM A CLIENT</div>
-          <img src="/brand/testimonial-yuri.jpg" alt="Yuri de Villiers" width="140" height="140" style={{ width: isMobile ? 96 : 140, height: isMobile ? 96 : 140, borderRadius:'50%', objectFit:'cover', display:'block', boxShadow:'0 0 0 4px var(--orange), 0 0 0 6px #fff' }}/>
+          <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 12, letterSpacing:'.14em', color: light, display:'flex', alignItems:'center', gap: 10 }}><span style={{ width: 7, height: 7, borderRadius:'50%', background:'var(--orange)' }}/>FROM A CLIENT</div>
+          <img src="/brand/testimonial-yuri.jpg" alt="Yuri de Villiers" width="140" height="140" style={{ width: isMobile ? 96 : 140, height: isMobile ? 96 : 140, borderRadius:'50%', objectFit:'cover', display:'block', boxShadow:'0 0 0 4px var(--ink), 0 0 0 7px var(--orange)' }}/>
         </div>
         <div>
           <blockquote style={{ margin: 0, fontSize: isMobile ? 22 : 34, lineHeight: 1.3, fontWeight: 600, letterSpacing:'-0.02em', maxWidth: 900 }}>
-            “Most of our team never check an email, so surveys used to miss them. With The HR Insights Co., everyone got a private link on WhatsApp, and we finally heard from the whole lodge.”
+            <span aria-hidden="true" style={{ color:'var(--orange)' }}>“</span>Most of our team never check an email, so surveys used to miss them. With The HR Insights Co., everyone got a private link on WhatsApp, and we finally heard from the whole lodge.<span aria-hidden="true" style={{ color:'var(--orange)' }}>”</span>
           </blockquote>
           <figcaption style={{ marginTop: isMobile ? 22 : 30, display:'flex', flexWrap:'wrap', alignItems:'center', gap:'12px 22px' }}>
             <span>
               <span style={{ display:'block', fontWeight: 700, fontSize: 17 }}>Yuri de Villiers</span>
               <span style={{ display:'block', fontSize: 14.5, color: light }}>Operations Director, Karongwe</span>
             </span>
-            <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, letterSpacing:'.08em', color:'#fff', border:'1px solid rgba(255,255,255,0.7)', padding:'6px 9px' }}>FEDHASA GENERAL MANAGER OF THE YEAR 2026</span>
+            <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, letterSpacing:'.08em', color:'#fff', background:'var(--orange)', padding:'6px 9px' }}>FEDHASA GENERAL MANAGER OF THE YEAR 2026</span>
             <a href="https://www.linkedin.com/in/yuri-de-villiers-3a21b1177/" target="_blank" rel="noopener noreferrer"
               style={{ display:'inline-flex', alignItems:'center', gap: 6, fontSize: 14, fontWeight: 600, color:'#fff', textDecoration:'none', borderBottom:'1px solid #fff', paddingBottom: 2 }}>
               <Icon name="linkedin" size={14} color="#fff"/> View on LinkedIn

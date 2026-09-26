@@ -404,7 +404,7 @@ function BookDemo() {
   const row = { display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 22 : 24 };
 
   return (
-    <section id="book" style={{ background:'var(--paper)', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
+    <section id="book" style={{ background:'#fff', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1.2fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
         <SectionLabel index="07 / BOOK A DEMO"/>
         <div>
@@ -423,7 +423,7 @@ function BookDemo() {
         </div>
 
         {submitted ? (
-          <div role="status" style={{ background:'#fff', padding: isMobile ? '28px 22px' : '40px 36px', borderTop:'3px solid var(--orange)' }}>
+          <div role="status" style={{ background:'var(--paper)', padding: isMobile ? '28px 22px' : '40px 36px', borderTop:'3px solid var(--orange)' }}>
             <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
               <span style={{ width: 8, height: 8, borderRadius:'50%', background:'var(--orange)' }}/>
               <span style={labelStyle}>REQUEST RECEIVED</span>
@@ -439,7 +439,7 @@ function BookDemo() {
             data-netlify="true"
             data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
-            style={{ background:'#fff', padding: isMobile ? '26px 20px' : '36px', display:'flex', flexDirection:'column', gap: 22, borderTop:'3px solid var(--orange)' }}
+            style={{ background:'var(--paper)', padding: isMobile ? '26px 20px' : '36px', display:'flex', flexDirection:'column', gap: 22, borderTop:'3px solid var(--orange)' }}
           >
             <input type="hidden" name="form-name" value="demo-request"/>
             <input type="hidden" name="bot-field" style={{ display:'none' }}/>

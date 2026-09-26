@@ -275,7 +275,7 @@ function WhoFor() {
         lede="If a large share of your people work on the floor, in the field, on shift or on site, this is built for you."/>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
         {!isMobile && <div/>}
-        <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2, minmax(0,1fr))' : 'repeat(4, minmax(0,1fr))', gap: 10 }}>
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2, minmax(0,1fr))' : 'repeat(4, minmax(0,1fr))', gridAutoRows:'1fr', gap: 10 }}>
           <span style={{ ...chip, background:'var(--orange)', borderColor:'var(--orange)', color:'#fff' }}>Hospitality: lodges, hotels &amp; game reserves</span>
           {inds.map(i => <span key={i} style={chip}>{i}</span>)}
         </div>

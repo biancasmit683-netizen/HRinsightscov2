@@ -53,10 +53,10 @@ function BtnOutlineLight({ children, onClick }) {
   );
 }
 
-function SectionHead({ index, title, lede, dark }) {
+function SectionHead({ index, title, lede, dark, last }) {
   const isMobile = useIsMobile();
   return (
-    <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 32 : 56, alignItems:'end' }}>
+    <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 16 : 40, marginBottom: last ? 0 : (isMobile ? 32 : 56), alignItems:'end' }}>
       <SectionLabel index={index} dark={dark}/>
       <h2 style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', margin: 0, maxWidth: 560 }}>{title}</h2>
       {lede && <p style={{ fontSize: isMobile ? 15.5 : 17, lineHeight: 1.6, color: dark ? 'var(--ink-soft)' : 'var(--graphite)', margin: 0, maxWidth: 520 }}>{lede}</p>}
@@ -115,45 +115,17 @@ function Hero() {
 // ---------- 01 The problem --------------------------------------------------
 function Problem() {
   const isMobile = useIsMobile();
-  const cells = [
-    ['Built for office workers', 'Generic survey platforms assume an inbox and a laptop. Housekeepers, operators, field staff and security officers have neither.'],
-    ['Subscriptions you don\'t need', 'A monthly licence makes little sense for a survey you run once or twice a year.'],
-    ['Low response, skewed data', 'When only a fraction of staff respond, the result is unrepresentative, and you act on the wrong things.'],
-  ];
   return (
     <section id="problem" style={{ background:'#fff', padding: pad(isMobile) }}>
-      <SectionHead index="01 / THE PROBLEM" title="Most surveys stop at the front desk."
+      <SectionHead last index="01 / THE PROBLEM" title="Most surveys stop at the front desk."
         lede="In hospitality, mining, agriculture, retail, manufacturing, security and logistics, most of the workforce never sits behind a company email address. So most surveys never reach them, and the results describe the office, not the operation."/>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
-        {!isMobile && <div/>}
-        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)', borderTop:'1px solid var(--ink)' }}>
-          {cells.map(([t, b], i) => (
-            <div key={i} style={{ padding: isMobile ? '24px 0 8px' : '30px 28px 8px', paddingLeft: isMobile || i === 0 ? 0 : 28, borderRight: !isMobile && i < 2 ? '1px solid var(--rule)' : 'none', borderBottom: isMobile && i < 2 ? '1px solid var(--rule)' : 'none' }}>
-              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 12, color:'var(--orange)' }}>0{i + 1}</div>
-              <h3 style={{ fontSize: 21, fontWeight: 600, letterSpacing:'-0.015em', margin:'12px 0 10px' }}>{t}</h3>
-              <p style={{ fontSize: 15, lineHeight: 1.6, color:'var(--graphite)', margin:'0 0 20px' }}>{b}</p>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }
 
 // ---------- 02 How it works -------------------------------------------------
-function FlowNode({ icon, title, sub }) {
-  return (
-    <div style={{ textAlign:'center' }}>
-      <div style={{ width: 56, height: 56, margin:'0 auto 12px', borderRadius: '50%', display:'grid', placeItems:'center', background:'#fff', border:'1px solid var(--rule)' }}>{icon}</div>
-      <div style={{ fontSize: 15, fontWeight: 600 }}>{title}</div>
-      <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, letterSpacing:'.08em', color:'var(--slate)', marginTop: 4 }}>{sub.toUpperCase()}</div>
-    </div>
-  );
-}
-
 function HowItWorks() {
   const isMobile = useIsMobile();
-  const arrow = <div aria-hidden="true" style={{ color:'var(--orange)', fontSize: 24, transform: isMobile ? 'rotate(90deg)' : 'none', textAlign:'center' }}>→</div>;
   const steps = [
     ['We set it up together', 'We meet your HR lead or operations head to understand your sites, workforce groups and what you most need to hear. Questions are designed by HR professionals and tuned to your industry.'],
     ['We reach your people', 'Invitations go out by WhatsApp and QR poster, supported by team champions and announcement templates. We watch response rates live and send targeted reminders to groups that lag.'],
@@ -166,13 +138,6 @@ function HowItWorks() {
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
         {!isMobile && <div/>}
         <div>
-          <div aria-label="How staff reach the survey" style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr auto 1fr auto 1fr', alignItems:'center', gap: 16, padding: 28, background:'var(--sand)', marginBottom: isMobile ? 32 : 48 }}>
-            <FlowNode title="Scan on site" sub="or receive a message" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#060644" strokeWidth="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v7M14 20h3"/></svg>}/>
-            {arrow}
-            <FlowNode title="WhatsApp opens" sub="no app to install" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1FA855" strokeWidth="1.8"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5l1.2-1.2 2 .8-.4 1.6c-3.8.4-8.2-4-7.8-7.8l1.6-.4.8 2z"/></svg>}/>
-            {arrow}
-            <FlowNode title="Private survey link" sub="unique to each person" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C2410C" strokeWidth="1.8"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>}/>
-          </div>
           <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)', gap: 20 }}>
             {steps.map(([t, b], i) => (
               <div key={i} style={{ background:'#fff', padding: isMobile ? 24 : 30, borderTop:'3px solid var(--orange)' }}>
@@ -223,15 +188,16 @@ function WhyUs() {
 function WhoFor() {
   const isMobile = useIsMobile();
   const inds = ['Mining','Agriculture','Retail','Manufacturing','Security','Logistics & transport','Healthcare & care services'];
+  const chip = { display:'flex', alignItems:'center', padding: isMobile ? '12px 14px' : '14px 18px', background:'#fff', border:'1px solid var(--rule)', fontWeight: 500, fontSize: isMobile ? 14 : 15, lineHeight: 1.35 };
   return (
     <section id="industries" style={{ background:'var(--paper)', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
       <SectionHead index="04 / WHO IT'S FOR" title="Any employer with a deskless workforce."
         lede="If a large share of your people work on the floor, in the field, on shift or on site, this is built for you."/>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
         {!isMobile && <div/>}
-        <div style={{ display:'flex', flexWrap:'wrap', gap: 10 }}>
-          <span style={{ padding:'12px 18px', background:'var(--orange)', color:'#fff', fontWeight: 500, fontSize: 15 }}>Hospitality: lodges, hotels &amp; game reserves</span>
-          {inds.map(i => <span key={i} style={{ padding:'12px 18px', background:'#fff', border:'1px solid var(--rule)', fontWeight: 500, fontSize: 15 }}>{i}</span>)}
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2, minmax(0,1fr))' : 'repeat(4, minmax(0,1fr))', gap: 10 }}>
+          <span style={{ ...chip, background:'var(--orange)', borderColor:'var(--orange)', color:'#fff' }}>Hospitality: lodges, hotels &amp; game reserves</span>
+          {inds.map(i => <span key={i} style={chip}>{i}</span>)}
         </div>
       </div>
     </section>
@@ -261,6 +227,35 @@ function Pricing() {
           ))}
         </ul>
       </div>
+    </section>
+  );
+}
+
+// Client testimonial (anonymous for now; name and photo to be added once approved).
+function Testimonial() {
+  const isMobile = useIsMobile();
+  const light = 'var(--ink-soft)';
+  return (
+    <section id="testimonial" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '56px 20px' : '88px 48px', position:'relative', overflow:'hidden' }}>
+      <Circles items={[
+        { size: isMobile ? 120 : 220, right: isMobile ? -60 : -90, top: isMobile ? -50 : -90, coral: true },
+        { size: isMobile ? 110 : 180, left: isMobile ? -50 : '14%', bottom: isMobile ? -60 : -110, opacity: 0.07 },
+      ]}/>
+      <figure style={{ position:'relative', margin: 0, display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr)', gap: isMobile ? 24 : 40, alignItems:'center' }}>
+        <div style={{ display:'flex', flexDirection:'column', gap: 18, alignItems:'flex-start' }}>
+          <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 12, letterSpacing:'.14em', color: light, display:'flex', alignItems:'center', gap: 10 }}><span style={{ width: 7, height: 7, borderRadius:'50%', background:'var(--orange)' }}/>FROM A CLIENT</div>
+          <div aria-hidden="true" style={{ fontSize: isMobile ? 56 : 120, lineHeight: isMobile ? 0.5 : 0.8, height: isMobile ? 22 : 'auto', fontWeight: 700, color:'var(--orange)' }}>“</div>
+        </div>
+        <div>
+          <blockquote style={{ margin: 0, fontSize: isMobile ? 22 : 34, lineHeight: 1.3, fontWeight: 600, letterSpacing:'-0.02em', maxWidth: 900 }}>
+            Most of our team never check an email, so surveys used to miss them. With The HR Insights Co., everyone got a private link on WhatsApp, and we finally heard from most of our team.
+          </blockquote>
+          <figcaption style={{ marginTop: isMobile ? 22 : 30, display:'flex', flexWrap:'wrap', alignItems:'center', gap:'12px 22px' }}>
+            <span style={{ width: 28, height: 2, background:'var(--orange)' }}/>
+            <span style={{ fontWeight: 600, fontSize: 16 }}>Operations Director, Karongwe</span>
+          </figcaption>
+        </div>
+      </figure>
     </section>
   );
 }
@@ -508,6 +503,7 @@ function EngagementPage({ startAt }) {
       <SiteHeader current="surveys"/>
       <Hero/>
       <Problem/>
+      <Testimonial/>
       <HowItWorks/>
       <WhyUs/>
       <WhoFor/>

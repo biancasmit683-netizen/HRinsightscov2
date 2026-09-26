@@ -187,35 +187,6 @@ function HowItWorks() {
   );
 }
 
-// ---------- Listening route (from the print campaign) -----------------------
-function ListeningRoute() {
-  const isMobile = useIsMobile();
-  return (
-    <section style={{ background:'var(--ink)', color:'#fff', padding: pad(isMobile), position:'relative', overflow:'hidden' }}>
-      <Circles items={[{ size: 280, left: -110, bottom: -120, coral: true, opacity: 0.5 }, { size: 180, right: '40%', top: -90 }]}/>
-      <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr auto', gap: isMobile ? 32 : 56, alignItems:'center' }}>
-        {!isMobile && <div/>}
-        <div>
-          <div style={{ fontSize: isMobile ? 34 : 60, lineHeight: 1.04, fontWeight: 700, letterSpacing:'-0.035em' }}>
-            The shop steward already knows.<br/>Do you?
-          </div>
-          <p style={{ fontSize: isMobile ? 17 : 20, lineHeight: 1.55, color:'#EFEBE4', margin:'28px 0 0', maxWidth: 560 }}>
-            They're on the floor every day. People trust them.
-          </p>
-          <p style={{ fontSize: isMobile ? 17 : 20, lineHeight: 1.55, color:'#fff', fontWeight: 600, margin:'14px 0 32px', maxWidth: 560 }}>
-            The question is: have you built a listening route of your own?
-          </p>
-          <BtnOrange onClick={() => scrollTo('book')}>Book a demo <Icon name="arrowSm" size={14} color="#fff"/></BtnOrange>
-        </div>
-        <figure style={{ margin: 0, justifySelf: isMobile ? 'center' : 'end' }}>
-          <img src="/brand/poster-shop-steward.jpg" alt="On-site poster: “The shop steward already knows. Do you?” with a QR code staff scan to open the survey" style={{ width: isMobile ? 240 : 300, height:'auto', display:'block', boxShadow:'0 30px 60px rgba(0,0,0,.35)' }}/>
-          <figcaption style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, letterSpacing:'.1em', color:'var(--ink-soft)', marginTop: 14 }}>ON-SITE QR POSTER · STAFF SCAN, WHATSAPP OPENS</figcaption>
-        </figure>
-      </div>
-    </section>
-  );
-}
-
 // ---------- 03 Why us -------------------------------------------------------
 function WhyUs() {
   const isMobile = useIsMobile();
@@ -529,7 +500,6 @@ function EngagementPage({ startAt }) {
       <Hero/>
       <Problem/>
       <HowItWorks/>
-      <ListeningRoute/>
       <WhyUs/>
       <WhoFor/>
       <Pricing/>

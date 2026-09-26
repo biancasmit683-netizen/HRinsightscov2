@@ -343,6 +343,15 @@ function SiteFooter({ ctaLabel = 'Book a demo', ctaTarget = 'book' }) {
               INFO@THEHRINSIGHTSCO.CO.ZA
             </a>
             <span style={{ opacity: 0.35 }}>·</span>
+            <a
+              href="https://www.linkedin.com/company/the-hr-insights-co/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color:'#C9C2B6', textDecoration:'none', display:'inline-flex', alignItems:'center', gap: 6 }}
+            >
+              <Icon name="linkedin" size={13} color="#C9C2B6"/> LINKEDIN
+            </a>
+            <span style={{ opacity: 0.35 }}>·</span>
             <span
               onClick={() => setShowPaia(true)}
               style={{ cursor:'pointer', textDecoration:'underline', textUnderlineOffset: 3 }}

@@ -464,8 +464,17 @@ function BookDemo() {
   );
 }
 
-function EngagementPage() {
+function EngagementPage({ startAt }) {
   React.useEffect(() => { document.title = 'Employee Engagement Surveys via WhatsApp — The HR Insights Co.'; }, []);
+  // Land on a section (e.g. /book-a-demo → the demo form). Re-align once images and fonts have loaded.
+  React.useEffect(() => {
+    if (!startAt) return;
+    const go = () => { const el = document.getElementById(startAt); if (el) el.scrollIntoView({ block:'start' }); };
+    go();
+    window.addEventListener('load', go, { once: true });
+    const t = setTimeout(go, 600);
+    return () => { window.removeEventListener('load', go); clearTimeout(t); };
+  }, [startAt]);
   return (
     <div>
       <SiteHeader current="surveys"/>

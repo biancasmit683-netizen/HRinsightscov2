@@ -281,8 +281,8 @@ function Circles({ items }) {
         <span key={i} style={{
           position:'absolute', width: c.size, height: c.size, borderRadius:'50%',
           left: c.left, right: c.right, top: c.top, bottom: c.bottom,
-          background: c.coral ? 'var(--coral)' : '#ffffff',
-          opacity: c.opacity ?? (c.coral ? 0.75 : 0.07),
+          background: c.coral ? 'var(--orange)' : '#ffffff',
+          opacity: c.coral ? 0.92 : (c.opacity ?? 0.07),
         }}/>
       ))}
     </div>
@@ -314,9 +314,14 @@ function SiteFooter({ ctaLabel = 'Book a demo', ctaTarget = 'book' }) {
               </div>
             </div>
             <div>
-              <BtnPrimary dark onClick={goCta}>
-                {ctaLabel} <Icon name="arrowSm" size={14} color="var(--ink)"/>
-              </BtnPrimary>
+              <button
+                onClick={goCta}
+                onMouseEnter={(e) => { e.currentTarget.style.background = '#9A3412'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--orange)'; }}
+                style={{ background:'var(--orange)', color:'#fff', border:'none', padding:'14px 22px', fontFamily:'Inter,sans-serif', fontWeight: 600, fontSize: 14.5, cursor:'pointer', borderRadius: 0, display:'inline-flex', alignItems:'center', gap: 10, transition:'background 160ms ease' }}
+              >
+                {ctaLabel} <Icon name="arrowSm" size={14} color="#fff"/>
+              </button>
             </div>
           </div>
         </div>

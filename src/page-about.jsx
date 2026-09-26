@@ -36,7 +36,7 @@ function WhatWeDo() {
         <SectionLabel index="03 / WHAT WE DO"/>
         <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 20 }}>
           {cards.map((c, i) => (
-            <a key={c.href} href={c.href} style={{ display:'block', textDecoration:'none', color:'var(--ink)', background:'#fff', padding: isMobile ? 24 : 32, borderTop: i === 0 ? '3px solid var(--orange)' : '3px solid var(--ink)' }}>
+            <a key={c.href} href={c.href} style={{ display:'block', textDecoration:'none', color:'var(--ink)', background:'#fff', padding: isMobile ? 24 : 32, borderTop:'3px solid var(--orange)' }}>
               <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.1em', color:'var(--orange)' }}>{c.tag}</div>
               <div style={{ fontSize: 24, fontWeight: 600, letterSpacing:'-0.02em', margin:'14px 0 10px' }}>{c.title}</div>
               <p style={{ fontSize: 15, lineHeight: 1.6, color:'var(--graphite)', margin:'0 0 22px' }}>{c.body}</p>

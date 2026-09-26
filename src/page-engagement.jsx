@@ -174,7 +174,7 @@ function HowItWorks() {
           </div>
           <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)', gap: 20 }}>
             {steps.map(([t, b], i) => (
-              <div key={i} style={{ background:'#fff', padding: isMobile ? 24 : 30, borderTop: i === 0 ? '3px solid var(--orange)' : '3px solid var(--ink)' }}>
+              <div key={i} style={{ background:'#fff', padding: isMobile ? 24 : 30, borderTop:'3px solid var(--orange)' }}>
                 <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.1em', color:'var(--orange)' }}>STEP 0{i + 1}</div>
                 <h3 style={{ fontSize: 21, fontWeight: 600, letterSpacing:'-0.015em', margin:'16px 0 10px' }}>{t}</h3>
                 <p style={{ fontSize: 15, lineHeight: 1.6, color:'var(--graphite)', margin: 0 }}>{b}</p>
@@ -229,7 +229,7 @@ function WhoFor() {
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
         {!isMobile && <div/>}
         <div style={{ display:'flex', flexWrap:'wrap', gap: 10 }}>
-          <span style={{ padding:'12px 18px', background:'var(--ink)', color:'#fff', fontWeight: 500, fontSize: 15 }}>Hospitality: lodges, hotels &amp; game reserves</span>
+          <span style={{ padding:'12px 18px', background:'var(--orange)', color:'#fff', fontWeight: 500, fontSize: 15 }}>Hospitality: lodges, hotels &amp; game reserves</span>
           {inds.map(i => <span key={i} style={{ padding:'12px 18px', background:'#fff', border:'1px solid var(--rule)', fontWeight: 500, fontSize: 15 }}>{i}</span>)}
         </div>
       </div>

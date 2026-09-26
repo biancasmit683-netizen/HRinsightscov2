@@ -13,7 +13,9 @@ function SectionLabel({ index, children, dark }) {
   const ink = dark ? '#fff' : 'var(--ink)';
   return (
     <div>
-      <div style={{ height: 1, background: dark ? '#ffffff26' : 'var(--rule)', marginBottom: 20 }}/>
+      <div style={{ position:'relative', height: 1, background: dark ? '#ffffff26' : 'var(--rule)', marginBottom: 20 }}>
+        <span style={{ position:'absolute', left: 0, top: -1, width: 32, height: 3, background:'var(--orange)' }}/>
+      </div>
       <div style={{
         fontFamily:'JetBrains Mono,monospace',
         fontSize: 18, fontWeight: 500, letterSpacing:'.08em',

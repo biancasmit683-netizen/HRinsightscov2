@@ -154,6 +154,81 @@ function HowItWorks() {
 }
 
 // ---------- 03 Why us -------------------------------------------------------
+// Phone mockup: the survey screen a staff member sees after opening their private link.
+function SurveyPhone() {
+  const isMobile = useIsMobile();
+  const opts = ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'];
+  const picked = 3;
+  const W = isMobile ? 280 : 300;
+  return (
+    <div role="img" aria-label="Example survey screen on a smartphone: question 7 of 24, 'I feel safe performing my duties at work', with 'Agree' selected"
+      style={{ width: W, maxWidth:'100%', margin:'0 auto', background:'#0d0d1a', borderRadius: 44, padding: 11, boxShadow:'0 40px 80px rgba(6,6,68,.28), 0 0 0 1px rgba(6,6,68,.12)', position:'relative' }}>
+      <div style={{ background:'#fff', borderRadius: 34, overflow:'hidden', fontFamily:'Inter,sans-serif', color:'var(--ink)', position:'relative' }}>
+        {/* status bar + notch */}
+        <div style={{ height: 38, display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 24px', fontSize: 12, fontWeight: 600 }}>
+          <span>08:15</span>
+          <span style={{ position:'absolute', left:'50%', top: 9, transform:'translateX(-50%)', width: 92, height: 24, borderRadius: 14, background:'#0d0d1a' }}/>
+          <span style={{ display:'flex', gap: 4, alignItems:'center' }}>
+            <span style={{ width: 16, height: 9, borderRadius: 2, border:'1.5px solid var(--ink)', position:'relative' }}><span style={{ position:'absolute', inset: 1, right: 4, background:'var(--ink)', borderRadius: 1 }}/></span>
+          </span>
+        </div>
+        {/* address bar */}
+        <div style={{ margin:'0 14px', padding:'7px 12px', borderRadius: 10, background:'#F1EFEA', fontSize: 11, color:'var(--graphite)', display:'flex', alignItems:'center', gap: 6 }}>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          survey.thehrinsightsco.co.za
+        </div>
+        <div style={{ padding:'18px 20px 22px' }}>
+          {/* header */}
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+            <img src="/brand/logo-primary-white-bg.png" alt="" style={{ height: 15, width:'auto', display:'block' }}/>
+            <div style={{ display:'flex', gap: 4, fontSize: 10.5, fontWeight: 600 }}>
+              {['EN', 'isiZulu', 'Afr'].map((l, i) => (
+                <span key={l} style={{ padding:'3px 7px', borderRadius: 999, background: i === 0 ? 'var(--ink)' : '#F1EFEA', color: i === 0 ? '#fff' : 'var(--graphite)' }}>{l}</span>
+              ))}
+            </div>
+          </div>
+          {/* progress */}
+          <div style={{ marginTop: 18, display:'flex', justifyContent:'space-between', fontSize: 11, color:'var(--slate)' }}>
+            <span>Question 7 of 24</span><span>Wellbeing &amp; safety</span>
+          </div>
+          <div style={{ marginTop: 6, height: 5, borderRadius: 3, background:'#ECE6DC', overflow:'hidden' }}>
+            <div style={{ width:'29%', height:'100%', background:'var(--orange)', borderRadius: 3 }}/>
+          </div>
+          {/* question */}
+          <div style={{ marginTop: 20, fontSize: 18, fontWeight: 700, lineHeight: 1.3, letterSpacing:'-0.01em' }}>
+            I feel safe performing my duties at work.
+          </div>
+          <div style={{ marginTop: 6, fontSize: 11.5, color:'var(--slate)' }}>Choose one answer</div>
+          {/* options */}
+          <div style={{ marginTop: 14, display:'flex', flexDirection:'column', gap: 7 }}>
+            {opts.map((o, i) => {
+              const on = i === picked;
+              return (
+                <div key={o} style={{ display:'flex', alignItems:'center', gap: 10, padding:'10px 12px', borderRadius: 10, fontSize: 13, fontWeight: on ? 700 : 500,
+                  border: on ? '1.5px solid var(--orange)' : '1px solid #E4DED3', background: on ? '#FBEDE6' : '#fff' }}>
+                  <span style={{ width: 16, height: 16, borderRadius:'50%', flexShrink: 0, border: on ? '5px solid var(--orange)' : '1.5px solid #C9C2B6', background:'#fff' }}/>
+                  {o}
+                </div>
+              );
+            })}
+          </div>
+          {/* nav */}
+          <div style={{ marginTop: 16, display:'grid', gridTemplateColumns:'1fr 2fr', gap: 8 }}>
+            <div style={{ padding:'11px 0', textAlign:'center', borderRadius: 10, border:'1px solid #E4DED3', fontSize: 13, fontWeight: 600, color:'var(--graphite)' }}>Back</div>
+            <div style={{ padding:'11px 0', textAlign:'center', borderRadius: 10, background:'var(--ink)', color:'#fff', fontSize: 13, fontWeight: 600 }}>Next →</div>
+          </div>
+          <div style={{ marginTop: 14, display:'flex', alignItems:'center', justifyContent:'center', gap: 6, fontSize: 10.5, color:'var(--slate)' }}>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            Anonymous and private · POPIA-compliant
+          </div>
+        </div>
+        {/* home indicator */}
+        <div style={{ height: 18, display:'flex', justifyContent:'center', alignItems:'flex-start' }}><span style={{ width: 110, height: 4, borderRadius: 2, background:'#0d0d1a' }}/></div>
+      </div>
+    </div>
+  );
+}
+
 function WhyUs() {
   const isMobile = useIsMobile();
   const feats = [
@@ -166,19 +241,18 @@ function WhyUs() {
     <section id="why" style={{ background:'#fff', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
       <SectionHead index="03 / WHY US" title="Built for how South African workplaces actually work."
         lede="Three founders from HR, industrial psychology, finance and data, running surveys that represent the whole workforce, not just the part with a laptop."/>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr) 340px', gap: isMobile ? 40 : 48, alignItems:'center' }}>
         {!isMobile && <div/>}
-        <div>
-          <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2,1fr)', borderTop:'1px solid var(--ink)' }}>
-            {feats.map(([tag, t, b], i) => (
-              <div key={i} style={{ padding: isMobile ? '24px 0' : '30px 32px 30px 0', paddingLeft: !isMobile && i % 2 ? 32 : 0, borderRight: !isMobile && i % 2 === 0 ? '1px solid var(--rule)' : 'none', borderBottom:'1px solid var(--rule)' }}>
-                <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.1em', color:'var(--orange)' }}>{tag}</div>
-                <h3 style={{ fontSize: 21, fontWeight: 600, letterSpacing:'-0.015em', margin:'12px 0 8px' }}>{t}</h3>
-                <p style={{ fontSize: 15, lineHeight: 1.6, color:'var(--graphite)', margin: 0 }}>{b}</p>
-              </div>
-            ))}
-          </div>
+        <div style={{ borderTop:'1px solid var(--ink)' }}>
+          {feats.map(([tag, t, b], i) => (
+            <div key={i} style={{ padding: isMobile ? '22px 0' : '24px 0', borderBottom:'1px solid var(--rule)' }}>
+              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.1em', color:'var(--orange)' }}>{tag}</div>
+              <h3 style={{ fontSize: 20, fontWeight: 600, letterSpacing:'-0.015em', margin:'10px 0 6px' }}>{t}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.6, color:'var(--graphite)', margin: 0 }}>{b}</p>
+            </div>
+          ))}
         </div>
+        <SurveyPhone/>
       </div>
     </section>
   );

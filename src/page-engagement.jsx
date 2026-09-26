@@ -72,9 +72,9 @@ function Hero() {
   const isMobile = useIsMobile();
   return (
     <section id="top" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '72px 20px 64px' : '120px 48px 96px', minHeight: isMobile ? 0 : 640, position:'relative', overflow:'hidden', display:'flex', alignItems:'flex-end' }}>
-      <div aria-hidden="true" style={{ position:'absolute', inset: 0, backgroundImage:`url(${HERO_PHOTO})`, backgroundSize:'cover', backgroundPosition: isMobile ? '70% 20%' : 'right 25%' }}/>
-      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background:'linear-gradient(180deg, rgba(6,6,68,0.12) 0%, rgba(6,6,68,0.45) 38%, rgba(6,6,68,0.86) 72%, #060644 100%)' }}/>
-      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background: isMobile ? 'rgba(6,6,68,0.35)' : 'linear-gradient(90deg, rgba(6,6,68,0.6) 0%, rgba(6,6,68,0.25) 45%, rgba(6,6,68,0) 70%)' }}/>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, backgroundImage:`url(${HERO_PHOTO})`, backgroundSize:'cover', backgroundPosition: isMobile ? '60% 40%' : 'center 45%' }}/>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background:'linear-gradient(180deg, rgba(6,6,68,0) 0%, rgba(6,6,68,0) 35%, rgba(6,6,68,0.55) 62%, rgba(6,6,68,0.92) 85%, #060644 100%)' }}/>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background: isMobile ? 'rgba(0,0,0,0.3)' : 'linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 62%)' }}/>
       <Circles items={isMobile ? [
         { size: 96, right: -52, top: 24, coral: true, opacity: 0.8 },
         { size: 150, left: -40, bottom: -90, coral: true, opacity: 0.75 },
@@ -90,7 +90,7 @@ function Hero() {
         <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.14em', color:'#fff', display:'flex', alignItems:'center', gap: 10 }}>
           <span style={{ width: 7, height: 7, borderRadius:'50%', background:'var(--orange)' }}/>EMPLOYEE ENGAGEMENT SURVEYS
         </div>
-        <h1 style={{ fontSize: isMobile ? 38 : 72, lineHeight: 1.02, fontWeight: 700, letterSpacing:'-0.035em', margin: isMobile ? '18px 0 0' : '22px 0 0', textShadow:'0 2px 24px rgba(6,6,68,0.35)' }}>
+        <h1 style={{ fontSize: isMobile ? 38 : 72, lineHeight: 1.02, fontWeight: 700, letterSpacing:'-0.035em', margin: isMobile ? '18px 0 0' : '22px 0 0', textShadow:'0 2px 18px rgba(0,0,0,0.45)' }}>
           Hear from every employee.<br/>
           Not just the ones with email.
         </h1>

@@ -1,122 +1,16 @@
 import React from 'react'
-import { Icon, BtnPrimary, BtnGhost, Circles, useIsMobile } from './shared'
-import HeroGraph from './landing-hero-graph'
-import { Dashboard, MobileDashboard } from './page-dashboard'
+import { Icon, useIsMobile } from './shared'
+import { SectionLabel, SectionHead, BtnOrange, Field, inputStyle, labelStyle, FadeSection } from './ui'
 
 // Landing page sections — in order of appearance.
-
-// A bigger, more prominent section label for the left 220px rail.
-// The numbered index IS the title. Children are optional secondary text
-// (rendered small below), and can be omitted entirely for a single-line label.
-function SectionLabel({ index, children, dark }) {
-  const dim = dark ? '#C9C2B6' : 'var(--slate)';
-  const ink = dark ? '#fff' : 'var(--ink)';
-  return (
-    <div>
-      <div style={{ position:'relative', height: 1, background: dark ? '#ffffff26' : 'var(--rule)', marginBottom: 20 }}>
-        <span style={{ position:'absolute', left: 0, top: -1, width: 32, height: 3, background:'var(--orange)' }}/>
-      </div>
-      <div style={{
-        fontFamily:'JetBrains Mono,monospace',
-        fontSize: 18, fontWeight: 500, letterSpacing:'.08em',
-        color: ink, lineHeight: 1.15,
-      }}>
-        {index}
-      </div>
-      {children && (
-        <div style={{
-          fontFamily:'Inter,sans-serif',
-          fontSize: 13, fontWeight: 400, letterSpacing:'0',
-          color: dim, marginTop: 10, lineHeight: 1.4,
-          textTransform:'none',
-        }}>
-          {children}
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ---------- Section 1: Hero -------------------------------------------------
-function HeroSection({ id }) {
-  const isMobile = useIsMobile();
-  return (
-    <section id={id} data-anchor="top" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '56px 20px 48px' : '96px 48px 72px', position:'relative', overflow:'hidden' }}>
-      <div aria-hidden="true" style={{
-        position:'absolute', inset: 0,
-        backgroundImage:'url(/brand/hero-photo.jpg)',
-        backgroundSize:'cover', backgroundPosition:'center 40%',
-      }}/>
-      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background:'rgba(6,6,68,0.84)' }}/>
-      <Circles items={[{ size: 260, right: -90, bottom: -110, coral: true, opacity: 0.6 }, { size: 180, left: '46%', top: -70 }, { size: 120, right: '30%', bottom: 40 }]}/>
-
-      <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) minmax(0, 560px)', gap: isMobile ? 32 : 56, alignItems:'center' }}>
-        <div>
-          <h1 style={{ fontSize: isMobile ? 34 : 82, lineHeight: isMobile ? 1.15 : 1.02, fontWeight: 600, letterSpacing:'-0.035em', margin: 0 }}>
-            Workforce data,<br/>
-            <span style={{ position:'relative', whiteSpace:'nowrap' }}>
-              financial decisions
-              <span style={{ position:'absolute', right: isMobile ? -13 : -26, top: isMobile ? 6 : 12, width: isMobile ? 8 : 16, height: isMobile ? 8 : 16, background:'var(--orange)', borderRadius:'50%' }}/>
-            </span>.
-          </h1>
-          <div style={{ fontSize: isMobile ? 16 : 20, lineHeight: 1.55, color:'#EFEBE4', marginTop: isMobile ? 22 : 36, maxWidth: 620, fontWeight: 400 }}>
-            We help mid-sized South African organisations turn fragmented workforce data into financial decisions. HR leads people. Finance leads money. We connect the two into decisions the business can act on.
-          </div>
-
-          <div style={{ display:'flex', flexWrap:'wrap', gap: 12, marginTop: isMobile ? 28 : 40 }}>
-            <BtnPrimary dark onClick={() => document.getElementById('pulse').scrollIntoView({ behavior:'smooth' })}>
-              Book a Pulse Check <Icon name="arrowSm" size={14} color="var(--ink)"/>
-            </BtnPrimary>
-            <BtnGhost dark onClick={() => document.getElementById('approach').scrollIntoView({ behavior:'smooth' })}>
-              See how we work
-            </BtnGhost>
-          </div>
-        </div>
-
-        {!isMobile && (
-          <div style={{ justifySelf:'end', width:'100%', maxWidth: 560 }}>
-            <HeroGraph />
-          </div>
-        )}
-      </div>
-
-    </section>
-  );
-}
-
-function HeroStat({ n, label, value, accent }) {
-  return (
-    <div>
-      <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
-        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#C9C2B6', letterSpacing:'.1em' }}>{n}</span>
-        {accent && <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--orange)' }}/>}
-      </div>
-      <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#C9C2B6', letterSpacing:'.1em', marginTop: 8 }}>
-        {label.toUpperCase()}
-      </div>
-      <div style={{ fontSize: 15, color:'#fff', fontWeight: 500, marginTop: 10, lineHeight: 1.4 }}>{value}</div>
-    </div>
-  );
-}
 
 // ---------- Section 2: About -----------------------------------------------
 function AboutSection({ id }) {
   const isMobile = useIsMobile();
   return (
     <section id={id} data-anchor="about" style={{ background:'#fff', padding: isMobile ? '56px 20px' : '96px 48px' }}>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 24 : 48 }}>
-        <SectionLabel index="02 / ABOUT"/>
-        <div>
-          <div style={{ fontSize: isMobile ? 30 : 40, lineHeight: 1.1, fontWeight: 600, letterSpacing:'-0.025em', maxWidth: 560 }}>
-            Built for the decision.
-          </div>
-        </div>
-        <div style={{ fontSize: isMobile ? 15.5 : 16.5, lineHeight: 1.65, color:'var(--graphite)', maxWidth: 520 }}>
-          <p style={{ margin: 0 }}>
-            The HR Insights Co. helps mid-sized South African organisations turn fragmented workforce data into financial decisions. Founded by three women from HR, finance, and data, we connect HR metrics with financial cost, give teams one reliable view of what is happening, and measure ourselves on whether the data changed a decision.
-          </p>
-        </div>
-      </div>
+      <SectionHead last index="01 / ABOUT" title="Built for the decision."
+        lede="The HR Insights Co. helps mid-sized South African organisations turn fragmented workforce data into financial decisions. Founded by three women from HR, finance, and data, we connect HR metrics with financial cost, give teams one reliable view of what is happening, and measure ourselves on whether the data changed a decision."/>
     </section>
   );
 }
@@ -125,14 +19,10 @@ function AboutSection({ id }) {
 function AudienceSection({ id }) {
   const isMobile = useIsMobile();
   return (
-    <section id={id} data-anchor="audience" data-screen-label="03 Our Audience" style={{ background:'#fff', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
-        <SectionLabel index="03 / OUR AUDIENCE"/>
-        <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
-          Two audiences. One shared view.
-        </div>
-      </div>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 16 : 36 }}>
+    <section id={id} data-anchor="audience" style={{ background:'var(--paper)', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
+      <SectionHead index="02 / OUR AUDIENCE" title="Two audiences. One shared view."
+        lede="The CFO carries the people cost line. The HR leader carries the people. We give both the same numbers, framed for the decisions each of them makes."/>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 16 : 20 }}>
         {!isMobile && <div/>}
         <AudienceCard
           role="CFO"
@@ -160,10 +50,10 @@ function AudienceSection({ id }) {
 
 function AudienceCard({ role, line, bullets, accent }) {
   return (
-    <div style={{ background:'var(--paper)', padding:'28px 28px 30px', position:'relative' }}>
+    <div style={{ background:'#fff', padding:'30px 30px 32px', position:'relative', borderTop:'3px solid var(--orange)' }}>
       <div style={{ display:'flex', alignItems:'center', gap: 10, marginBottom: 14 }}>
         {accent && <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--orange)' }}/>}
-        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color: accent ? 'var(--orange)' : 'var(--slate)', letterSpacing:'.1em' }}>
+        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, color:'var(--orange)', letterSpacing:'.1em' }}>
           FOR THE {role.toUpperCase()}
         </span>
       </div>
@@ -173,7 +63,7 @@ function AudienceCard({ role, line, bullets, accent }) {
       <div style={{ borderTop:'1px solid var(--rule)', paddingTop: 14, display:'flex', flexDirection:'column', gap: 10 }}>
         {bullets.map((b,i) => (
           <div key={i} style={{ display:'grid', gridTemplateColumns:'18px 1fr', gap: 10, fontSize: 14, lineHeight: 1.5, color:'var(--graphite)' }}>
-            <Icon name="check" size={14} color="var(--ink)"/>
+            <Icon name="check" size={14} color="var(--orange)" stroke={2}/>
             <span>{b}</span>
           </div>
         ))}
@@ -214,15 +104,9 @@ function ApproachSection({ id }) {
   const isMobile = useIsMobile();
   const [openIdx, setOpenIdx] = React.useState(0);
   return (
-    <section id={id} data-anchor="approach" style={{ background:'var(--paper)', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
-        <SectionLabel index="04 / HOW WE WORK"/>
-        <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 32, flexWrap:'wrap' }}>
-          <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
-            One continuous process. Three phases, in order.
-          </div>
-        </div>
-      </div>
+    <section id={id} data-anchor="approach" style={{ background:'#fff', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
+      <SectionHead index="03 / HOW WE WORK" title="One continuous process. Three phases, in order."
+        lede="Start with a Pulse Check, close the gaps it finds, then keep the numbers current every month. Open a phase to see what it involves."/>
 
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
         {!isMobile && <div/>}
@@ -231,6 +115,7 @@ function ApproachSection({ id }) {
             <PhaseRow
               key={i}
               {...p}
+              color={openIdx === i ? 'var(--orange)' : 'var(--ink)'}
               open={openIdx === i}
               onToggle={() => setOpenIdx(openIdx === i ? -1 : i)}
               isLast={i === phases.length - 1}
@@ -408,154 +293,13 @@ function FounderCard({ idx, photo, name, role, bio, cred, accent }) {
   );
 }
 
-// ---------- Section 5: Work in action --------------------------------------
-function WorkSection({ id }) {
-  const isMobile = useIsMobile();
-  return (
-    <section id={id} data-anchor="work" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '56px 20px' : '96px 48px' }}>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
-        <SectionLabel index="05 / INDUSTRY FOCUS" dark/>
-        <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 32, flexWrap:'wrap' }}>
-          <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
-            Hospitality.
-          </div>
-        </div>
-      </div>
-
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
-        {!isMobile && <div/>}
-        <div>
-          {/* Live dashboard embed */}
-          <div style={{
-            maxHeight: isMobile ? 600 : 720,
-            overflowY: 'auto', overflowX: 'hidden',
-            border: '1px solid rgba(255,255,255,0.12)',
-            scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.2) transparent',
-          }}>
-            {isMobile ? <MobileDashboard /> : <Dashboard />}
-          </div>
-
-          {/* Other industries — understated */}
-          <div style={{ marginTop: 40, paddingTop: 20, borderTop:'1px solid rgba(255,255,255,0.14)', display:'flex', alignItems:'center', gap: 14, flexWrap:'wrap' }}>
-            <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'rgba(255,255,255,0.55)', letterSpacing:'.14em' }}>ALSO SERVING</span>
-            <span style={{ fontSize: 13.5, color:'rgba(255,255,255,0.7)', letterSpacing:'-0.005em' }}>
-              Mining · Professional services · Other mid-sized industries
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function MiniTile({ n, name, value, sub, accent }) {
-  return (
-    <div style={{ background:'#fff', padding:'14px 14px 14px', border: accent ? '1px solid var(--orange)' : '1px solid var(--rule)' }}>
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10, color: accent ? 'var(--orange)' : 'var(--slate)', letterSpacing:'.1em' }}>{n}</span>
-      </div>
-      <div style={{ fontSize: 11, fontWeight: 500, color:'var(--graphite)', marginTop: 8, lineHeight: 1.3 }}>{name}</div>
-      <div style={{ fontSize: 22, fontWeight: 600, color: accent ? 'var(--orange)' : 'var(--ink)', letterSpacing:'-0.02em', marginTop: 4, lineHeight: 1 }}>{value}</div>
-      <div style={{ fontSize: 10.5, color:'var(--slate)', fontFamily:'JetBrains Mono,monospace', marginTop: 6 }}>{sub}</div>
-    </div>
-  );
-}
-
-// ---------- Section 6: Clients ---------------------------------------------
-function ClientsSection({ id }) {
-  const items = [
-    {
-      tag:'HOSPITALITY · MULTI-SITE',
-      sector:'Lodge group, 5 properties',
-      problem:'Labour cost running above plan, no single view across properties.',
-      change:'Roster templates reset against occupancy curve. R 720k run-rate saving modelled.',
-      metric:{ v:'−3.1 pp', label:'Labour cost / revenue' },
-      period:'Q2 2026',
-    },
-    {
-      tag:'PROFESSIONAL SERVICES',
-      sector:'Partnership, 140 people',
-      problem:'Regrettable exits in billable roles, fill times exceeding 60 days.',
-      change:'Retention programme on 20 critical roles. Pre-built pipeline for senior associates.',
-      metric:{ v:'−38 days', label:'Time to fill, critical roles', accent:true },
-      period:'H1 2026',
-    },
-  ];
-  return (
-    <section id={id} data-anchor="clients" style={{ background:'#fff', padding:'96px 48px', borderTop:'1px solid var(--rule)' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap: 40, marginBottom: 48 }}>
-        <SectionLabel index="06 / CLIENTS"/>
-        <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 32, flexWrap:'wrap' }}>
-          <div style={{ fontSize: 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
-            Where the data changed a decision.
-          </div>
-          <div style={{ fontSize: 14, color:'var(--slate)', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.06em', marginBottom: 6 }}>
-            CLIENT DETAIL ANONYMISED ·&nbsp;NUMBERS FROM LIVE ENGAGEMENTS
-          </div>
-        </div>
-      </div>
-
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 28 }}>
-        {items.map((it, i) => (
-          <ClientCard key={i} {...it}/>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ClientCard({ tag, sector, problem, change, metric, period }) {
-  const [hover, setHover] = React.useState(false);
-  return (
-    <div
-      onMouseEnter={()=>setHover(true)}
-      onMouseLeave={()=>setHover(false)}
-      style={{
-        background:'var(--paper)', padding:'32px 32px 28px',
-        borderTop: metric.accent ? '3px solid var(--orange)' : '3px solid var(--ink)',
-        transition:'transform 200ms ease, box-shadow 200ms ease',
-        transform: hover ? 'translateY(-2px)' : 'none',
-        boxShadow: hover ? '0 10px 30px rgba(6,6,68,0.08)' : 'none',
-      }}>
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline' }}>
-        <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em' }}>
-          {tag}
-        </div>
-        <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.06em' }}>
-          {period}
-        </div>
-      </div>
-      <div style={{ fontSize: 22, fontWeight: 600, letterSpacing:'-0.02em', color:'var(--ink)', marginTop: 10 }}>{sector}</div>
-
-      <div style={{ marginTop: 24, display:'grid', gridTemplateColumns:'90px 1fr', gap: 14, borderTop:'1px solid var(--rule)', paddingTop: 20 }}>
-        <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.1em' }}>PROBLEM</div>
-        <div style={{ fontSize: 15, lineHeight: 1.55, color:'var(--graphite)' }}>{problem}</div>
-
-        <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.1em' }}>CHANGE</div>
-        <div style={{ fontSize: 15, lineHeight: 1.55, color:'var(--ink)', fontWeight: 500 }}>{change}</div>
-      </div>
-
-      <div style={{ marginTop: 24, borderTop:'1px solid var(--rule)', paddingTop: 20, display:'flex', alignItems:'flex-end', justifyContent:'space-between' }}>
-        <div>
-          <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.1em' }}>WHAT MOVED</div>
-          <div style={{ fontSize: 15, color:'var(--ink)', marginTop: 6, fontWeight: 500 }}>{metric.label}</div>
-        </div>
-        <div style={{ fontSize: 44, fontWeight: 600, letterSpacing:'-0.03em', color: metric.accent ? 'var(--orange)' : 'var(--ink)', lineHeight: 1 }}>
-          {metric.v}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ---------- Section 7: Pulse Check form -----------------------------------
 function PulseSection({ id }) {
   const isMobile = useIsMobile();
   const [fields, setFields] = React.useState({ name:'', role:'', organisation:'', employees:'', email:'' });
   const [sending, setSending] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
-
-  const set = (k) => (e) => setFields(f => ({ ...f, [k]: typeof e === 'string' ? e : e.target.value }));
+  const set = (k) => (e) => setFields(f => ({ ...f, [k]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -571,180 +315,75 @@ function PulseSection({ id }) {
     setSubmitted(true);
   };
 
+  const row = { display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 22 : 24 };
+  const card = { background:'#fff', color:'var(--ink)', boxShadow:'0 30px 60px rgba(0,0,0,.35)', borderTop:'3px solid var(--orange)' };
+
   return (
-    <section id={id} data-anchor="pulse" style={{ background:'var(--paper)', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
-        <SectionLabel index="07 / PULSE CHECK"/>
-
+    <FadeSection id={id}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1.2fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
+        <SectionLabel index="05 / PULSE CHECK" dark/>
         <div>
-          <h2 style={{ fontSize: isMobile ? 32 : 48, lineHeight: 1.06, fontWeight: 600, letterSpacing:'-0.03em', margin: 0, maxWidth: 520 }}>
-            Start with a Pulse Check.
-          </h2>
-          <div style={{ fontSize: 16.5, lineHeight: 1.6, color:'var(--graphite)', marginTop: 22, maxWidth: 480 }}>
-            The Pulse Check ends with a written analysis of where your data stands and where insight can be driven from it. Clients who do not continue to Implementation still walk away with something usable. We answer new enquiries in a working day.
-          </div>
-
-          <div style={{ marginTop: 40, background:'#fff', borderLeft:'3px solid var(--ink)', padding:'22px 24px' }}>
-            <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em', marginBottom: 10 }}>WHEN A PULSE CHECK FITS</div>
-            <ul style={{ margin: 0, padding: 0, listStyle:'none', display:'flex', flexDirection:'column', gap: 10 }}>
-              {[
-                '50 to 300 employees',
-                'CFO and HR leader jointly own workforce costs',
-                'Data sits across systems, with no shared view',
-                'A decision is being made this quarter',
-              ].map((t,i) => (
-                <li key={i} style={{ display:'grid', gridTemplateColumns:'18px 1fr', gap: 10, fontSize: 14, color:'var(--ink)', lineHeight: 1.5 }}>
-                  <Icon name="check" size={14} color="var(--ink)"/>
-                  <span>{t}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <h2 style={{ fontSize: isMobile ? 32 : 50, lineHeight: 1.05, fontWeight: 700, letterSpacing:'-0.03em', margin: 0 }}>Start with a Pulse Check.</h2>
+          <p style={{ fontSize: 16.5, lineHeight: 1.6, color:'#EFEBE4', margin:'22px 0 0' }}>
+            The Pulse Check ends with a written analysis of where your data stands and where insight can be driven from it. Clients who do not continue to Implementation still walk away with something usable.
+          </p>
+          <p style={{ fontSize: 16.5, lineHeight: 1.6, color:'#EFEBE4', margin:'22px 0 12px' }}>A Pulse Check fits when:</p>
+          <ul style={{ margin: 0, padding: 0, listStyle:'none', display:'flex', flexDirection:'column', gap: 10 }}>
+            {['You have 50 to 300 employees', 'Your CFO and HR leader jointly own workforce costs', 'Your data sits across systems, with no shared view', 'A decision is being made this quarter'].map(t => (
+              <li key={t} style={{ display:'grid', gridTemplateColumns:'20px 1fr', gap: 10, fontSize: 15, lineHeight: 1.5 }}>
+                <Icon name="check" size={15} color="var(--orange)" stroke={2}/><span>{t}</span>
+              </li>
+            ))}
+          </ul>
+          <p style={{ fontSize: 15, color:'#EFEBE4', marginTop: 24 }}>
+            Prefer email? <a href="mailto:info@thehrinsightsco.co.za" style={{ color:'#fff' }}>info@thehrinsightsco.co.za</a>
+          </p>
         </div>
 
         {submitted ? (
-          <div style={{ background:'#fff', padding:'40px 32px', display:'flex', flexDirection:'column', gap: 20 }}>
+          <div role="status" style={{ ...card, padding: isMobile ? '28px 22px' : '40px 36px' }}>
             <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
-              <span style={{ width:8, height:8, borderRadius:'50%', background:'var(--orange)', flexShrink:0 }}/>
-              <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em' }}>ENQUIRY RECEIVED</span>
+              <span style={{ width: 8, height: 8, borderRadius:'50%', background:'var(--orange)' }}/>
+              <span style={labelStyle}>ENQUIRY RECEIVED</span>
             </div>
-            <div style={{ fontSize: 24, fontWeight: 600, color:'var(--ink)', lineHeight: 1.2, letterSpacing:'-0.02em' }}>
-              We will be in touch within a working day.
-            </div>
-            <div style={{ fontSize: 15.5, color:'var(--graphite)', lineHeight: 1.6 }}>
-              Your enquiry has been sent to the team. We answer every enquiry personally — expect a reply from one of the three founders.
-            </div>
+            <div style={{ fontSize: 24, fontWeight: 600, lineHeight: 1.2, letterSpacing:'-0.02em', margin:'16px 0 12px' }}>Thank you. We'll be in touch within a working day.</div>
+            <p style={{ fontSize: 15.5, color:'var(--graphite)', lineHeight: 1.6, margin: 0 }}>
+              We answer every enquiry personally. Expect a reply from one of the three founders.
+            </p>
           </div>
         ) : (
           <form
             name="pulse-check"
             data-netlify="true"
             data-netlify-honeypot="bot-field"
-            style={{ background:'#fff', padding:'32px', display:'flex', flexDirection:'column', gap: 22 }}
             onSubmit={handleSubmit}
+            style={{ ...card, padding: isMobile ? '26px 20px' : '36px', display:'flex', flexDirection:'column', gap: 22 }}
           >
             <input type="hidden" name="form-name" value="pulse-check"/>
             <input type="hidden" name="bot-field" style={{ display:'none' }}/>
-            <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color:'var(--slate)', letterSpacing:'.1em', marginBottom: 4 }}>ENQUIRY FORM</div>
-
-            <FieldInput label="Name" placeholder="First and last" value={fields.name} onChange={set('name')}/>
-            <FieldInput label="Role" placeholder="e.g. CFO, HR Director" value={fields.role} onChange={set('role')}/>
-            <FieldInput label="Organisation" placeholder="Company name" value={fields.organisation} onChange={set('organisation')}/>
-            <FieldSelect label="Employees" value={fields.employees} onChange={set('employees')}/>
-            <FieldInput label="Email" type="email" placeholder="you@company.co.za" value={fields.email} onChange={set('email')}/>
-
-            <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-end', marginTop: 10 }}>
-              <BtnPrimary disabled={sending}>
-                {sending ? 'Sending…' : 'Send enquiry'} {!sending && <Icon name="arrowSm" size={14} color="#fff"/>}
-              </BtnPrimary>
+            <div style={row}>
+              <Field label="Name"><input style={inputStyle} name="name" required autoComplete="name" value={fields.name} onChange={set('name')}/></Field>
+              <Field label="Role"><input style={inputStyle} name="role" required autoComplete="organization-title" placeholder="e.g. CFO, HR Director" value={fields.role} onChange={set('role')}/></Field>
             </div>
+            <div style={row}>
+              <Field label="Organisation"><input style={inputStyle} name="organisation" required autoComplete="organization" value={fields.organisation} onChange={set('organisation')}/></Field>
+              <Field label="Employees">
+                <select style={inputStyle} name="employees" required value={fields.employees} onChange={set('employees')}>
+                  <option value="">Select range</option>
+                  {['Under 50','50–100','100–200','200–300','300+'].map(o => <option key={o}>{o}</option>)}
+                </select>
+              </Field>
+            </div>
+            <Field label="Work email"><input style={inputStyle} type="email" name="email" required autoComplete="email" value={fields.email} onChange={set('email')}/></Field>
+            <BtnOrange type="submit" disabled={sending} full>
+              {sending ? 'Sending…' : 'Send enquiry'} {!sending && <Icon name="arrowSm" size={14} color="#fff"/>}
+            </BtnOrange>
+            <p style={{ fontSize: 12.5, color:'var(--slate)', margin: 0 }}>We reply within one working day.</p>
           </form>
         )}
       </div>
-    </section>
+    </FadeSection>
   );
 }
 
-function DirectLineMini_UNUSED({ label, value, accent }) {
-  return (
-    <div style={{ padding:'16px 0', borderBottom:'1px solid var(--rule)', borderRight: accent ? 'none' : '1px solid var(--rule)', paddingRight: 20, paddingLeft: accent ? 20 : 0 }}>
-      <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color: accent ? 'var(--orange)' : 'var(--slate)', letterSpacing:'.08em', marginBottom: 6 }}>
-        {accent && <span style={{ marginRight: 6 }}>●</span>}{label}
-      </div>
-      <div style={{ fontSize: 14.5, color:'var(--ink)', fontWeight: 500 }}>{value}</div>
-    </div>
-  );
-}
-
-function FieldInput({ label, placeholder, type = 'text', value, onChange }) {
-  const [focus, setFocus] = React.useState(false);
-  return (
-    <label style={{ display:'flex', flexDirection:'column', gap: 6 }}>
-      <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.08em' }}>{label.toUpperCase()}</span>
-      <input
-        type={type} placeholder={placeholder}
-        value={value} onChange={onChange}
-        onFocus={()=>setFocus(true)} onBlur={()=>setFocus(false)}
-        style={{
-          border:'none', borderBottom: focus ? '1px solid var(--ink)' : '1px solid var(--rule)',
-          padding:'12px 0', fontSize: 15, fontFamily:'Inter,sans-serif', color:'var(--ink)', background:'transparent',
-          outline:'none', transition:'border-color 160ms ease',
-        }}
-      />
-    </label>
-  );
-}
-
-function FieldSelect({ label, value, onChange }) {
-  const [open, setOpen] = React.useState(false);
-  const opts = ['Under 50','50–100','100–200','200–300','300+'];
-  return (
-    <label style={{ display:'flex', flexDirection:'column', gap: 6, position:'relative' }}>
-      <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.08em' }}>{label.toUpperCase()}</span>
-      <div
-        onClick={()=>setOpen(!open)}
-        style={{
-          borderBottom: open ? '1px solid var(--ink)' : '1px solid var(--rule)',
-          padding:'12px 0', fontSize: 15, color: value ? 'var(--ink)' : 'var(--slate)',
-          display:'flex', justifyContent:'space-between', alignItems:'center', cursor:'pointer',
-        }}
-      >
-        <span>{value || 'Select range'}</span>
-        <Icon name="down" size={14} color="var(--slate)"/>
-      </div>
-      {open && (
-        <div style={{ position:'absolute', top:'100%', left:0, right:0, background:'#fff', border:'1px solid var(--rule)', zIndex: 10, marginTop: 2, boxShadow:'0 8px 24px rgba(6,6,68,0.08)' }}>
-          {opts.map(o => (
-            <div key={o} onClick={()=>{ onChange(o); setOpen(false); }}
-              style={{ padding:'10px 14px', fontSize: 14, cursor:'pointer', color:'var(--ink)' }}
-              onMouseEnter={(e)=>e.currentTarget.style.background='var(--paper)'}
-              onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
-              {o}
-            </div>
-          ))}
-        </div>
-      )}
-    </label>
-  );
-}
-
-function FieldTextarea({ label, placeholder }) {
-  const [focus, setFocus] = React.useState(false);
-  return (
-    <label style={{ display:'flex', flexDirection:'column', gap: 6 }}>
-      <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.08em' }}>{label.toUpperCase()}</span>
-      <textarea
-        placeholder={placeholder} rows={4}
-        onFocus={()=>setFocus(true)} onBlur={()=>setFocus(false)}
-        style={{
-          border:'none', borderBottom: focus ? '1px solid var(--ink)' : '1px solid var(--rule)',
-          padding:'12px 0', fontSize: 15, fontFamily:'Inter,sans-serif', color:'var(--ink)', background:'transparent',
-          outline:'none', resize:'vertical', transition:'border-color 160ms ease',
-        }}
-      />
-    </label>
-  );
-}
-
-// ---------- Section 8: Start Here (final CTA) ------------------------------
-function StartHereSection() {
-  return (
-    <section style={{ background:'var(--ink)', color:'#fff', padding:'72px 48px' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr auto', gap: 40, alignItems:'center' }}>
-        <div>
-          <SectionLabel index="08 / START HERE" dark>Reply in a day</SectionLabel>
-        </div>
-        <div style={{ fontSize: 38, fontWeight: 600, lineHeight: 1.1, letterSpacing:'-0.025em', maxWidth: 900 }}>
-          If the numbers do not change a decision, they are not insight. Let us show you where yours can.
-        </div>
-        <div>
-          <BtnPrimary dark onClick={() => document.getElementById('pulse').scrollIntoView({ behavior:'smooth' })}>
-            Book a Pulse Check <Icon name="arrowSm" size={14} color="var(--ink)"/>
-          </BtnPrimary>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export { SectionLabel, FounderCard, HeroSection, AboutSection, AudienceSection, ApproachSection, TeamSection, WorkSection, PulseSection };
+export { SectionLabel, FounderCard, AboutSection, AudienceSection, ApproachSection, TeamSection, PulseSection };

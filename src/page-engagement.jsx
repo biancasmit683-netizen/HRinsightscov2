@@ -261,7 +261,37 @@ function Pricing() {
           ))}
         </ul>
       </div>
+      <Testimonial/>
     </section>
+  );
+}
+
+// Client testimonial — quote and details approved by Yuri de Villiers.
+function Testimonial() {
+  const isMobile = useIsMobile();
+  return (
+    <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40, marginTop: isMobile ? 40 : 64 }}>
+      {!isMobile && <div/>}
+      <figure style={{ margin: 0, background:'var(--paper)', borderLeft:'3px solid var(--orange)', padding: isMobile ? '26px 22px' : '36px 40px', display:'grid', gridTemplateColumns: isMobile ? '1fr' : '112px 1fr', gap: isMobile ? 20 : 32, alignItems:'center' }}>
+        <img src="/brand/testimonial-yuri.jpg" alt="Yuri de Villiers" width="112" height="112" style={{ width: isMobile ? 84 : 112, height: isMobile ? 84 : 112, borderRadius:'50%', objectFit:'cover', display:'block', boxShadow:'0 0 0 4px #fff, 0 0 0 5px var(--orange)' }}/>
+        <div>
+          <blockquote style={{ margin: 0, fontSize: isMobile ? 18 : 22, lineHeight: 1.45, fontWeight: 500, letterSpacing:'-0.01em', color:'var(--ink)' }}>
+            <span aria-hidden="true" style={{ color:'var(--orange)', fontWeight: 700 }}>“</span>Most of our team never check an email, so surveys used to miss them. With The HR Insights Co., everyone got a private link on WhatsApp, and we finally heard from the whole lodge.<span aria-hidden="true" style={{ color:'var(--orange)', fontWeight: 700 }}>”</span>
+          </blockquote>
+          <figcaption style={{ marginTop: 18, display:'flex', flexWrap:'wrap', alignItems:'center', gap:'10px 18px' }}>
+            <span>
+              <span style={{ display:'block', fontWeight: 700, fontSize: 15.5 }}>Yuri de Villiers</span>
+              <span style={{ display:'block', fontSize: 14, color:'var(--graphite)' }}>Operations Director, Karongwe</span>
+            </span>
+            <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, letterSpacing:'.08em', color:'var(--orange)', border:'1px solid var(--orange)', padding:'5px 8px' }}>FEDHASA GENERAL MANAGER OF THE YEAR 2026</span>
+            <a href="https://www.linkedin.com/in/yuri-de-villiers-3a21b1177/" target="_blank" rel="noopener noreferrer"
+              style={{ display:'inline-flex', alignItems:'center', gap: 6, fontSize: 13.5, fontWeight: 600, color:'var(--ink)', textDecoration:'none', borderBottom:'1px solid var(--ink)', paddingBottom: 2 }}>
+              <Icon name="linkedin" size={14} color="var(--ink)"/> View on LinkedIn
+            </a>
+          </figcaption>
+        </div>
+      </figure>
+    </div>
   );
 }
 

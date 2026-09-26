@@ -301,7 +301,6 @@ const RESULT_GROUPS = [
   { id:'Hospitality',  n:47,  overall:68, enps:4,   themes:[83, 78, 79, 42, 44, 80] },
   { id:'Guide',        n:26,  overall:80, enps:69,  themes:[88, 91, 94, 62, 58, 91] },
   { id:'Kitchen',      n:19,  overall:59, enps:11,  themes:[61, 76, 77, 37, 32, 75] },
-  { id:'Housekeeping', n:14,  overall:62, enps:7,   themes:[74, 79, 77, 26, 43, 70] },
   { id:'Admin',        n:17,  overall:50, enps:-24, themes:[48, 59, 62, 20, 38, 71] },
 ];
 
@@ -311,15 +310,15 @@ function ResultsPreview() {
   const g = RESULT_GROUPS.find(x => x.id === groupId);
   const tile = { display:'flex', flexDirection:'column', gap: 4 };
   const tileLabel = { fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, letterSpacing:'.1em', color:'var(--slate)' };
-  const tileValue = { fontSize: isMobile ? 26 : 30, fontWeight: 700, letterSpacing:'-0.02em', fontVariantNumeric:'tabular-nums' };
+  const tileValue = { fontSize: isMobile ? 24 : 26, fontWeight: 700, letterSpacing:'-0.02em', fontVariantNumeric:'tabular-nums' };
   return (
     <div style={{ background:'#fff', padding: isMobile ? 20 : 28, borderTop:'3px solid var(--orange)' }}>
       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', flexWrap:'wrap', gap: 8 }}>
-        <div style={{ fontSize: 16, fontWeight: 600 }}>Engagement by theme</div>
+        <div style={{ fontSize: 16, fontWeight: 600 }}>Engagement by theme <span style={{ fontSize: 12, fontWeight: 400, color:'var(--slate)' }}>· % favourable</span></div>
         <div style={tileLabel}>SAMPLE DATA · LODGE CO.</div>
       </div>
 
-      <div role="group" aria-label="Filter by department" style={{ display:'flex', flexWrap:'wrap', gap: 6, margin:'16px 0 20px' }}>
+      <div role="group" aria-label="Filter by department" style={{ display:'flex', flexWrap:'wrap', gap: 6, margin:'14px 0 14px' }}>
         {RESULT_GROUPS.map(x => {
           const on = x.id === groupId;
           return (
@@ -332,7 +331,7 @@ function ResultsPreview() {
         })}
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 12, paddingBottom: 18, borderBottom:'1px solid var(--rule)' }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 12, paddingBottom: 12, borderBottom:'1px solid var(--rule)' }}>
         <div style={tile}><span style={tileLabel}>ENGAGEMENT</span><span style={tileValue}>{g.overall}%</span></div>
         <div style={tile}><span style={tileLabel}>ENPS</span><span style={tileValue}>{g.enps > 0 ? '+' : ''}{g.enps}</span></div>
         <div style={tile}><span style={tileLabel}>RESPONSES</span><span style={tileValue}>{g.n}</span></div>
@@ -344,7 +343,7 @@ function ResultsPreview() {
           const low = v < 50;
           return (
             <div key={t} title={`${t}: ${v}% favourable`}
-              style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr 44px' : '200px 1fr 48px', gap: isMobile ? '6px 10px' : 14, alignItems:'center', padding:'10px 0', borderBottom:'1px solid var(--rule)' }}>
+              style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr 44px' : 'minmax(0,1fr) 120px 40px', gap: isMobile ? '6px 10px' : 14, alignItems:'center', padding:'7px 0', borderBottom:'1px solid var(--rule)' }}>
               <span style={{ fontSize: 13.5 }}>
                 {t}
                 {low && <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10, letterSpacing:'.06em', color:'var(--orange)', marginLeft: 8, whiteSpace:'nowrap' }}>FOCUS AREA</span>}
@@ -357,15 +356,14 @@ function ResultsPreview() {
           );
         })}
       </div>
-      <p style={{ fontSize: 12.5, color:'var(--slate)', margin:'14px 0 0' }}>% favourable (4–5 on a 5-point scale). Groups with fewer than 5 responses are hidden to protect anonymity.</p>
     </div>
   );
 }
 
 function SurveyResults() {
   const isMobile = useIsMobile();
-  const results = ['Engagement by theme', 'Strengths and opportunities', 'Every question, ranked', 'Employee Net Promoter Score', 'How groups differ', 'Benefit preferences'];
-  const insights = ['Strengths to protect', 'Company-wide drags', 'Where leadership is the issue', 'Where the pain concentrates', 'Where money will land best', 'Who to win back'];
+  const results = ['Engagement by theme', 'Strengths and opportunities', 'Every question, ranked'];
+  const insights = ['Strengths to protect', 'Company-wide drags', 'Where leadership is the issue'];
   const list = (title, items) => (
     <div>
       <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.1em', color:'var(--orange)', marginBottom: 10 }}>{title}</div>
@@ -384,7 +382,7 @@ function SurveyResults() {
         lede="Your results arrive as a live dashboard, not a static PDF. Filter by department, site, manager or tenure and every score recalculates. Then we tell you what it means and where to act first."/>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr) minmax(0,1.25fr)', gap: isMobile ? 32 : 40, alignItems:'start' }}>
         {!isMobile && <div/>}
-        <div style={{ display:'flex', flexDirection:'column', gap: 28 }}>
+        <div style={{ display:'flex', flexDirection:'column', gap: 24 }}>
           {list('INTERACTIVE RESULTS', results)}
           {list('DEEP INSIGHTS', insights)}
           <p style={{ fontSize: 14.5, lineHeight: 1.6, color:'var(--graphite)', margin: 0 }}>

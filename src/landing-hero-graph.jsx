@@ -89,7 +89,7 @@ function HeroGraph() {
       userSelect:'none',
     }}>
       {/* Header row — mono labels, brand-consistent */}
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom: 14, fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#a6a6d4', letterSpacing:'.1em' }}>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom: 14, fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#C9C2B6', letterSpacing:'.1em' }}>
         <span>LIVE · SAMPLE WORKFORCE DATA</span>
         <span>MAY 25 — APR 26</span>
       </div>
@@ -122,14 +122,14 @@ function HeroGraph() {
         {months.map((m, i) => (
           <text key={i}
             x={xAt(i)} y={H - 14}
-            fill="#a6a6d4" fontSize="9" fontFamily="JetBrains Mono, monospace"
+            fill="#C9C2B6" fontSize="9" fontFamily="JetBrains Mono, monospace"
             textAnchor="middle" letterSpacing="1"
           >{m}</text>
         ))}
 
         {/* Y-axis labels — left side for Labour %, right side for Rev/Emp */}
-        <text x={padL - 8} y={padT + 4} fill="#a6a6d4" fontSize="9" fontFamily="JetBrains Mono, monospace" textAnchor="end" letterSpacing="0.5">47%</text>
-        <text x={padL - 8} y={padT + ih + 3} fill="#a6a6d4" fontSize="9" fontFamily="JetBrains Mono, monospace" textAnchor="end" letterSpacing="0.5">42%</text>
+        <text x={padL - 8} y={padT + 4} fill="#C9C2B6" fontSize="9" fontFamily="JetBrains Mono, monospace" textAnchor="end" letterSpacing="0.5">47%</text>
+        <text x={padL - 8} y={padT + ih + 3} fill="#C9C2B6" fontSize="9" fontFamily="JetBrains Mono, monospace" textAnchor="end" letterSpacing="0.5">42%</text>
 
         {/* Labour — white ghost line (down trend) */}
         <path d={labourPath} fill="none" stroke="#ffffff" strokeOpacity="0.85" strokeWidth="1.6"
@@ -165,7 +165,7 @@ function HeroGraph() {
           <text x={lEnd[0] + 24} y={lEnd[1] + 3} fill="#ffffff" fontSize="10" fontFamily="JetBrains Mono, monospace" letterSpacing="0.5">
             42.1%
           </text>
-          <text x={lEnd[0] + 24} y={lEnd[1] + 16} fill="#a6a6d4" fontSize="8.5" fontFamily="JetBrains Mono, monospace" letterSpacing="0.6">
+          <text x={lEnd[0] + 24} y={lEnd[1] + 16} fill="#C9C2B6" fontSize="8.5" fontFamily="JetBrains Mono, monospace" letterSpacing="0.6">
             LABOUR / REV
           </text>
         </g>
@@ -185,7 +185,7 @@ function HeroGraph() {
           <text x={rEnd[0] - 24} y={rEnd[1] + 3} fill="#C2410C" fontSize="10.5" fontFamily="JetBrains Mono, monospace" textAnchor="end" letterSpacing="0.5" fontWeight="600">
             R 96k
           </text>
-          <text x={rEnd[0] - 24} y={rEnd[1] + 16} fill="#a6a6d4" fontSize="8.5" fontFamily="JetBrains Mono, monospace" textAnchor="end" letterSpacing="0.6">
+          <text x={rEnd[0] - 24} y={rEnd[1] + 16} fill="#C9C2B6" fontSize="8.5" fontFamily="JetBrains Mono, monospace" textAnchor="end" letterSpacing="0.6">
             REV / EMPLOYEE
           </text>
         </g>
@@ -200,7 +200,7 @@ function HeroGraph() {
       </svg>
 
       {/* Legend footer */}
-      <div style={{ marginTop: 14, display:'flex', justifyContent:'space-between', alignItems:'center', fontFamily:'JetBrains Mono,monospace', fontSize: 10, color:'#a6a6d4', letterSpacing:'.08em' }}>
+      <div style={{ marginTop: 14, display:'flex', justifyContent:'space-between', alignItems:'center', fontFamily:'JetBrains Mono,monospace', fontSize: 10, color:'#C9C2B6', letterSpacing:'.08em' }}>
         <span style={{ display:'inline-flex', alignItems:'center', gap: 8 }}>
           <span style={{ width: 14, height: 2, background:'#ffffff', opacity:.85 }}/> LABOUR / REV ↓
         </span>

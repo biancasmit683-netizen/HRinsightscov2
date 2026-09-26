@@ -40,7 +40,7 @@ function WDRISection({ id }) {
       borderTop:'1px solid var(--rule)',
     }}>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
-        <SectionLabel index="07 / READINESS ASSESSMENT"/>
+        <SectionLabel index="06 / READINESS ASSESSMENT"/>
         <div>
           <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
             How ready is your workforce data to drive decisions?
@@ -53,7 +53,7 @@ function WDRISection({ id }) {
 
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
         {!isMobile && <div/>}
-        <div style={{ background:'#F7F7F4', border:'1px solid var(--rule)' }}>
+        <div style={{ background:'#F6F3EE', border:'1px solid var(--rule)' }}>
           {phase === 'landing'  && <EmbedLanding onStart={start}/>}
           {phase === 'q'        && <EmbedQuestion idx={idx} total={10} selected={answers[idx]} onSelect={select} onNext={next} onBack={back}/>}
           {phase === 'loading'  && <EmbedLoading/>}

@@ -95,8 +95,8 @@ function DashHeader({ view, onToggle }) {
       <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-end', gap: 12, fontSize: 12 }}>
         <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.08em' }}>VIEW</span>
         <div style={{ display:'inline-flex', border:'1px solid var(--ink)' }}>
-          <button onClick={() => onToggle && onToggle('cfo')} style={{ padding:'7px 14px', background: view==='cfo' ? 'var(--ink)' : '#fff', color: view==='cfo' ? '#fff' : 'var(--ink)', border:'none', fontFamily:'Inter', fontWeight: 500, fontSize: 12.5, cursor:'pointer', letterSpacing:'.02em' }}>CFO view</button>
-          <button onClick={() => onToggle && onToggle('hr')} style={{ padding:'7px 14px', background: view==='hr' ? 'var(--ink)' : '#fff', color: view==='hr' ? '#fff' : 'var(--ink)', border:'none', borderLeft:'1px solid var(--ink)', fontFamily:'Inter', fontWeight: 500, fontSize: 12.5, cursor:'pointer', letterSpacing:'.02em' }}>HR view</button>
+          <button onClick={() => onToggle && onToggle('cfo')} style={{ padding:'7px 14px', background: view==='cfo' ? 'var(--ink)' : '#fff', color: view==='cfo' ? '#fff' : 'var(--ink)', border:'none', fontFamily:'Inter,sans-serif', fontWeight: 500, fontSize: 12.5, cursor:'pointer', letterSpacing:'.02em' }}>CFO view</button>
+          <button onClick={() => onToggle && onToggle('hr')} style={{ padding:'7px 14px', background: view==='hr' ? 'var(--ink)' : '#fff', color: view==='hr' ? '#fff' : 'var(--ink)', border:'none', borderLeft:'1px solid var(--ink)', fontFamily:'Inter,sans-serif', fontWeight: 500, fontSize: 12.5, cursor:'pointer', letterSpacing:'.02em' }}>HR view</button>
         </div>
       </div>
     </div>
@@ -219,7 +219,7 @@ function MetricGrid({ view }) {
   const set = view === 'cfo' ? cfo : hr;
 
   return (
-    <div style={{ padding:'36px 32px', background:'var(--mist)' }}>
+    <div style={{ padding:'36px 32px', background:'var(--paper)' }}>
       <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom: 20 }}>
         <div style={{ display:'flex', alignItems:'baseline', gap: 14 }}>
           <Eyebrow>Workforce view · 07 metrics</Eyebrow>
@@ -326,13 +326,13 @@ function DeepDiveHook() {
   return (
     <div style={{ background:'var(--ink)', color:'#fff', padding:'22px', display:'flex', flexDirection:'column', justifyContent:'space-between', minHeight: 220 }}>
       <div>
-        <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#a6a6d4', letterSpacing:'.1em' }}>DEEP DIVE · 01</div>
+        <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#C9C2B6', letterSpacing:'.1em' }}>DEEP DIVE · 01</div>
         <div style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.25, marginTop: 14, letterSpacing:'-0.01em' }}>
           Which regrettable exits hurt most, and where.
         </div>
       </div>
       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginTop: 18 }}>
-        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#a6a6d4', letterSpacing:'.08em' }}>SCROLL TO VIEW</span>
+        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#C9C2B6', letterSpacing:'.08em' }}>SCROLL TO VIEW</span>
         <Icon name="down" size={18} color="#fff"/>
       </div>
     </div>
@@ -401,7 +401,7 @@ function DeepDive({ view }) {
       </div>
 
       <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr', gap: 32, alignItems:'flex-start' }}>
-        <div style={{ background:'var(--mist)', padding:'28px 24px' }}>
+        <div style={{ background:'var(--paper)', padding:'28px 24px' }}>
           <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 18, letterSpacing:'-0.005em' }}>Chef and F&B manager exits carry most of the cost.</div>
           <HBar data={roleExits} width={720} rowH={28} accentRule={d=>d.reg} format={fmt}/>
           <div style={{ display:'flex', gap: 18, marginTop: 14, fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.06em' }}>
@@ -414,7 +414,7 @@ function DeepDive({ view }) {
         <div style={{ padding:'28px 26px', background:'var(--ink)', color:'#fff' }}>
           <div style={{ display:'flex', alignItems:'center', gap: 8 }}>
             <span style={{ width: 6, height: 6, borderRadius:'50%', background:'var(--orange)' }}/>
-            <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#a6a6d4', letterSpacing:'.1em' }}>WHAT THIS CHANGES</div>
+            <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#C9C2B6', letterSpacing:'.1em' }}>WHAT THIS CHANGES</div>
           </div>
           <div style={{ marginTop: 16, fontSize: 18, fontWeight: 600, lineHeight: 1.3, letterSpacing:'-0.01em' }}>
             {view === 'cfo'
@@ -422,7 +422,7 @@ function DeepDive({ view }) {
               : <>Three interventions, three owners, first review 30 May.</>
             }
           </div>
-          <div style={{ marginTop: 14, fontSize: 13.5, lineHeight: 1.6, color:'#e5e7ff' }}>
+          <div style={{ marginTop: 14, fontSize: 13.5, lineHeight: 1.6, color:'#EFEBE4' }}>
             {view === 'cfo' ? cfoText : hrText}
           </div>
         </div>
@@ -432,7 +432,7 @@ function DeepDive({ view }) {
         <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 16, letterSpacing:'-0.005em' }}>
           Kruger and Letaba carry 74% of the regrettable cost.
         </div>
-        <div style={{ background:'var(--mist)', padding:'28px 24px' }}>
+        <div style={{ background:'var(--paper)', padding:'28px 24px' }}>
           <HBar data={byProperty} width={720} rowH={30} accentRule={d=>d.flag} format={fmt}/>
           <div style={{ marginTop: 12, fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.06em' }}>
             REGRETTABLE TURNOVER COST BY PROPERTY · APR 2026 YTD · SORTED BY VALUE
@@ -495,7 +495,7 @@ function MobileDashboard() {
           <button onClick={()=>setView('hr')} style={{ padding:'7px 14px', background: view==='hr'?'var(--ink)':'#fff', color: view==='hr'?'#fff':'var(--ink)', border:'none', borderLeft:'1px solid var(--ink)', fontSize: 12, fontWeight:500 }}>HR</button>
         </div>
       </div>
-      <div style={{ padding:'18px', background:'var(--mist)', display:'flex', flexDirection:'column', gap: 12 }}>
+      <div style={{ padding:'18px', background:'var(--paper)', display:'flex', flexDirection:'column', gap: 12 }}>
         <MobTile n="01" name="Labour cost % of revenue" value="44.8%" sub="vs 41.5% plan" cap="Labour cost crossed 42% at two properties. Roster review triggered."/>
         <MobTile n="02" name="Total cost of workforce" value="R 31.4m" sub="YTD · 39% of revenue" cap="Tracking R 2.4m above plan YTD."/>
         <MobTile n="03" accent name="Regrettable turnover cost" value="R 680k" sub="8 of 14 exits regrettable" cap="Retention programme for 20 critical roles nets R 240k in year one.">
@@ -515,7 +515,7 @@ function MobileDashboard() {
         <div style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, letterSpacing:'-0.02em', marginTop: 10 }}>
           Eight regrettable exits cost <span style={{ color:'var(--orange)' }}>R 680k</span>. Two properties carry 74%.
         </div>
-        <div style={{ marginTop: 16, background:'var(--mist)', padding:'18px 14px' }}>
+        <div style={{ marginTop: 16, background:'var(--paper)', padding:'18px 14px' }}>
           <HBar
             data={[
               { label:'Head chef, Kruger', value: 182000, reg:true },
@@ -529,7 +529,7 @@ function MobileDashboard() {
           />
         </div>
         <div style={{ marginTop: 18, background:'var(--ink)', color:'#fff', padding:'18px 16px' }}>
-          <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10, color:'#a6a6d4', letterSpacing:'.1em' }}>WHAT THIS CHANGES</div>
+          <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10, color:'#C9C2B6', letterSpacing:'.1em' }}>WHAT THIS CHANGES</div>
           <div style={{ fontSize: 14.5, fontWeight: 600, marginTop: 10, lineHeight: 1.35 }}>
             Retention programme for the 20 critical roles nets R 240k in year one, before the guest impact.
           </div>

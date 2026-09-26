@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, BtnPrimary, BtnGhost, useIsMobile } from './shared'
+import { Icon, BtnPrimary, BtnGhost, Circles, useIsMobile } from './shared'
 import HeroGraph from './landing-hero-graph'
 import { Dashboard, MobileDashboard } from './page-dashboard'
 
@@ -9,7 +9,7 @@ import { Dashboard, MobileDashboard } from './page-dashboard'
 // The numbered index IS the title. Children are optional secondary text
 // (rendered small below), and can be omitted entirely for a single-line label.
 function SectionLabel({ index, children, dark }) {
-  const dim = dark ? '#a6a6d4' : 'var(--slate)';
+  const dim = dark ? '#C9C2B6' : 'var(--slate)';
   const ink = dark ? '#fff' : 'var(--ink)';
   return (
     <div>
@@ -43,20 +43,10 @@ function HeroSection({ id }) {
       <div aria-hidden="true" style={{
         position:'absolute', inset: 0,
         backgroundImage:'url(/brand/hero-photo.jpg)',
-        backgroundSize:'cover',
-        backgroundPosition:'right center',
-        filter:'blur(6px) saturate(0.85)',
-        transform:'scale(1.06)',
-        opacity: 0.55,
+        backgroundSize:'cover', backgroundPosition:'center 40%',
       }}/>
-      <div aria-hidden="true" style={{
-        position:'absolute', inset: 0,
-        background:'linear-gradient(90deg, var(--ink) 0%, var(--ink) 38%, rgba(6,6,68,0.88) 58%, rgba(6,6,68,0.65) 100%)',
-      }}/>
-      <div aria-hidden="true" style={{
-        position:'absolute', left: 0, right: 0, bottom: 0, height: 120,
-        background:'linear-gradient(180deg, rgba(6,6,68,0) 0%, var(--ink) 100%)',
-      }}/>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background:'rgba(6,6,68,0.84)' }}/>
+      <Circles items={[{ size: 260, right: -90, bottom: -110, coral: true, opacity: 0.6 }, { size: 180, left: '46%', top: -70 }, { size: 120, right: '30%', bottom: 40 }]}/>
 
       <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) minmax(0, 560px)', gap: isMobile ? 32 : 56, alignItems:'center' }}>
         <div>
@@ -67,7 +57,7 @@ function HeroSection({ id }) {
               <span style={{ position:'absolute', right: isMobile ? -13 : -26, top: isMobile ? 6 : 12, width: isMobile ? 8 : 16, height: isMobile ? 8 : 16, background:'var(--orange)', borderRadius:'50%' }}/>
             </span>.
           </h1>
-          <div style={{ fontSize: isMobile ? 16 : 20, lineHeight: 1.55, color:'#e5e7ff', marginTop: isMobile ? 22 : 36, maxWidth: 620, fontWeight: 400 }}>
+          <div style={{ fontSize: isMobile ? 16 : 20, lineHeight: 1.55, color:'#EFEBE4', marginTop: isMobile ? 22 : 36, maxWidth: 620, fontWeight: 400 }}>
             We help mid-sized South African organisations turn fragmented workforce data into financial decisions. HR leads people. Finance leads money. We connect the two into decisions the business can act on.
           </div>
 
@@ -96,10 +86,10 @@ function HeroStat({ n, label, value, accent }) {
   return (
     <div>
       <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
-        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#a6a6d4', letterSpacing:'.1em' }}>{n}</span>
+        <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#C9C2B6', letterSpacing:'.1em' }}>{n}</span>
         {accent && <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--orange)' }}/>}
       </div>
-      <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#a6a6d4', letterSpacing:'.1em', marginTop: 8 }}>
+      <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'#C9C2B6', letterSpacing:'.1em', marginTop: 8 }}>
         {label.toUpperCase()}
       </div>
       <div style={{ fontSize: 15, color:'#fff', fontWeight: 500, marginTop: 10, lineHeight: 1.4 }}>{value}</div>
@@ -168,7 +158,7 @@ function AudienceSection({ id }) {
 
 function AudienceCard({ role, line, bullets, accent }) {
   return (
-    <div style={{ background:'var(--mist)', padding:'28px 28px 30px', position:'relative' }}>
+    <div style={{ background:'var(--paper)', padding:'28px 28px 30px', position:'relative' }}>
       <div style={{ display:'flex', alignItems:'center', gap: 10, marginBottom: 14 }}>
         {accent && <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--orange)' }}/>}
         <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, color: accent ? 'var(--orange)' : 'var(--slate)', letterSpacing:'.1em' }}>
@@ -216,13 +206,13 @@ function ApproachSection({ id }) {
       duration:'Monthly · ongoing',
       output:'Live dashboard · monthly analysis · industry comparison',
       accent: true,
-      color:'#3b3b86',
+      color:'#060644',
     },
   ];
   const isMobile = useIsMobile();
   const [openIdx, setOpenIdx] = React.useState(0);
   return (
-    <section id={id} data-anchor="approach" style={{ background:'var(--mist)', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
+    <section id={id} data-anchor="approach" style={{ background:'var(--paper)', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
         <SectionLabel index="04 / HOW WE WORK"/>
         <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 32, flexWrap:'wrap' }}>
@@ -275,7 +265,7 @@ function PhaseRow({ n, tag, title, headline, body, duration, output, accent, col
           gap: isMobile ? 0 : 24,
           padding: isMobile ? '18px 16px 18px 24px' : '28px 32px 28px 40px',
           cursor:'pointer',
-          background: open ? '#fafaf7' : (hover ? '#fafaf7' : '#fff'),
+          background: open ? '#F6F3EE' : (hover ? '#F6F3EE' : '#fff'),
           transition:'background 160ms ease',
         }}
       >
@@ -333,7 +323,7 @@ function PhaseRow({ n, tag, title, headline, body, duration, output, accent, col
         borderTop: open ? '1px solid var(--rule)' : 'none',
       }}>
         {isMobile ? (
-          <div style={{ padding:'16px 16px 24px 24px', background:'#fafaf7' }}>
+          <div style={{ padding:'16px 16px 24px 24px', background:'#F6F3EE' }}>
             <div style={{ fontSize: 15, lineHeight: 1.65, color:'var(--graphite)' }}>{body}</div>
             <div style={{ marginTop: 16 }}>
               <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color: color, letterSpacing:'.1em', marginBottom: 6, fontWeight: 600 }}>OUTPUT</div>
@@ -341,7 +331,7 @@ function PhaseRow({ n, tag, title, headline, body, duration, output, accent, col
             </div>
           </div>
         ) : (
-          <div style={{ padding:'32px 32px 40px 40px', display:'grid', gridTemplateColumns:'80px 180px 1fr 260px', gap: 24, background:'#fafaf7' }}>
+          <div style={{ padding:'32px 32px 40px 40px', display:'grid', gridTemplateColumns:'80px 180px 1fr 260px', gap: 24, background:'#F6F3EE' }}>
             <div/>
             <div/>
             <div style={{ fontSize: 16.5, lineHeight: 1.65, color:'var(--graphite)', maxWidth: 640 }}>{body}</div>
@@ -357,7 +347,7 @@ function PhaseRow({ n, tag, title, headline, body, duration, output, accent, col
 }
 
 // ---------- Section 4: Team ------------------------------------------------
-function TeamSection({ id }) {
+function TeamSection({ id, index = '05 / FOUNDERS' }) {
   const isMobile = useIsMobile();
   const people = [
     { photo:'/brand/founder-bianca.jpg', name:'Bianca Janse van Vuuren', role:'Finance, Data and AI Strategy', accent:true,
@@ -376,7 +366,7 @@ function TeamSection({ id }) {
   return (
     <section id={id} data-anchor="team" style={{ background:'#fff', padding: isMobile ? '56px 20px' : '96px 48px' }}>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 56 }}>
-        <SectionLabel index="05 / FOUNDERS"/>
+        <SectionLabel index={index}/>
         <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 40, flexWrap:'wrap' }}>
           <div>
             <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
@@ -422,7 +412,7 @@ function WorkSection({ id }) {
   return (
     <section id={id} data-anchor="work" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '56px 20px' : '96px 48px' }}>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
-        <SectionLabel index="06 / INDUSTRY FOCUS" dark/>
+        <SectionLabel index="05 / INDUSTRY FOCUS" dark/>
         <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 32, flexWrap:'wrap' }}>
           <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
             Hospitality.
@@ -519,7 +509,7 @@ function ClientCard({ tag, sector, problem, change, metric, period }) {
       onMouseEnter={()=>setHover(true)}
       onMouseLeave={()=>setHover(false)}
       style={{
-        background:'var(--mist)', padding:'32px 32px 28px',
+        background:'var(--paper)', padding:'32px 32px 28px',
         borderTop: metric.accent ? '3px solid var(--orange)' : '3px solid var(--ink)',
         transition:'transform 200ms ease, box-shadow 200ms ease',
         transform: hover ? 'translateY(-2px)' : 'none',
@@ -580,9 +570,9 @@ function PulseSection({ id }) {
   };
 
   return (
-    <section id={id} data-anchor="pulse" style={{ background:'var(--mist)', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
+    <section id={id} data-anchor="pulse" style={{ background:'var(--paper)', padding: isMobile ? '56px 20px' : '96px 48px', borderTop:'1px solid var(--rule)' }}>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
-        <SectionLabel index="08 / PULSE CHECK"/>
+        <SectionLabel index="07 / PULSE CHECK"/>
 
         <div>
           <h2 style={{ fontSize: isMobile ? 32 : 48, lineHeight: 1.06, fontWeight: 600, letterSpacing:'-0.03em', margin: 0, maxWidth: 520 }}>
@@ -705,7 +695,7 @@ function FieldSelect({ label, value, onChange }) {
           {opts.map(o => (
             <div key={o} onClick={()=>{ onChange(o); setOpen(false); }}
               style={{ padding:'10px 14px', fontSize: 14, cursor:'pointer', color:'var(--ink)' }}
-              onMouseEnter={(e)=>e.currentTarget.style.background='var(--mist)'}
+              onMouseEnter={(e)=>e.currentTarget.style.background='var(--paper)'}
               onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
               {o}
             </div>
@@ -755,4 +745,4 @@ function StartHereSection() {
   );
 }
 
-export { SectionLabel, HeroSection, AboutSection, AudienceSection, ApproachSection, TeamSection, WorkSection, PulseSection };
+export { SectionLabel, FounderCard, HeroSection, AboutSection, AudienceSection, ApproachSection, TeamSection, WorkSection, PulseSection };

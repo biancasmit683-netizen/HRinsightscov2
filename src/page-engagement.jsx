@@ -404,12 +404,20 @@ function BookDemo() {
   const row = { display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 22 : 24 };
 
   return (
-    <section id="book" style={{ background:'#fff', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1.2fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
-        <SectionLabel index="07 / BOOK A DEMO"/>
+    <section id="book" style={{ background:'linear-gradient(180deg, var(--paper) 0%, #232263 9%, #060644 30%, #060644 100%)', color:'#fff', padding: isMobile ? '88px 20px 72px' : '150px 48px 120px', position:'relative', overflow:'hidden' }}>
+      <Circles items={isMobile ? [
+        { size: 90, right: -45, top: 40, coral: true },
+        { size: 140, left: -70, bottom: -70, coral: true },
+      ] : [
+        { size: 220, right: -110, top: 180, coral: true },
+        { size: 260, left: -120, bottom: -150, coral: true },
+        { size: 170, left: '34%', bottom: -60 },
+      ]}/>
+      <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1.2fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
+        <SectionLabel index="07 / BOOK A DEMO" dark/>
         <div>
-          <h2 style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', margin: 0 }}>See what a survey looks like for a business your size.</h2>
-          <p style={{ fontSize: 16.5, lineHeight: 1.6, color:'var(--graphite)', margin:'22px 0 12px' }}>In 30 minutes we'll walk you through:</p>
+          <h2 style={{ fontSize: isMobile ? 32 : 50, lineHeight: 1.05, fontWeight: 700, letterSpacing:'-0.03em', margin: 0 }}>See what a survey looks like for a business your size.</h2>
+          <p style={{ fontSize: 16.5, lineHeight: 1.6, color:'#EFEBE4', margin:'22px 0 12px' }}>In 30 minutes we'll walk you through:</p>
           <ul style={{ margin: 0, padding: 0, listStyle:'none', display:'flex', flexDirection:'column', gap: 10 }}>
             {['What your staff see on WhatsApp, step by step', 'How we lift response rates in hard-to-reach teams', 'A sample insights report by site, department and role', 'A fixed quote for your workforce'].map(t => (
               <li key={t} style={{ display:'grid', gridTemplateColumns:'20px 1fr', gap: 10, fontSize: 15, lineHeight: 1.5 }}>
@@ -417,13 +425,13 @@ function BookDemo() {
               </li>
             ))}
           </ul>
-          <p style={{ fontSize: 15, color:'var(--graphite)', marginTop: 24 }}>
-            Prefer email? <a href="mailto:info@thehrinsightsco.co.za" style={{ color:'var(--ink)' }}>info@thehrinsightsco.co.za</a>
+          <p style={{ fontSize: 15, color:'#EFEBE4', marginTop: 24 }}>
+            Prefer email? <a href="mailto:info@thehrinsightsco.co.za" style={{ color:'#fff' }}>info@thehrinsightsco.co.za</a>
           </p>
         </div>
 
         {submitted ? (
-          <div role="status" style={{ background:'var(--paper)', padding: isMobile ? '28px 22px' : '40px 36px', borderTop:'3px solid var(--orange)' }}>
+          <div role="status" style={{ background:'#fff', color:'var(--ink)', boxShadow:'0 30px 60px rgba(0,0,0,.35)', padding: isMobile ? '28px 22px' : '40px 36px', borderTop:'3px solid var(--orange)' }}>
             <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
               <span style={{ width: 8, height: 8, borderRadius:'50%', background:'var(--orange)' }}/>
               <span style={labelStyle}>REQUEST RECEIVED</span>
@@ -439,7 +447,7 @@ function BookDemo() {
             data-netlify="true"
             data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
-            style={{ background:'var(--paper)', padding: isMobile ? '26px 20px' : '36px', display:'flex', flexDirection:'column', gap: 22, borderTop:'3px solid var(--orange)' }}
+            style={{ background:'#fff', color:'var(--ink)', boxShadow:'0 30px 60px rgba(0,0,0,.35)', padding: isMobile ? '26px 20px' : '36px', display:'flex', flexDirection:'column', gap: 22, borderTop:'3px solid var(--orange)' }}
           >
             <input type="hidden" name="form-name" value="demo-request"/>
             <input type="hidden" name="bot-field" style={{ display:'none' }}/>
@@ -505,7 +513,7 @@ function EngagementPage({ startAt }) {
       <Pricing/>
       <SurveyResults/>
       <BookDemo/>
-      <SiteFooter/>
+      <SiteFooter showCta={false}/>
     </div>
   );
 }

@@ -289,7 +289,7 @@ function Circles({ items }) {
   );
 }
 
-function SiteFooter({ ctaLabel = 'Book a demo', ctaTarget = 'book' }) {
+function SiteFooter({ ctaLabel = 'Book a demo', ctaTarget = 'book', showCta = true }) {
   const isMobile = useIsMobile();
   const [showPrivacy, setShowPrivacy] = React.useState(false);
   const [showPaia, setShowPaia] = React.useState(false);
@@ -302,7 +302,7 @@ function SiteFooter({ ctaLabel = 'Book a demo', ctaTarget = 'book' }) {
     <>
       <div style={{ background:'var(--ink)', color:'#fff', fontFamily:'Inter,sans-serif' }}>
         {/* CTA band */}
-        <div style={{ padding: isMobile ? '56px 20px 48px' : '88px 48px 80px', position:'relative', overflow:'hidden' }}>
+        {showCta && <div style={{ padding: isMobile ? '56px 20px 48px' : '88px 48px 80px', position:'relative', overflow:'hidden' }}>
           <Circles items={[{ size: 200, right: -90, top: -120, coral: true, opacity: 0.55 }, { size: 160, right: 220, bottom: -110 }]}/>
           <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr auto', gap: isMobile ? 28 : 56, alignItems:'center' }}>
             <div>
@@ -324,7 +324,7 @@ function SiteFooter({ ctaLabel = 'Book a demo', ctaTarget = 'book' }) {
               </button>
             </div>
           </div>
-        </div>
+        </div>}
 
         {/* Thin legal strip */}
         <div style={{

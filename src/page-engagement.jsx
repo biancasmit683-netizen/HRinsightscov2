@@ -265,7 +265,7 @@ function Pricing() {
   );
 }
 
-// Client testimonial — quote and details approved by Yuri de Villiers.
+// Client testimonial (anonymous for now; name and photo to be added once approved).
 function Testimonial() {
   const isMobile = useIsMobile();
   const light = 'var(--ink-soft)';
@@ -278,22 +278,15 @@ function Testimonial() {
       <figure style={{ position:'relative', margin: 0, display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr)', gap: isMobile ? 24 : 40, alignItems:'center' }}>
         <div style={{ display:'flex', flexDirection:'column', gap: 18, alignItems:'flex-start' }}>
           <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 12, letterSpacing:'.14em', color: light, display:'flex', alignItems:'center', gap: 10 }}><span style={{ width: 7, height: 7, borderRadius:'50%', background:'var(--orange)' }}/>FROM A CLIENT</div>
-          <img src="/brand/testimonial-yuri.jpg" alt="Yuri de Villiers" width="140" height="140" style={{ width: isMobile ? 96 : 140, height: isMobile ? 96 : 140, borderRadius:'50%', objectFit:'cover', display:'block', boxShadow:'0 0 0 4px var(--ink), 0 0 0 7px var(--orange)' }}/>
+          <div aria-hidden="true" style={{ fontSize: isMobile ? 56 : 120, lineHeight: isMobile ? 0.5 : 0.8, height: isMobile ? 22 : 'auto', fontWeight: 700, color:'var(--orange)' }}>“</div>
         </div>
         <div>
           <blockquote style={{ margin: 0, fontSize: isMobile ? 22 : 34, lineHeight: 1.3, fontWeight: 600, letterSpacing:'-0.02em', maxWidth: 900 }}>
-            <span aria-hidden="true" style={{ color:'var(--orange)' }}>“</span>Most of our team never check an email, so surveys used to miss them. With The HR Insights Co., everyone got a private link on WhatsApp, and we finally heard from most of our team.<span aria-hidden="true" style={{ color:'var(--orange)' }}>”</span>
+            Most of our team never check an email, so surveys used to miss them. With The HR Insights Co., everyone got a private link on WhatsApp, and we finally heard from most of our team.
           </blockquote>
           <figcaption style={{ marginTop: isMobile ? 22 : 30, display:'flex', flexWrap:'wrap', alignItems:'center', gap:'12px 22px' }}>
-            <span>
-              <span style={{ display:'block', fontWeight: 700, fontSize: 17 }}>Yuri de Villiers</span>
-              <span style={{ display:'block', fontSize: 14.5, color: light }}>Operations Director, Karongwe</span>
-            </span>
-            <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11, letterSpacing:'.08em', color:'#fff', background:'var(--orange)', padding:'6px 9px' }}>FEDHASA GENERAL MANAGER OF THE YEAR 2026</span>
-            <a href="https://www.linkedin.com/in/yuri-de-villiers-3a21b1177/" target="_blank" rel="noopener noreferrer"
-              style={{ display:'inline-flex', alignItems:'center', gap: 6, fontSize: 14, fontWeight: 600, color:'#fff', textDecoration:'none', borderBottom:'1px solid #fff', paddingBottom: 2 }}>
-              <Icon name="linkedin" size={14} color="#fff"/> View on LinkedIn
-            </a>
+            <span style={{ width: 28, height: 2, background:'var(--orange)' }}/>
+            <span style={{ fontWeight: 600, fontSize: 16 }}>Operations Director, Karongwe</span>
           </figcaption>
         </div>
       </figure>

@@ -225,7 +225,6 @@ function WhyUs() {
     ['LIVE', 'We chase the gaps', 'Live response rates by department, site and role. When one group lags, we see it and follow up, so the data represents everyone.'],
     ['ZA · POPIA', 'Fully POPIA-compliant', 'Built in South Africa, for South African employers, with personal information handled in line with POPIA.'],
   ];
-  const bars = [['Front office', 82], ['Kitchen & F&B', 68], ['Housekeeping', 41, true], ['Maintenance', 74]];
   return (
     <section id="why" style={{ background:'#fff', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
       <SectionHead index="03 / WHY US" title="Built for how South African workplaces actually work."
@@ -241,23 +240,6 @@ function WhyUs() {
                 <p style={{ fontSize: 15, lineHeight: 1.6, color:'var(--graphite)', margin: 0 }}>{b}</p>
               </div>
             ))}
-          </div>
-
-          <div aria-label="Example of live response monitoring" style={{ marginTop: 48, background:'var(--paper)', padding: isMobile ? 20 : 32 }}>
-            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', flexWrap:'wrap', gap: 8, marginBottom: 18 }}>
-              <div style={{ fontSize: 16, fontWeight: 600 }}>Live response monitor</div>
-              <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, letterSpacing:'.1em', color:'var(--slate)' }}>ILLUSTRATIVE EXAMPLE · DAY 4 OF 10</div>
-            </div>
-            {bars.map(([name, pct, low]) => (
-              <div key={name} style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr 44px' : '190px 1fr 52px', gap: isMobile ? '8px 12px' : 16, alignItems:'center', padding:'10px 0', borderTop:'1px solid var(--rule)', fontSize: 14 }}>
-                <span>{name}{low && <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10, color:'var(--orange)', marginLeft: 8 }}>REMINDER SENT</span>}</span>
-                <div style={{ height: 10, background:'var(--sand)', position:'relative', gridColumn: isMobile ? '1 / -1' : 'auto', gridRow: isMobile ? 2 : 'auto' }}>
-                  <div style={{ position:'absolute', inset:0, right:'auto', width: pct + '%', background: low ? 'var(--orange)' : 'var(--ink)' }}/>
-                </div>
-                <span style={{ fontFamily:'JetBrains Mono,monospace', textAlign:'right' }}>{pct}%</span>
-              </div>
-            ))}
-            <p style={{ fontSize: 13, color:'var(--slate)', margin:'14px 0 0' }}>When one group lags, a targeted reminder goes to non-responders in that group only.</p>
           </div>
         </div>
       </div>

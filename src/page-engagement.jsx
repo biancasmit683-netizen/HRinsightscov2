@@ -294,7 +294,7 @@ function Pricing() {
 }
 
 // ---------- 06 Survey results ----------------------------------------------
-// Sample figures from the Lodge Co. sample report (public/sample-report). Favourable = 4–5 on a 5-point scale.
+// Sample figures from the Lodge Co. sample report. Favourable = 4–5 on a 5-point scale.
 const RESULT_THEMES = ['Physical Wellbeing & Safety', 'Psychological Safety & Ethics', 'My Manager', 'Pay, Reward & Benefits', 'Facilities & Resources', 'Belonging & Retention'];
 const RESULT_GROUPS = [
   { id:'All',          n:150, overall:67, enps:17,  themes:[74, 78, 81, 43, 47, 79] },
@@ -388,11 +388,6 @@ function SurveyResults() {
           <p style={{ fontSize: 14.5, lineHeight: 1.6, color:'var(--graphite)', margin: 0 }}>
             Anonymity is built in: any group with fewer than five responses is hidden, so no individual can be identified.
           </p>
-          <div>
-            <a href="/sample-report/" target="_blank" rel="noopener" style={{ display:'inline-flex', alignItems:'center', gap: 10, padding:'13px 20px', border:'1px solid var(--ink)', color:'var(--ink)', fontWeight: 600, fontSize: 14.5, textDecoration:'none', background:'#fff' }}>
-              Explore a sample report <Icon name="arrowSm" size={14} color="var(--ink)"/>
-            </a>
-          </div>
         </div>
         <ResultsPreview/>
       </div>

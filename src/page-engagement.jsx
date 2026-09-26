@@ -348,7 +348,7 @@ function SurveyResults() {
     </div>
   );
   return (
-    <section id="results" style={{ background:'var(--paper)', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
+    <section id="results" style={{ background:'var(--paper)', padding: isMobile ? '56px 20px 24px' : '96px 48px 32px', borderTop:'1px solid var(--rule)' }}>
       <SectionHead index="06 / SURVEY RESULTS" title="Interactive results. Deep insights."
         lede="Your results arrive as a live dashboard, not a static PDF. Filter by department, site, manager or tenure and every score recalculates. Then we tell you what it means and where to act first."/>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr) minmax(0,1.25fr)', gap: isMobile ? 32 : 40, alignItems:'start' }}>
@@ -404,12 +404,12 @@ function BookDemo() {
   const row = { display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 22 : 24 };
 
   return (
-    <section id="book" style={{ background: isMobile ? 'linear-gradient(180deg, #F6F3EE 0px, rgba(246,243,238,0.72) 60px, rgba(246,243,238,0.3) 130px, rgba(246,243,238,0) 210px), #060644' : 'linear-gradient(180deg, #F6F3EE 0px, rgba(246,243,238,0.75) 80px, rgba(246,243,238,0.35) 180px, rgba(246,243,238,0.1) 260px, rgba(246,243,238,0) 320px), #060644', color:'#fff', padding: isMobile ? '210px 20px 72px' : '300px 48px 120px', position:'relative', overflow:'hidden' }}>
+    <section id="book" style={{ background: isMobile ? 'linear-gradient(180deg, #F6F3EE 0px, rgba(246,243,238,0.7) 40px, rgba(246,243,238,0.28) 85px, rgba(246,243,238,0) 130px), #060644' : 'linear-gradient(180deg, #F6F3EE 0px, rgba(246,243,238,0.72) 45px, rgba(246,243,238,0.32) 105px, rgba(246,243,238,0.08) 155px, rgba(246,243,238,0) 190px), #060644', color:'#fff', padding: isMobile ? '140px 20px 72px' : '200px 48px 120px', position:'relative', overflow:'hidden' }}>
       <Circles items={isMobile ? [
-        { size: 90, right: -45, top: 200, coral: true },
+        { size: 90, right: -45, top: 130, coral: true },
         { size: 140, left: -70, bottom: -70, coral: true },
       ] : [
-        { size: 220, right: -110, top: 330, coral: true },
+        { size: 220, right: -110, top: 230, coral: true },
         { size: 260, left: -120, bottom: -150, coral: true },
         { size: 170, left: '34%', bottom: -60 },
       ]}/>

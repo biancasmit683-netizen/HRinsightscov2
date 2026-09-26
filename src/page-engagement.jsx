@@ -308,7 +308,7 @@ function Field({ label, children }) {
 
 function BookDemo() {
   const isMobile = useIsMobile();
-  const empty = { name:'', role:'', organisation:'', industry:'', employees:'', 'deskless-share':'', email:'', phone:'', consent:'' };
+  const empty = { name:'', role:'', organisation:'', industry:'', employees:'', email:'', phone:'', consent:'' };
   const [fields, setFields] = React.useState(empty);
   const [sending, setSending] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
@@ -390,15 +390,9 @@ function BookDemo() {
                   {['Under 50','50–150','151–300','301–1,000','1,000+'].map(o => <option key={o}>{o}</option>)}
                 </select>
               </Field>
-              <Field label="Staff without company email">
-                <select style={inputStyle} name="deskless-share" value={fields['deskless-share']} onChange={set('deskless-share')}>
-                  <option value="">Roughly how many?</option>
-                  {['Less than a quarter','About half','Most of them','Almost all'].map(o => <option key={o}>{o}</option>)}
-                </select>
-              </Field>
+              <Field label="Work email"><input style={inputStyle} type="email" name="email" required autoComplete="email" value={fields.email} onChange={set('email')}/></Field>
             </div>
             <div style={row}>
-              <Field label="Work email"><input style={inputStyle} type="email" name="email" required autoComplete="email" value={fields.email} onChange={set('email')}/></Field>
               <Field label="Phone (optional)"><input style={inputStyle} type="tel" name="phone" autoComplete="tel" value={fields.phone} onChange={set('phone')}/></Field>
             </div>
             <label style={{ display:'flex', gap: 10, alignItems:'flex-start', fontSize: 13, color:'var(--graphite)', lineHeight: 1.5 }}>

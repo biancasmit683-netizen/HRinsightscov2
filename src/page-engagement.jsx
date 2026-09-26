@@ -293,7 +293,116 @@ function Pricing() {
   );
 }
 
-// ---------- 06 Book a demo --------------------------------------------------
+// ---------- 06 Survey results ----------------------------------------------
+// Sample figures from the Lodge Co. sample report (public/sample-report). Favourable = 4–5 on a 5-point scale.
+const RESULT_THEMES = ['Physical Wellbeing & Safety', 'Psychological Safety & Ethics', 'My Manager', 'Pay, Reward & Benefits', 'Facilities & Resources', 'Belonging & Retention'];
+const RESULT_GROUPS = [
+  { id:'All',          n:150, overall:67, enps:17,  themes:[74, 78, 81, 43, 47, 79] },
+  { id:'Hospitality',  n:47,  overall:68, enps:4,   themes:[83, 78, 79, 42, 44, 80] },
+  { id:'Guide',        n:26,  overall:80, enps:69,  themes:[88, 91, 94, 62, 58, 91] },
+  { id:'Kitchen',      n:19,  overall:59, enps:11,  themes:[61, 76, 77, 37, 32, 75] },
+  { id:'Housekeeping', n:14,  overall:62, enps:7,   themes:[74, 79, 77, 26, 43, 70] },
+  { id:'Admin',        n:17,  overall:50, enps:-24, themes:[48, 59, 62, 20, 38, 71] },
+];
+
+function ResultsPreview() {
+  const isMobile = useIsMobile();
+  const [groupId, setGroupId] = React.useState('All');
+  const g = RESULT_GROUPS.find(x => x.id === groupId);
+  const tile = { display:'flex', flexDirection:'column', gap: 4 };
+  const tileLabel = { fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, letterSpacing:'.1em', color:'var(--slate)' };
+  const tileValue = { fontSize: isMobile ? 26 : 30, fontWeight: 700, letterSpacing:'-0.02em', fontVariantNumeric:'tabular-nums' };
+  return (
+    <div style={{ background:'#fff', padding: isMobile ? 20 : 28, borderTop:'3px solid var(--orange)' }}>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', flexWrap:'wrap', gap: 8 }}>
+        <div style={{ fontSize: 16, fontWeight: 600 }}>Engagement by theme</div>
+        <div style={tileLabel}>SAMPLE DATA · LODGE CO.</div>
+      </div>
+
+      <div role="group" aria-label="Filter by department" style={{ display:'flex', flexWrap:'wrap', gap: 6, margin:'16px 0 20px' }}>
+        {RESULT_GROUPS.map(x => {
+          const on = x.id === groupId;
+          return (
+            <button key={x.id} type="button" aria-pressed={on} onClick={() => setGroupId(x.id)}
+              style={{ fontFamily:'Inter,sans-serif', fontSize: 12.5, fontWeight: 500, padding:'7px 12px', borderRadius: 999, cursor:'pointer',
+                border: on ? '1px solid var(--ink)' : '1px solid var(--warm-grey)', background: on ? 'var(--ink)' : '#fff', color: on ? '#fff' : 'var(--ink)' }}>
+              {x.id === 'All' ? 'All staff' : x.id}
+            </button>
+          );
+        })}
+      </div>
+
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 12, paddingBottom: 18, borderBottom:'1px solid var(--rule)' }}>
+        <div style={tile}><span style={tileLabel}>ENGAGEMENT</span><span style={tileValue}>{g.overall}%</span></div>
+        <div style={tile}><span style={tileLabel}>ENPS</span><span style={tileValue}>{g.enps > 0 ? '+' : ''}{g.enps}</span></div>
+        <div style={tile}><span style={tileLabel}>RESPONSES</span><span style={tileValue}>{g.n}</span></div>
+      </div>
+
+      <div style={{ display:'flex', flexDirection:'column', marginTop: 6 }}>
+        {RESULT_THEMES.map((t, i) => {
+          const v = g.themes[i];
+          const low = v < 50;
+          return (
+            <div key={t} title={`${t}: ${v}% favourable`}
+              style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr 44px' : '200px 1fr 48px', gap: isMobile ? '6px 10px' : 14, alignItems:'center', padding:'10px 0', borderBottom:'1px solid var(--rule)' }}>
+              <span style={{ fontSize: 13.5 }}>
+                {t}
+                {low && <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 10, letterSpacing:'.06em', color:'var(--orange)', marginLeft: 8, whiteSpace:'nowrap' }}>FOCUS AREA</span>}
+              </span>
+              <div style={{ height: 8, background:'var(--sand)', borderRadius: 4, overflow:'hidden', gridColumn: isMobile ? '1 / -1' : 'auto', gridRow: isMobile ? 2 : 'auto' }}>
+                <div style={{ width: v + '%', height:'100%', borderRadius: 4, background: low ? 'var(--orange)' : 'var(--ink)', transition:'width 400ms ease' }}/>
+              </div>
+              <span style={{ fontSize: 13.5, fontWeight: 600, textAlign:'right', fontVariantNumeric:'tabular-nums' }}>{v}%</span>
+            </div>
+          );
+        })}
+      </div>
+      <p style={{ fontSize: 12.5, color:'var(--slate)', margin:'14px 0 0' }}>% favourable (4–5 on a 5-point scale). Groups with fewer than 5 responses are hidden to protect anonymity.</p>
+    </div>
+  );
+}
+
+function SurveyResults() {
+  const isMobile = useIsMobile();
+  const results = ['Engagement by theme', 'Strengths and opportunities', 'Every question, ranked', 'Employee Net Promoter Score', 'How groups differ', 'Benefit preferences'];
+  const insights = ['Strengths to protect', 'Company-wide drags', 'Where leadership is the issue', 'Where the pain concentrates', 'Where money will land best', 'Who to win back'];
+  const list = (title, items) => (
+    <div>
+      <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.1em', color:'var(--orange)', marginBottom: 10 }}>{title}</div>
+      <ul style={{ listStyle:'none', margin: 0, padding: 0, display:'flex', flexDirection:'column', gap: 8 }}>
+        {items.map(t => (
+          <li key={t} style={{ display:'grid', gridTemplateColumns:'18px 1fr', gap: 8, fontSize: 14.5, lineHeight: 1.45 }}>
+            <Icon name="check" size={14} color="var(--orange)" stroke={2}/><span>{t}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+  return (
+    <section id="results" style={{ background:'var(--paper)', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
+      <SectionHead index="06 / SURVEY RESULTS" title="Interactive results. Deep insights."
+        lede="Your results arrive as a live dashboard, not a static PDF. Filter by department, site, manager or tenure and every score recalculates. Then we tell you what it means and where to act first."/>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px minmax(0,1fr) minmax(0,1.25fr)', gap: isMobile ? 32 : 40, alignItems:'start' }}>
+        {!isMobile && <div/>}
+        <div style={{ display:'flex', flexDirection:'column', gap: 28 }}>
+          {list('INTERACTIVE RESULTS', results)}
+          {list('DEEP INSIGHTS', insights)}
+          <p style={{ fontSize: 14.5, lineHeight: 1.6, color:'var(--graphite)', margin: 0 }}>
+            Anonymity is built in: any group with fewer than five responses is hidden, so no individual can be identified.
+          </p>
+          <div>
+            <a href="/sample-report/" target="_blank" rel="noopener" style={{ display:'inline-flex', alignItems:'center', gap: 10, padding:'13px 20px', border:'1px solid var(--ink)', color:'var(--ink)', fontWeight: 600, fontSize: 14.5, textDecoration:'none', background:'#fff' }}>
+              Explore a sample report <Icon name="arrowSm" size={14} color="var(--ink)"/>
+            </a>
+          </div>
+        </div>
+        <ResultsPreview/>
+      </div>
+    </section>
+  );
+}
+
+// ---------- 07 Book a demo --------------------------------------------------
 const labelStyle = { fontFamily:'JetBrains Mono,monospace', fontSize: 10.5, color:'var(--slate)', letterSpacing:'.08em' };
 const inputStyle = { border:'none', borderBottom:'1px solid var(--warm-grey)', padding:'11px 0', fontSize: 15, fontFamily:'Inter,sans-serif', color:'var(--ink)', background:'transparent', borderRadius: 0, width:'100%' };
 
@@ -333,7 +442,7 @@ function BookDemo() {
   return (
     <section id="book" style={{ background:'var(--paper)', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1.2fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
-        <SectionLabel index="06 / BOOK A DEMO"/>
+        <SectionLabel index="07 / BOOK A DEMO"/>
         <div>
           <h2 style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', margin: 0 }}>See what a survey looks like for a business your size.</h2>
           <p style={{ fontSize: 16.5, lineHeight: 1.6, color:'var(--graphite)', margin:'22px 0 12px' }}>In 30 minutes we'll walk you through:</p>
@@ -431,6 +540,7 @@ function EngagementPage({ startAt }) {
       <WhyUs/>
       <WhoFor/>
       <Pricing/>
+      <SurveyResults/>
       <BookDemo/>
       <SiteFooter/>
     </div>

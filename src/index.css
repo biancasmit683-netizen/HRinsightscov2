@@ -13,7 +13,7 @@
   --ink-soft: #CFC8BC;
   --warm-grey: #D9D3C8;
 }
-html, body { margin: 0; padding: 0; background: #fff; font-family: Inter, system-ui, sans-serif; color: var(--ink); scroll-behavior: smooth; overflow-x: hidden; }
+html, body { margin: 0; padding: 0; background: #fff; font-family: Inter, system-ui, sans-serif; color: var(--ink); scroll-behavior: smooth; overflow-x: clip; }
 * { box-sizing: border-box; }
 section[data-anchor], section[id] { scroll-margin-top: 64px; }
 ::selection { background: var(--ink); color: #fff; }

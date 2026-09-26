@@ -65,77 +65,47 @@ function SectionHead({ index, title, lede, dark }) {
 }
 
 // ---------- Hero ------------------------------------------------------------
-function PhoneMock() {
-  const msg = { background:'#fff', borderRadius: 10, borderTopLeftRadius: 2, padding:'9px 11px', fontSize: 12.5, lineHeight: 1.45, color:'#111', maxWidth:'88%', boxShadow:'0 1px 1px rgba(0,0,0,.08)' };
-  const time = { display:'block', textAlign:'right', fontSize: 9.5, color:'#6b7280', marginTop: 3 };
-  return (
-    <div aria-hidden="true" style={{ width: 270, background:'#111', borderRadius: 36, padding: 10, boxShadow:'0 30px 60px rgba(0,0,0,.45)' }}>
-      <div style={{ background:'#ECE5DD', borderRadius: 27, overflow:'hidden', minHeight: 470, display:'flex', flexDirection:'column' }}>
-        <div style={{ background:'#075E54', color:'#fff', padding:'16px 14px 12px', display:'flex', alignItems:'center', gap: 10 }}>
-          <div style={{ width: 32, height: 32, borderRadius:'50%', background:'#fff', display:'grid', placeItems:'center', color:'var(--ink)', fontWeight: 700, fontSize: 11 }}>HRI</div>
-          <div><div style={{ fontSize: 13.5, fontWeight: 600 }}>Staff Survey</div><div style={{ fontSize: 10.5, opacity: .8 }}>via WhatsApp</div></div>
-        </div>
-        <div style={{ padding:'14px 11px', display:'flex', flexDirection:'column', gap: 9 }}>
-          <div style={msg}>Hi Thandi 👋 Your employer has asked for your honest views. It takes about 8 minutes and your answers are private.<span style={time}>08:14</span></div>
-          <div style={msg}>
-            Choose your language:
-            <div style={{ display:'flex', gap: 5, flexWrap:'wrap', marginTop: 7 }}>
-              {['English','isiZulu','Afrikaans','Sesotho'].map(l => <span key={l} style={{ fontSize: 10.5, padding:'3px 8px', borderRadius: 999, border:'1px solid #d1d5db', background:'#fff' }}>{l}</span>)}
-            </div>
-            <span style={time}>08:14</span>
-          </div>
-          <div style={{ ...msg, alignSelf:'flex-end', background:'#DCF8C6', borderTopLeftRadius: 10, borderTopRightRadius: 2 }}>isiZulu<span style={time}>08:15 ✓✓</span></div>
-          <div style={msg}>
-            Here is your personal survey link:
-            <span style={{ display:'block', marginTop: 7, padding: 9, borderRadius: 8, background:'#f3f4f6', color:'#075E54', fontWeight: 600, fontSize: 11.5 }}>🔒 Open my private survey</span>
-            <span style={time}>08:15</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+// Background photo. Navy fades in from the bottom, like the print campaign.
+const HERO_PHOTO = '/brand/hero-surveys.jpg';
 
 function Hero() {
   const isMobile = useIsMobile();
   return (
-    <section id="top" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '56px 20px 64px' : '88px 48px 96px', position:'relative', overflow:'hidden' }}>
-      <Circles items={[
-        { size: 340, right: -120, bottom: -150, coral: true, opacity: 0.55 },
-        { size: 220, left: '38%', top: -110 },
-        { size: 140, left: -50, bottom: 60 },
+    <section id="top" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '72px 20px 64px' : '120px 48px 96px', minHeight: isMobile ? 0 : 640, position:'relative', overflow:'hidden', display:'flex', alignItems:'flex-end' }}>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, backgroundImage:`url(${HERO_PHOTO})`, backgroundSize:'cover', backgroundPosition: isMobile ? '60% 40%' : 'center 45%' }}/>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background:'linear-gradient(180deg, rgba(6,6,68,0) 0%, rgba(6,6,68,0) 35%, rgba(6,6,68,0.55) 62%, rgba(6,6,68,0.92) 85%, #060644 100%)' }}/>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background: isMobile ? 'rgba(0,0,0,0.3)' : 'linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 62%)' }}/>
+      <Circles items={isMobile ? [
+        { size: 96, right: -52, top: 24, coral: true, opacity: 0.8 },
+        { size: 150, left: -40, bottom: -90, coral: true, opacity: 0.75 },
+        { size: 110, right: 30, bottom: 40, opacity: 0.08 },
+      ] : [
+        { size: 180, right: -90, top: '36%', coral: true, opacity: 0.8 },
+        { size: 220, left: '12%', bottom: -170, coral: true, opacity: 0.75 },
+        { size: 190, right: '22%', bottom: 30, opacity: 0.08 },
+        { size: 150, right: '6%', bottom: -40, opacity: 0.07 },
+        { size: 120, left: '46%', bottom: 90, opacity: 0.06 },
       ]}/>
-      <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? 'minmax(0,1fr)' : 'minmax(0,1.15fr) minmax(0,.85fr)', gap: isMobile ? 40 : 56, alignItems:'center' }}>
-        <div>
-          <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.14em', color:'var(--ink-soft)', display:'flex', alignItems:'center', gap: 10 }}>
-            <span style={{ width: 7, height: 7, borderRadius:'50%', background:'var(--coral)' }}/>EMPLOYEE ENGAGEMENT SURVEYS
-          </div>
-          <h1 style={{ fontSize: isMobile ? 36 : 68, lineHeight: 1.03, fontWeight: 600, letterSpacing:'-0.035em', margin: isMobile ? '18px 0 0' : '24px 0 0' }}>
-            Hear from every employee.<br/>
-            <span style={{ color:'var(--ink-soft)' }}>Not just the ones with email.</span>
-          </h1>
-          <p style={{ fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color:'#EFEBE4', margin: isMobile ? '22px 0 30px' : '30px 0 38px', maxWidth: 560 }}>
-            End-to-end engagement surveys for deskless teams. Each staff member gets a private survey link on WhatsApp, or scans a QR poster on site. No app, no login, no email, no shared device.
-          </p>
-          <div style={{ display:'flex', gap: 12, flexWrap:'wrap' }}>
-            <BtnOrange onClick={() => scrollTo('book')}>Book a demo <Icon name="arrowSm" size={14} color="#fff"/></BtnOrange>
-            <BtnOutlineLight onClick={() => scrollTo('how')}>See how it works</BtnOutlineLight>
-          </div>
-          <div style={{ display:'flex', gap: isMobile ? 14 : 26, flexWrap:'wrap', marginTop: isMobile ? 32 : 44, fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.08em', color:'var(--ink-soft)' }}>
-            {['WHATSAPP & QR','LOCAL LANGUAGES','ONE FIXED FEE','POPIA-COMPLIANT'].map(f => (
-              <span key={f} style={{ display:'inline-flex', alignItems:'center', gap: 8 }}><Icon name="check" size={13} color="var(--coral)" stroke={2}/>{f}</span>
-            ))}
-          </div>
+      <div style={{ position:'relative', maxWidth: 680 }}>
+        <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.14em', color:'#fff', display:'flex', alignItems:'center', gap: 10 }}>
+          <span style={{ width: 7, height: 7, borderRadius:'50%', background:'var(--orange)' }}/>EMPLOYEE ENGAGEMENT SURVEYS
         </div>
-
-        {!isMobile ? (
-          <div style={{ position:'relative', height: 540 }}>
-            <img src="/brand/poster-engagement.jpg" alt="The HR Insights Co. engagement survey poster" style={{ position:'absolute', right: 0, top: 0, height: 540, width:'auto', boxShadow:'0 30px 60px rgba(0,0,0,.35)' }}/>
-            <div style={{ position:'absolute', left: -36, bottom: -24 }}><PhoneMock/></div>
-          </div>
-        ) : (
-          <div style={{ display:'flex', justifyContent:'center' }}><PhoneMock/></div>
-        )}
+        <h1 style={{ fontSize: isMobile ? 38 : 72, lineHeight: 1.02, fontWeight: 700, letterSpacing:'-0.035em', margin: isMobile ? '18px 0 0' : '22px 0 0', textShadow:'0 2px 18px rgba(0,0,0,0.45)' }}>
+          Hear from every employee.<br/>
+          Not just the ones with email.
+        </h1>
+        <p style={{ fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color:'#fff', fontWeight: 500, margin: isMobile ? '22px 0 30px' : '28px 0 36px', maxWidth: 580 }}>
+          End-to-end engagement surveys for deskless teams. Each staff member gets a private survey link on WhatsApp, or scans a QR poster on site. No app, no login, no email, no shared device.
+        </p>
+        <div style={{ display:'flex', gap: 12, flexWrap:'wrap' }}>
+          <BtnOrange onClick={() => scrollTo('book')}>Book a demo <Icon name="arrowSm" size={14} color="#fff"/></BtnOrange>
+          <BtnOutlineLight onClick={() => scrollTo('how')}>See how it works</BtnOutlineLight>
+        </div>
+        <div style={{ display:'flex', gap: isMobile ? 14 : 26, flexWrap:'wrap', marginTop: isMobile ? 32 : 40, fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.08em', color:'#EFEBE4' }}>
+          {['WHATSAPP & QR','LOCAL LANGUAGES','ONE FIXED FEE','POPIA-COMPLIANT'].map(f => (
+            <span key={f} style={{ display:'inline-flex', alignItems:'center', gap: 8 }}><Icon name="check" size={13} color="var(--orange)" stroke={2.2}/>{f}</span>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -464,8 +434,17 @@ function BookDemo() {
   );
 }
 
-function EngagementPage() {
+function EngagementPage({ startAt }) {
   React.useEffect(() => { document.title = 'Employee Engagement Surveys via WhatsApp — The HR Insights Co.'; }, []);
+  // Land on a section (e.g. /book-a-demo → the demo form). Re-align once images and fonts have loaded.
+  React.useEffect(() => {
+    if (!startAt) return;
+    const go = () => { const el = document.getElementById(startAt); if (el) el.scrollIntoView({ block:'start' }); };
+    go();
+    window.addEventListener('load', go, { once: true });
+    const t = setTimeout(go, 600);
+    return () => { window.removeEventListener('load', go); clearTimeout(t); };
+  }, [startAt]);
   return (
     <div>
       <SiteHeader current="surveys"/>

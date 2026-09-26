@@ -404,12 +404,12 @@ function BookDemo() {
   const row = { display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 22 : 24 };
 
   return (
-    <section id="book" style={{ background:'linear-gradient(180deg, var(--paper) 0%, #232263 9%, #060644 30%, #060644 100%)', color:'#fff', padding: isMobile ? '88px 20px 72px' : '150px 48px 120px', position:'relative', overflow:'hidden' }}>
+    <section id="book" style={{ background: isMobile ? 'linear-gradient(180deg, #F6F3EE 0px, rgba(246,243,238,0.72) 60px, rgba(246,243,238,0.3) 130px, rgba(246,243,238,0) 210px), #060644' : 'linear-gradient(180deg, #F6F3EE 0px, rgba(246,243,238,0.75) 80px, rgba(246,243,238,0.35) 180px, rgba(246,243,238,0.1) 260px, rgba(246,243,238,0) 320px), #060644', color:'#fff', padding: isMobile ? '210px 20px 72px' : '300px 48px 120px', position:'relative', overflow:'hidden' }}>
       <Circles items={isMobile ? [
-        { size: 90, right: -45, top: 40, coral: true },
+        { size: 90, right: -45, top: 200, coral: true },
         { size: 140, left: -70, bottom: -70, coral: true },
       ] : [
-        { size: 220, right: -110, top: 180, coral: true },
+        { size: 220, right: -110, top: 330, coral: true },
         { size: 260, left: -120, bottom: -150, coral: true },
         { size: 170, left: '34%', bottom: -60 },
       ]}/>

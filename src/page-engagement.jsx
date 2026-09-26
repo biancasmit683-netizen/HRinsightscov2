@@ -214,9 +214,6 @@ function Pricing() {
         <div>
           <h2 style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', margin: 0 }}>One survey. One price.</h2>
           <p style={{ fontSize: isMobile ? 15.5 : 17, lineHeight: 1.6, color:'var(--graphite)', margin:'18px 0 0', maxWidth: 440 }}>A single fixed fee per survey, agreed upfront. You know exactly what it costs before we start.</p>
-          <div style={{ marginTop: 26, fontFamily:'JetBrains Mono,monospace', fontSize: 11.5, letterSpacing:'.1em', color:'var(--slate)' }}>
-            TRUSTED WITH SURVEYS AT <span style={{ fontFamily:'Inter,sans-serif', fontSize: 16, fontWeight: 600, letterSpacing: 0, color:'var(--ink)', marginLeft: 8 }}>Karongwe</span>
-          </div>
         </div>
         <ul style={{ listStyle:'none', margin: 0, padding: 0, borderTop:'1px solid var(--ink)' }}>
           {rows.map(([k, v]) => (

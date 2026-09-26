@@ -264,7 +264,13 @@ function WhoFor() {
   const inds = ['Mining','Agriculture','Retail','Manufacturing','Security','Logistics & transport','Healthcare & care services'];
   const chip = { display:'flex', alignItems:'center', padding: isMobile ? '12px 14px' : '14px 18px', background:'#fff', border:'1px solid var(--rule)', fontWeight: 500, fontSize: isMobile ? 14 : 15, lineHeight: 1.35 };
   return (
-    <section id="industries" style={{ background:'var(--paper)', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
+    <section id="industries" style={{ background:'var(--paper)', padding: pad(isMobile), borderTop:'1px solid var(--rule)', position:'relative', overflow:'hidden' }}>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, backgroundImage:'url(/brand/who-farm.jpg)', backgroundSize:'cover', backgroundPosition: isMobile ? '70% 55%' : 'center 55%', filter:'saturate(0.75)' }}/>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background: isMobile
+        ? 'linear-gradient(180deg, rgba(246,243,238,1) 0%, rgba(246,243,238,0.86) 30%, rgba(246,243,238,0.8) 70%, rgba(246,243,238,1) 100%)'
+        : 'linear-gradient(90deg, rgba(246,243,238,0.97) 0%, rgba(246,243,238,0.9) 40%, rgba(246,243,238,0.78) 100%)' }}/>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background:'linear-gradient(180deg, rgba(246,243,238,1) 0%, rgba(246,243,238,0) 22%, rgba(246,243,238,0) 78%, rgba(246,243,238,1) 100%)' }}/>
+      <div style={{ position:'relative' }}>
       <SectionHead index="04 / WHO IT'S FOR" title="Any employer with a deskless workforce."
         lede="If a large share of your people work on the floor, in the field, on shift or on site, this is built for you."/>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
@@ -273,6 +279,7 @@ function WhoFor() {
           <span style={{ ...chip, background:'var(--orange)', borderColor:'var(--orange)', color:'#fff' }}>Hospitality: lodges, hotels &amp; game reserves</span>
           {inds.map(i => <span key={i} style={chip}>{i}</span>)}
         </div>
+      </div>
       </div>
     </section>
   );

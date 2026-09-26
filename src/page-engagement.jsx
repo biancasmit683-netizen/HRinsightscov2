@@ -231,7 +231,7 @@ function Pricing() {
   );
 }
 
-// Client testimonial (anonymous for now; name and photo to be added once approved).
+// Client testimonial (anonymous for now; attribution to be added later).
 function Testimonial() {
   const isMobile = useIsMobile();
   const light = 'var(--ink-soft)';
@@ -252,7 +252,7 @@ function Testimonial() {
           </blockquote>
           <figcaption style={{ marginTop: isMobile ? 22 : 30, display:'flex', flexWrap:'wrap', alignItems:'center', gap:'12px 22px' }}>
             <span style={{ width: 28, height: 2, background:'var(--orange)' }}/>
-            <span style={{ fontWeight: 600, fontSize: 16 }}>Operations Director, Karongwe</span>
+            <span style={{ fontWeight: 600, fontSize: 16 }}>Client A</span>
           </figcaption>
         </div>
       </figure>

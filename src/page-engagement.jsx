@@ -72,7 +72,8 @@ function Hero() {
   const isMobile = useIsMobile();
   return (
     <section id="top" style={{ background:'var(--ink)', color:'#fff', padding: isMobile ? '72px 20px 64px' : '120px 48px 96px', minHeight: isMobile ? 0 : 640, position:'relative', overflow:'hidden', display:'flex', alignItems:'flex-end' }}>
-      <div aria-hidden="true" style={{ position:'absolute', inset: 0, backgroundImage:`url(${HERO_PHOTO})`, backgroundSize:'cover', backgroundPosition: isMobile ? '60% 40%' : 'center 45%' }}/>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, backgroundImage:`url(${HERO_PHOTO})`, backgroundSize:'cover', backgroundPosition: isMobile ? '60% 40%' : 'center 45%', filter:'saturate(0.5) brightness(0.92)' }}/>
+      <div aria-hidden="true" style={{ position:'absolute', inset: 0, background:'rgba(6,6,68,0.28)' }}/>
       <div aria-hidden="true" style={{ position:'absolute', inset: 0, background:'linear-gradient(180deg, rgba(6,6,68,0) 0%, rgba(6,6,68,0) 35%, rgba(6,6,68,0.55) 62%, rgba(6,6,68,0.92) 85%, #060644 100%)' }}/>
       <div aria-hidden="true" style={{ position:'absolute', inset: 0, background: isMobile ? 'rgba(0,0,0,0.3)' : 'linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 62%)' }}/>
       <Circles items={isMobile ? [

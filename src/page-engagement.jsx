@@ -282,7 +282,7 @@ function Testimonial() {
         </div>
         <div>
           <blockquote style={{ margin: 0, fontSize: isMobile ? 22 : 34, lineHeight: 1.3, fontWeight: 600, letterSpacing:'-0.02em', maxWidth: 900 }}>
-            <span aria-hidden="true" style={{ color:'var(--orange)' }}>“</span>Most of our team never check an email, so surveys used to miss them. With The HR Insights Co., everyone got a private link on WhatsApp, and we finally heard from the whole lodge.<span aria-hidden="true" style={{ color:'var(--orange)' }}>”</span>
+            <span aria-hidden="true" style={{ color:'var(--orange)' }}>“</span>Most of our team never check an email, so surveys used to miss them. With The HR Insights Co., everyone got a private link on WhatsApp, and we finally heard from most of our team.<span aria-hidden="true" style={{ color:'var(--orange)' }}>”</span>
           </blockquote>
           <figcaption style={{ marginTop: isMobile ? 22 : 30, display:'flex', flexWrap:'wrap', alignItems:'center', gap:'12px 22px' }}>
             <span>

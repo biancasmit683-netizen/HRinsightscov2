@@ -329,21 +329,22 @@ function SiteFooter({ ctaLabel = 'Book a demo', ctaTarget = 'book', showCta = tr
         {/* Thin legal strip */}
         <div style={{
           padding: isMobile ? '14px 20px' : '18px 48px',
-          borderTop:'1px solid #ffffff1a',
+          background:'var(--paper)',
+          borderTop:'3px solid var(--orange)',
           display:'flex', justifyContent:'space-between', alignItems:'center',
           flexWrap:'wrap', gap: 8,
-          fontSize: 11, color:'#C9C2B6', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.08em',
+          fontSize: 11, color:'var(--graphite)', fontFamily:'JetBrains Mono,monospace', letterSpacing:'.08em',
         }}>
           <span style={{ display:'flex', gap: 14, flexWrap:'wrap', alignItems:'center' }}>
             <span>© 2026 HR ANALYTICS (PTY) LTD</span>
             {PAGES.map(pg => (
-              <a key={pg.id} href={pg.href} style={{ color:'var(--ink-soft)', textDecoration:'none' }}>{pg.label.toUpperCase()}</a>
+              <a key={pg.id} href={pg.href} style={{ color:'var(--ink)', textDecoration:'none' }}>{pg.label.toUpperCase()}</a>
             ))}
           </span>
           <span style={{ display:'flex', gap: 14, alignItems:'center', flexWrap:'wrap' }}>
             <a
               href="mailto:info@thehrinsightsco.co.za"
-              style={{ color:'#C9C2B6', textDecoration:'none' }}
+              style={{ color:'var(--ink)', textDecoration:'none' }}
             >
               INFO@THEHRINSIGHTSCO.CO.ZA
             </a>
@@ -352,21 +353,21 @@ function SiteFooter({ ctaLabel = 'Book a demo', ctaTarget = 'book', showCta = tr
               href="https://www.linkedin.com/company/the-hr-insights-co/"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color:'#C9C2B6', textDecoration:'none', display:'inline-flex', alignItems:'center', gap: 6 }}
+              style={{ color:'var(--ink)', textDecoration:'none', display:'inline-flex', alignItems:'center', gap: 6 }}
             >
-              <Icon name="linkedin" size={13} color="#C9C2B6"/> LINKEDIN
+              <Icon name="linkedin" size={13} color="var(--ink)"/> LINKEDIN
             </a>
             <span style={{ opacity: 0.35 }}>·</span>
             <span
               onClick={() => setShowPaia(true)}
-              style={{ cursor:'pointer', textDecoration:'underline', textUnderlineOffset: 3 }}
+              style={{ cursor:'pointer', color:'var(--ink)', textDecoration:'underline', textUnderlineOffset: 3 }}
             >
               PAIA MANUAL
             </span>
             <span style={{ opacity: 0.35 }}>·</span>
             <span
               onClick={() => setShowPrivacy(true)}
-              style={{ cursor:'pointer', textDecoration:'underline', textUnderlineOffset: 3 }}
+              style={{ cursor:'pointer', color:'var(--ink)', textDecoration:'underline', textUnderlineOffset: 3 }}
             >
               PRIVACY NOTICE
             </span>

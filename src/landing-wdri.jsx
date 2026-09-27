@@ -1,7 +1,7 @@
 import React from 'react'
 import { WDRI_QUESTIONS, WDRI_BANDS, bandForPct } from './page-wdri'
 import { Icon, useIsMobile } from './shared'
-import { SectionLabel } from './landing-sections'
+import { SectionHead, pad } from './ui'
 
 // Embedded Workforce Data Readiness Index — inline section for the landing page.
 
@@ -34,26 +34,16 @@ function WDRISection({ id }) {
   const reset = () => { setPhase('landing'); setIdx(0); setAnswers(Array(10).fill(null)); };
 
   return (
-    <section id={id} data-anchor="readiness" data-screen-label="06 WDRI" style={{
-      background:'#fff',
-      padding: isMobile ? '56px 20px 40px' : '96px 48px 48px',
+    <section id={id} data-anchor="readiness" data-screen-label="04 WDRI" style={{
+      background:'var(--paper)',
+      padding: pad(isMobile),
       borderTop:'1px solid var(--rule)',
     }}>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 16 : 40, marginBottom: isMobile ? 24 : 48 }}>
-        <SectionLabel index="06 / READINESS ASSESSMENT"/>
-        <div>
-          <div style={{ fontSize: isMobile ? 30 : 44, lineHeight: 1.08, fontWeight: 600, letterSpacing:'-0.028em', maxWidth: 760 }}>
-            How ready is your workforce data to drive decisions?
-          </div>
-          <div style={{ fontSize: isMobile ? 15 : 16.5, lineHeight: 1.6, color:'var(--graphite)', maxWidth: 640, marginTop: 18 }}>
-            Ten questions. About five minutes. Honest answers give you a more useful result.
-          </div>
-        </div>
-      </div>
+      <SectionHead index="04 / READINESS" title="How ready is your workforce data to drive decisions?" lede="Ten questions. About five minutes. Honest answers give you a more useful result."/>
 
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 40 }}>
         {!isMobile && <div/>}
-        <div style={{ background:'#F6F3EE', border:'1px solid var(--rule)' }}>
+        <div style={{ background:'#fff', border:'1px solid var(--rule)', borderTop:'3px solid var(--orange)' }}>
           {phase === 'landing'  && <EmbedLanding onStart={start}/>}
           {phase === 'q'        && <EmbedQuestion idx={idx} total={10} selected={answers[idx]} onSelect={select} onNext={next} onBack={back}/>}
           {phase === 'loading'  && <EmbedLoading/>}
@@ -82,11 +72,10 @@ function EmbedLanding({ onStart }) {
 
         <div style={{ marginTop: 32, display:'flex', alignItems:'center', gap: 20, flexWrap:'wrap' }}>
           <button onClick={onStart} style={{
-            background:'var(--ink)', color:'#fff', border:'none',
+            background:'var(--orange)', color:'#fff', border:'none',
             padding:'15px 24px', fontFamily:'Inter, sans-serif', fontWeight: 500, fontSize: 15,
             cursor:'pointer', display:'inline-flex', alignItems:'center', gap: 12,
           }}>
-            <span style={{ width:7, height:7, borderRadius:'50%', background:'var(--orange)' }}/>
             Start the assessment
             <Icon name="arrowSm" size={16} color="#fff"/>
           </button>
@@ -337,7 +326,7 @@ function EmbedResult({ answers, onReset }) {
 
           <div style={{ marginTop: 22, display:'flex', alignItems:'center', gap: 14, flexWrap:'wrap' }}>
             <button onClick={() => document.getElementById('pulse').scrollIntoView({ behavior:'smooth' })} style={{
-              background:'var(--ink)', color:'#fff', border:'none',
+              background:'var(--orange)', color:'#fff', border:'none',
               padding:'14px 22px', fontFamily:'Inter, sans-serif', fontWeight: 500, fontSize: 14.5,
               cursor:'pointer', display:'inline-flex', alignItems:'center', gap: 10,
             }}>

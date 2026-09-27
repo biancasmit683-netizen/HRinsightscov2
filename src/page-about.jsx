@@ -1,6 +1,7 @@
 import React from 'react'
 import { SiteHeader, SiteFooter, Circles, ArrowLink, useIsMobile } from './shared'
-import { SectionLabel, TeamSection } from './landing-sections'
+import { TeamSection } from './landing-sections'
+import { SectionLabel } from './ui'
 
 // About us — who we are and the three founders.
 
@@ -12,7 +13,7 @@ function AboutIntro() {
       <div style={{ position:'relative', display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 20 : 40 }}>
         <SectionLabel index="01 / ABOUT US" dark/>
         <div>
-          <h1 style={{ fontSize: isMobile ? 36 : 64, lineHeight: 1.04, fontWeight: 600, letterSpacing:'-0.035em', margin: 0, maxWidth: 900 }}>
+          <h1 style={{ fontSize: isMobile ? 36 : 64, lineHeight: 1.04, fontWeight: 700, letterSpacing:'-0.035em', margin: 0, maxWidth: 900 }}>
             Built for the decision.
           </h1>
           <p style={{ fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color:'#EFEBE4', margin: isMobile ? '22px 0 0' : '30px 0 0', maxWidth: 680 }}>

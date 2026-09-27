@@ -163,6 +163,32 @@ const PAGES = [
   { id:'about',        label:'About us',           href:'/about' },
 ];
 
+const LINKEDIN_URL = 'https://www.linkedin.com/company/the-hr-insights-co/';
+
+function FollowLinkedIn({ compact }) {
+  const [hov, setHov] = React.useState(false);
+  return (
+    <a
+      href={LINKEDIN_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Follow us on LinkedIn"
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        display:'inline-flex', alignItems:'center', gap: 7,
+        padding: compact ? '6px 12px' : '7px 14px', borderRadius: 999,
+        border:'1.5px solid #0A66C2', color: hov ? '#fff' : '#0A66C2', background: hov ? '#0A66C2' : 'transparent',
+        fontSize: 13, fontWeight: 600, textDecoration:'none', lineHeight: 1, whiteSpace:'nowrap',
+        transition:'background 160ms ease, color 160ms ease',
+      }}
+    >
+      <Icon name="linkedin" size={15} color={hov ? '#fff' : '#0A66C2'}/>
+      {compact ? 'Follow' : '+ Follow us'}
+    </a>
+  );
+}
+
 function SiteHeader({ current, ctaLabel = 'Book a demo', ctaHref = '/#book' }) {
   const isMobile = useIsMobile();
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -192,6 +218,8 @@ function SiteHeader({ current, ctaLabel = 'Book a demo', ctaHref = '/#book' }) {
         </a>
 
         {isMobile ? (
+          <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+          <FollowLinkedIn compact/>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -199,6 +227,7 @@ function SiteHeader({ current, ctaLabel = 'Book a demo', ctaHref = '/#book' }) {
           >
             <Icon name={menuOpen ? 'close' : 'menu'} size={22} color="var(--ink)"/>
           </button>
+          </div>
         ) : (
           <nav aria-label="Main" style={{ display:'flex', alignItems:'center', gap: 30, fontSize: 13.5, fontWeight: 500 }}>
             {PAGES.map(pg => {
@@ -221,6 +250,7 @@ function SiteHeader({ current, ctaLabel = 'Book a demo', ctaHref = '/#book' }) {
                 </a>
               );
             })}
+            <FollowLinkedIn/>
             <a
               href={ctaHref}
               onClick={onCta}
@@ -350,7 +380,7 @@ function SiteFooter({ ctaLabel = 'Book a demo', ctaTarget = 'book', showCta = tr
             </a>
             <span style={{ opacity: 0.35 }}>·</span>
             <a
-              href="https://www.linkedin.com/company/the-hr-insights-co/"
+              href={LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               style={{ color:'var(--ink)', textDecoration:'none', display:'inline-flex', alignItems:'center', gap: 6 }}
@@ -528,4 +558,4 @@ function TeamStrip({ dark = false }) {
   );
 }
 
-export { PAGES, SiteHeader, Circles, BRAND, Wordmark, Icon, Photo, SiteNav, SiteFooter, Eyebrow, RuleThin, RuleInk, BtnPrimary, BtnGhost, ArrowLink, TeamStrip, useIsMobile };
+export { PAGES, LINKEDIN_URL, SiteHeader, Circles, BRAND, Wordmark, Icon, Photo, SiteNav, SiteFooter, Eyebrow, RuleThin, RuleInk, BtnPrimary, BtnGhost, ArrowLink, TeamStrip, useIsMobile };

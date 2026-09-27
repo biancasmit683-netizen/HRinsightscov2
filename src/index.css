@@ -18,3 +18,5 @@ section[data-anchor], section[id] { scroll-margin-top: 64px; }
 ::selection { background: var(--ink); color: #fff; }
 button:focus-visible, span:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+.li-track::-webkit-scrollbar { display: none; }

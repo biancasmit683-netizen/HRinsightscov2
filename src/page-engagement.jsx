@@ -354,6 +354,99 @@ function SurveyResults() {
 // ---------- 07 Book a demo --------------------------------------------------
 
 
+// ---------- 07 On LinkedIn (carousel) --------------------------------------
+const LINKEDIN_POSTS = [
+  {
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7508110463768047616',
+    image: '/linkedin/post-sunday.jpg',
+    title: 'The Sunday night survey form.',
+    text: "It's free. It's fast. It gets the survey out by Monday. But what happens to the data once the form is live? The less obvious risks behind DIY engagement surveys, from data ownership and anonymity to POPIA and small-group reporting.",
+  },
+  {
+    url: 'https://www.linkedin.com/posts/the-hr-insights-co_employeeengagement-hr-industrialrelations-activity-7506358966403330050-OOk7',
+    image: '/linkedin/post-shop-steward.jpg',
+    title: 'The shop steward already knows. Do you?',
+    text: 'A shop steward is often closer to the workforce than management is. A well-designed engagement survey gives employers their own listening route, so concerns surface early, not months later as formal demands.',
+  },
+  {
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7504051699834159104',
+    image: '/linkedin/post-ask-before.jpg',
+    title: 'Ask before you are told.',
+    text: 'In March, what your workforce wants arrives as anonymous survey results: an operational to-do list. In July, the same items arrive as a memorandum. The workforce does not change between March and July. The temperature does.',
+  },
+];
+
+function LinkedInPosts() {
+  const isMobile = useIsMobile();
+  const track = React.useRef(null);
+  const [edges, setEdges] = React.useState({ start: true, end: false });
+  const update = React.useCallback(() => {
+    const el = track.current; if (!el) return;
+    setEdges({ start: el.scrollLeft <= 2, end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 2 });
+  }, []);
+  React.useEffect(() => {
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, [update]);
+  const step = (dir) => {
+    const el = track.current; if (!el) return;
+    const card = el.firstElementChild;
+    el.scrollBy({ left: dir * (card ? card.offsetWidth + 24 : 300), behavior:'smooth' });
+  };
+  const scrollable = !(edges.start && edges.end);
+  const arrow = (dir, disabled) => (
+    <button type="button" aria-label={dir < 0 ? 'Previous post' : 'Next post'} disabled={disabled} onClick={() => step(dir)} style={{
+      width: 44, height: 44, borderRadius:'50%', border:'1px solid var(--ink)', background:'#fff',
+      display:'inline-flex', alignItems:'center', justifyContent:'center', cursor: disabled ? 'default' : 'pointer',
+      opacity: disabled ? 0.3 : 1, padding: 0,
+    }}>
+      <span style={{ display:'inline-flex', transform: dir < 0 ? 'rotate(180deg)' : 'none' }}><Icon name="arrowSm" size={16} color="var(--ink)"/></span>
+    </button>
+  );
+
+  return (
+    <section id="linkedin" style={{ background:'#fff', padding: pad(isMobile), borderTop:'1px solid var(--rule)' }}>
+      <SectionHead index="07 / ON LINKEDIN" title="What we're talking about."
+        lede="Short reads on employee voice, industrial relations and running surveys that people trust. Follow us for new posts."/>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'minmax(0,1fr)' : '220px minmax(0,1fr)', gap: isMobile ? 0 : 40 }}>
+        {!isMobile && <div/>}
+        <div>
+          <div ref={track} onScroll={update} className="li-track" style={{
+            display:'flex', gap: 24, overflowX:'auto', scrollSnapType:'x mandatory', scrollbarWidth:'none',
+            paddingBottom: 4,
+          }}>
+            {LINKEDIN_POSTS.map(p => (
+              <a key={p.url} href={p.url} target="_blank" rel="noopener noreferrer" style={{
+                flex: isMobile ? '0 0 85%' : '0 0 340px', scrollSnapAlign:'start', textDecoration:'none', color:'var(--ink)',
+                background:'#fff', border:'1px solid var(--rule)', borderTop:'3px solid var(--orange)',
+                display:'flex', flexDirection:'column',
+              }}>
+                <div style={{ aspectRatio:'1 / 1', background:'var(--ink)', display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden' }}>
+                  <img src={p.image} alt={p.title} loading="lazy" style={{ width:'100%', height:'100%', objectFit:'contain', display:'block' }}/>
+                </div>
+                <div style={{ padding:'20px 22px 22px', display:'flex', flexDirection:'column', flex: 1 }}>
+                  <div style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.3, letterSpacing:'-0.01em' }}>{p.title}</div>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.55, color:'var(--graphite)', margin:'10px 0 18px', display:'-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient:'vertical', overflow:'hidden' }}>{p.text}</p>
+                  <span style={{ marginTop:'auto', display:'inline-flex', alignItems:'center', gap: 8, fontSize: 14, fontWeight: 600, color:'var(--orange)' }}>
+                    Read on LinkedIn <Icon name="arrowSm" size={14} color="var(--orange)"/>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap: 16, marginTop: 28, flexWrap:'wrap' }}>
+            <a href="https://www.linkedin.com/company/the-hr-insights-co/" target="_blank" rel="noopener noreferrer" style={{ display:'inline-flex', alignItems:'center', gap: 10, fontSize: 15, fontWeight: 600, color:'var(--ink)', textDecoration:'none', borderBottom:'2px solid var(--orange)', paddingBottom: 2 }}>
+              <Icon name="linkedin" size={16} color="var(--ink)"/> Follow us on LinkedIn
+            </a>
+            {scrollable && <div style={{ display:'flex', gap: 12 }}>{arrow(-1, edges.start)}{arrow(1, edges.end)}</div>}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function BookDemo() {
   const isMobile = useIsMobile();
   const empty = { name:'', role:'', organisation:'', industry:'', employees:'', email:'', phone:'', consent:'' };
@@ -379,9 +472,9 @@ function BookDemo() {
   const row = { display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 22 : 24 };
 
   return (
-    <FadeSection id="book">
+    <FadeSection id="book" from="255,255,255">
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr 1.2fr', gap: isMobile ? 32 : 48, alignItems:'start' }}>
-        <SectionLabel index="07 / BOOK A DEMO" dark/>
+        <SectionLabel index="08 / BOOK A DEMO" dark/>
         <div>
           <h2 style={{ fontSize: isMobile ? 32 : 50, lineHeight: 1.05, fontWeight: 700, letterSpacing:'-0.03em', margin: 0 }}>See what a survey looks like for a business your size.</h2>
           <p style={{ fontSize: 16.5, lineHeight: 1.6, color:'#EFEBE4', margin:'22px 0 12px' }}>In 30 minutes we'll walk you through:</p>
@@ -480,6 +573,7 @@ function EngagementPage({ startAt }) {
       <WhoFor/>
       <Pricing/>
       <SurveyResults/>
+      <LinkedInPosts/>
       <BookDemo/>
       <SiteFooter showCta={false}/>
     </div>

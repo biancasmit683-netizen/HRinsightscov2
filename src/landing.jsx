@@ -12,7 +12,8 @@ function Landing() {
     <div>
       <SiteHeader current="hr-analytics" ctaLabel="Book a Pulse Check" ctaHref="#pulse"/>
       <PhotoHero
-        photo="/brand/hero-photo.jpg"
+        photo="/brand/hero-analytics.jpg"
+        position={{ mobile:"50% 72%", desktop:"center 72%" }}
         eyebrow="HR ANALYTICS"
         title={<>Workforce data,<br/>financial decisions.</>}
         lede="We help mid-sized South African organisations turn fragmented workforce data into financial decisions. HR leads people. Finance leads money. We connect the two into decisions the business can act on."

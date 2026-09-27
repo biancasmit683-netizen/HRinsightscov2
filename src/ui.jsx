@@ -142,10 +142,11 @@ export function PhotoHero({ id = 'top', photo, position, eyebrow, title, lede, p
 }
 
 // Closing call-to-action section: navy that fades in from the off-white section above, with orange circles.
-export function FadeSection({ id, children }) {
+export function FadeSection({ id, children, from = '246,243,238' }) {
   const isMobile = useIsMobile();
+  const c = (a) => `rgba(${from},${a})`;
   return (
-    <section id={id} style={{ background: isMobile ? 'linear-gradient(180deg, #F6F3EE 0px, rgba(246,243,238,0.7) 40px, rgba(246,243,238,0.28) 85px, rgba(246,243,238,0) 130px), #060644' : 'linear-gradient(180deg, #F6F3EE 0px, rgba(246,243,238,0.72) 45px, rgba(246,243,238,0.32) 105px, rgba(246,243,238,0.08) 155px, rgba(246,243,238,0) 190px), #060644', color:'#fff', padding: isMobile ? '140px 20px 72px' : '200px 48px 120px', position:'relative', overflow:'hidden' }}>
+    <section id={id} style={{ background: isMobile ? `linear-gradient(180deg, ${c(1)} 0px, ${c(0.7)} 40px, ${c(0.28)} 85px, ${c(0)} 130px), #060644` : `linear-gradient(180deg, ${c(1)} 0px, ${c(0.72)} 45px, ${c(0.32)} 105px, ${c(0.08)} 155px, ${c(0)} 190px), #060644`, color:'#fff', padding: isMobile ? '140px 20px 72px' : '200px 48px 120px', position:'relative', overflow:'hidden' }}>
       <Circles items={isMobile ? [
         { size: 90, right: -45, top: 130, coral: true },
         { size: 140, left: -70, bottom: -70, coral: true },
